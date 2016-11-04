@@ -5,94 +5,436 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextInputControl?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"   prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml">
+
   <bottom>
     <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: linear-gradient(to bottom, paleturquoise, azure, paleturquoise);&#10;" text="#" textAlignment="LEFT" BorderPane.alignment="CENTER" />
   </bottom>
   	<center>
+  		<SplitPane dividerPositions="0.3492462311557789"  focusTraversable="false" prefWidth="300">
+  			<items>
+  			<SplitPane maxWidth="300" orientation="VERTICAL">  				
+  			<items>
+  			 <AnchorPane>
+  				<VBox spacing="20" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="10">
+  				<Label text="Datos del Proyecto" style="-fx-font-size: 15;-fx-font-weight:bold"  ></Label>
+  				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" >
+               				<Label text=" Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+               				<Label text=" Ubicación" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+               				<Label text=" Muestra" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+               				<Label text=" PCA" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+               				<Label text=" Profundidad " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+          		</GridPane>
+          		</VBox>
+          		</AnchorPane>
+          	
+          				<ImageView
+				                fx:id="imageView"
+				                fitHeight="200.0"
+								fitWidth="200.0"
+				                pickOnBounds="true"
+				                preserveRatio="true"
+				                
+				            >
+				            <image>
+				                <Image
+				                    url="@logo_uv.png"
+				                    backgroundLoading="true"
+				                    
+				                    />
+				            </image>
+				        </ImageView>
+          			
+          	
+  				</items>
+  			</SplitPane>
             <TabPane prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" >
 				<tabs>
-                <Tab text="Datos de Proyecto">
-                  <content>
-                    <TilePane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lavender;&#10;" />
-                  </content>
-                </Tab>
                 <Tab text="Datos Generales">
-                  <content>
-	                  <TilePane prefHeight="200.0" prefWidth="200.0">
-		                    <TabPane prefHeight="Infinity" prefWidth="Infinity" side="TOP" tabClosingPolicy="UNAVAILABLE">
-		                    	<tabs>
-			                    	<Tab text="Granulometría"></Tab>
-			                    	<Tab text="Límites"></Tab>
-			                    	<Tab text="Clasificación"></Tab>
-		                    	</tabs>
-		                    </TabPane>
-                    	</TilePane>
-                 </content>
+                <content>
+                  <VBox>
+       					 <TitledPane animated="false" text="Granulometría"  >
+           					<content>
+                				<AnchorPane>
+                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label text=" Grava % " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Arena % " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Finos % " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+				               				
+				          		</GridPane>
+                				</AnchorPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Límites"  >
+           					<content>
+                				<AnchorPane >
+                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label text=" LL %    " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" LP %    " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" IP %    " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" CL %    " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+				               				
+				          		</GridPane>
+                				</AnchorPane>
+           					</content>
+       					 </TitledPane>
+	                  <TitledPane animated="false" text="Clasificación">
+           					<content>
+                				<AnchorPane prefHeight="800">
+                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label text="???????" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text="???????" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Carga de Sitio " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" Clasificación SUCS " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+				               				
+				          		</GridPane>
+                				</AnchorPane>
+           					</content>
+       					 </TitledPane>
+	                </VBox>
+	                </content>
                 </Tab>
                 <Tab text="Datos Iniciales">
                   <content>
-	                  <TilePane prefHeight="200.0" prefWidth="200.0">
-		                    <TabPane prefHeight="Infinity" prefWidth="Infinity" side="TOP" tabClosingPolicy="UNAVAILABLE">
-		                    	<tabs>
-			                    	<Tab text="Constantes del Equipo"></Tab>
-			                    	<Tab text="Humedad Inicial"></Tab>
-		                    	</tabs>
-		                    </TabPane>
-                    	</TilePane>
+	                  <VBox>
+       					 <TitledPane animated="false" text="Constantes del equipo" >
+           					<content>
+                				<AnchorPane >
+                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Área " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" Volumen " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+				               				<Label text=" Peso Anillo " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="0" GridPane.rowIndex="5" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="5" ></TextField>
+				               				
+				          		</GridPane>
+                				</AnchorPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Humedad Inicial"  >
+           					<content>
+                				<AnchorPane prefHeight="800" >
+                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label text=" Flanera " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Wm + tara " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Ws + tara " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" Wflanera " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+				               				<Label text=" W % " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+				          		</GridPane>
+                				</AnchorPane>
+           					</content>
+       					 </TitledPane>
+	                  
+	                </VBox>
                  </content>
                 </Tab>
                 <Tab text="Muestra">
                   <content>
-	                  <TilePane prefHeight="200.0" prefWidth="200.0">
-		                    <TabPane prefHeight="Infinity" prefWidth="Infinity" side="TOP" tabClosingPolicy="UNAVAILABLE">
-		                    	<tabs>
-			                    	<Tab text="Antes de la Prueba"></Tab>
-			                    	<Tab text="Despues de Consolidar"></Tab>
-		                    	</tabs>
-		                    </TabPane>
-                    	</TilePane>
+                  <VBox>
+       					 <TitledPane animated="false" text="Antes de la Prueba" >
+           					<content>
+                				<AnchorPane >
+                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Área " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" Volumen " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+				               				<Label text=" Peso Anillo " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+				               			
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="3" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="4"  ></TextField>
+				               				
+				               				
+				          		</GridPane>
+                				</AnchorPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Despues de Consolidar"  >
+           					<content>
+                				<AnchorPane prefHeight="800">
+                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Área " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" Volumen " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+				               				<Label text=" Peso Anillo " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="0" GridPane.rowIndex="5" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="5"  ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="2" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="3" ></TextField>
+				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="4"  ></TextField>
+				          		</GridPane>
+                				</AnchorPane>
+           					</content>
+       					 </TitledPane>
+	                  
+	                </VBox>
                  </content>
                 </Tab>
                 <Tab text="Registro de carga">
                    <content>
-	                  <TilePane prefHeight="200.0" prefWidth="200.0">
-		                    <TabPane prefHeight="Infinity" prefWidth="Infinity" side="TOP" tabClosingPolicy="UNAVAILABLE">
-		                    	<tabs>
-			                    	<Tab text="Carga 1"></Tab>
-			                    	<Tab text="Carga 2"></Tab>
-			                    	<Tab text="Carga 3"></Tab>
-			                    	<Tab text="Carga 4"></Tab>
-			                    	<Tab text="Carga 5"></Tab>
-			                    	<Tab text="Carga 6"></Tab>
-			                    	<Tab text="Carga 7"></Tab>
-			                    	<Tab text="Carga 8"></Tab>
-		                    	</tabs>
-		                    </TabPane>
-                    	</TilePane>
+                   	 <VBox>
+       					 <TitledPane animated="false" text="Carga 1" expanded="true">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL" >
+										    	<items>
+											    		<AnchorPane>
+							                				<GridPane  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+											               				<Label text=" Incremento de Carga ?" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+											               				<Label text=" ----" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+											               				<Label text=" -----" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+											               				
+											          		</GridPane>
+							                				</AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Carga 2" expanded="false">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
+										    	<items>
+											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Carga 3" expanded="false">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
+										    	<items>
+											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Carga 4" expanded="false">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
+										    	<items>
+											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Carga 5" expanded="false">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
+										    	<items>
+											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Carga 6" expanded="false">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
+										    	<items>
+											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Carga 7" expanded="false">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
+										    	<items>
+											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Carga 8" expanded="false">
+           					<content>
+									<SplitPane prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
+										    	<items>
+											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
+											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+										    	</items>
+										    </SplitPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+	                  
+	                </VBox>
+	                  
                  </content>
                 </Tab>
                 <Tab text="Resultados">
                   <content>
-                    <TilePane prefHeight="200.0" prefWidth="200.0" />
+                    <VBox>
+                    <TitledPane animated="false" text="Visualización Completa"  >
+           					<content>
+                				<AnchorPane id="Content" 
+		                            minHeight="0.0" 
+		                            minWidth="0.0" 
+		                            prefHeight="800.0" 
+		                            prefWidth="200.0" />
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Tabla de Cálculos" >
+           					<content>
+                				<SplitPane orientation="VERTICAL" prefHeight="800.0" prefWidth="600.0" >
+									    <items>
+										    <AnchorPane prefHeight="300" prefWidth="300"> <Label text="Datos de la muestra"/></AnchorPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Tabla de cálculos"/></AnchorPane>
+									    	</items>
+									</SplitPane>
+           					</content>
+       					 </TitledPane>
+       					 <TitledPane animated="false" text="Curva de Compresión"  >
+           					<content>
+                				<AnchorPane id="Content" 
+		                            minHeight="0.0" 
+		                            minWidth="0.0" 
+		                            prefHeight="800.0" 
+		                            prefWidth="200.0" />
+           					</content>
+       					 </TitledPane>
+	                  
+	                </VBox>
                   </content>
                 </Tab>    
                </tabs>            
             </TabPane>
+            </items>
+       </SplitPane>
   </center>
   <top>
     <VBox prefHeight="-1.0" prefWidth="-1.0">
       <children>
         
-     <!--    
+    <!-- 
         <ToolBar>
           <items>
             <Button mnemonicParsing="false" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-9/24/open-file-icon.png');" text="" />
             <Button mnemonicParsing="false" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-7/24/Save-icon.png');" text="" />
           </items>
         </ToolBar>
-      -->
+       -->
       </children>
     </VBox>
   </top>

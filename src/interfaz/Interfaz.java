@@ -13,7 +13,7 @@ public class Interfaz extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent mainLayout = FXMLLoader.load(getClass().getResource("InterfazFXML.fxml"));
-        Scene scene = new Scene(mainLayout, 800, 600);
+        Scene scene = new Scene(mainLayout, 1000, 600);
         primaryStage.setTitle("Sistema de Cargas");
         primaryStage.setScene(scene);
         primaryStage.show();	
