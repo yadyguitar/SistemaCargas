@@ -48,10 +48,10 @@
           	
           				<ImageView
 				                fx:id="imageView"
-				                fitHeight="200.0"
-								fitWidth="200.0"
-				                pickOnBounds="true"
-				                preserveRatio="true"
+				                fitHeight="100"
+								fitWidth="150"
+				                pickOnBounds="false"
+				                preserveRatio="false"
 				                
 				            >
 				            <image>
@@ -74,8 +74,8 @@
        					 <TitledPane animated="false" text="Granulometría"  >
            					<content>
                 				<AnchorPane>
-                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label text=" Grava % " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+				               				<Label minWidth="150" text=" Grava % " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Arena % " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -90,7 +90,7 @@
            					<content>
                 				<AnchorPane >
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label text=" LL %    " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label minWidth="150" text=" LL %    " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" LP %    " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -107,7 +107,7 @@
            					<content>
                 				<AnchorPane prefHeight="800">
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label text="???????" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label minWidth="150" text="???????" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text="???????" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -130,7 +130,7 @@
            					<content>
                 				<AnchorPane >
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label minWidth="150" text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -151,7 +151,7 @@
            					<content>
                 				<AnchorPane prefHeight="800" >
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label text=" Flanera " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label minWidth="150" text=" Flanera " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Wm + tara " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -176,7 +176,7 @@
            					<content>
                 				<AnchorPane >
                 				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label minWidth="150" text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -207,7 +207,7 @@
            					<content>
                 				<AnchorPane prefHeight="800">
                 				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label  minWidth="150" text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -248,7 +248,7 @@
 										    	<items>
 											    		<AnchorPane>
 							                				<GridPane  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-											               				<Label text=" Incremento de Carga ?" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+											               				<Label  text=" Incremento de Carga ?" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 											               				<Label text=" ----" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
@@ -386,21 +386,12 @@
                 <Tab text="Resultados">
                   <content>
                     <VBox>
-                    <TitledPane animated="false" text="Visualización Completa"  >
-           					<content>
-                				<AnchorPane id="Content" 
-		                            minHeight="0.0" 
-		                            minWidth="0.0" 
-		                            prefHeight="800.0" 
-		                            prefWidth="200.0" />
-           					</content>
-       					 </TitledPane>
-       					 <TitledPane animated="false" text="Tabla de Cálculos" >
+                    <TitledPane animated="false" text="Tabla de Cálculos" >
            					<content>
                 				<SplitPane orientation="VERTICAL" prefHeight="800.0" prefWidth="600.0" >
 									    <items>
-										    <AnchorPane prefHeight="300" prefWidth="300"> <Label text="Datos de la muestra"/></AnchorPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Tabla de cálculos"/></AnchorPane>
+										    <AnchorPane prefHeight="300" prefWidth="300"> <Label text="Tabla de cálculos"/></AnchorPane>
+										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Datos de la muestra"/></AnchorPane>
 									    	</items>
 									</SplitPane>
            					</content>
