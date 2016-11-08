@@ -94,7 +94,7 @@
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" LP %    " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-				               				<Label text=" IP %    " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<Label text=" Ip %    " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
 				               				<Label text=" CL %    " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
@@ -107,9 +107,9 @@
            					<content>
                 				<AnchorPane prefHeight="800">
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label minWidth="150" text="???????" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label minWidth="150" text=" ɣm" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-				               				<Label text="???????" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" δs" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
 				               				<Label text=" Carga de Sitio " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
@@ -125,20 +125,20 @@
                 </Tab>
                 <Tab text="Datos Iniciales">
                   <content>
-	                  <VBox>
+                     <VBox>
        					 <TitledPane animated="false" text="Constantes del equipo" >
            					<content>
                 				<AnchorPane >
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label minWidth="150" text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<Label minWidth="150" text=" Diámetro (cm)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" Altura (cm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-				               				<Label text=" Área " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<Label text=" Área (cm²)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
-				               				<Label text=" Volumen " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<Label text=" Volumen (cm³)" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
-				               				<Label text=" Peso Anillo " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+				               				<Label text=" Peso Anillo (grs)" GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
 				               				<Label text=" Cte. Aparato " GridPane.columnIndex="0" GridPane.rowIndex="5" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="5" ></TextField>
