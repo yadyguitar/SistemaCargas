@@ -155,11 +155,11 @@
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" Flanera " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" Wm<sup>+ tara<sup>" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" Wm˖ₜₐᵣₐ" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-				               				<Label text=" Ws + tara " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<Label text=" Ws˖ₜₐᵣₐ" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
-				               				<Label text=" Wflanera " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<Label text=" Wғₗₐₙₑᵣₐ" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
 				               				<Label text=" W % " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
