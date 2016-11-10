@@ -19,6 +19,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.SubScene?>
 <?import java.*?>
+<?import javafx.scene.layout.Region?>
 
 <BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"   prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml">
 
@@ -30,10 +31,10 @@
   			<items>
   			<SplitPane maxWidth="300" orientation="VERTICAL">  				
   			<items>
-  			 <AnchorPane>
-  				<VBox spacing="20" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="10">
-  				<Label text="Datos del Proyecto" style="-fx-font-size: 15;-fx-font-weight:bold"  ></Label>
-  				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" >
+  			 <GridPane vgap="20" hgap="10">
+  				<Region GridPane.columnIndex="0"></Region>
+  				<Label GridPane.rowIndex="2" GridPane.columnIndex="1" text="Datos del Proyecto" style="-fx-font-size: 15;-fx-font-weight:bold"  ></Label>
+  				<GridPane  GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-font-size: 14"  gridLinesVisible="true" >
                				<Label text=" Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
                				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
                				<Label text=" Ubicación" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
@@ -45,8 +46,8 @@
                				<Label text=" Profundidad (m) " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
                				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
           		</GridPane>
-          		</VBox>
-          		</AnchorPane>
+          		<Region GridPane.columnIndex="3"></Region>
+          		</GridPane>
           	
           				<ImageView
 				                fx:id="imageView"
@@ -177,27 +178,27 @@
        					 <TitledPane animated="false" text="Antes de la Prueba" >
            					<content>
                 				<AnchorPane >
-                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label minWidth="150" text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
+				               				<Label minWidth="150" text=" Wₘ˖ₐₙᵢₗₗₒ" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+				               				<TextField  GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<Label text=" Wₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ(Wm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-				               				<Label text=" Área " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<Label text=" Humedad (W%)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
-				               				<Label text=" Volumen " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<Label text=" Wₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ ₛ (Ws)" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
-				               				<Label text=" Peso Anillo " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+				               				<Label text=" Volₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ (Vs)" GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
 				               			
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+				               				<Label text=" Wₐ. ₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ (Ww)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" Volₜₒₜₐₗ ₘ. ₙₐₜᵤᵣₐₗ (Vm)" GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
+				               				<Label text=" Volᵥ. ₙₐₜᵤᵣₐₗ (Vv)" GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="2" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
+				               				<Label text=" Vacíos (e)" GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="3" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
+				               				<Label text=" Grado de Saturación(G%)" GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="4"  ></TextField>
 				               				
 				               				
@@ -208,29 +209,29 @@
        					 <TitledPane animated="false" text="Despues de Consolidar"  >
            					<content>
                 				<AnchorPane prefHeight="800">
-                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-				               				<Label  minWidth="150" text=" Diámetro " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
+				               				<Label  minWidth="150" text=" Wₘ.ₛₐₜ˖ₐₙᵢₗₗₒ " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" Altura " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" Wₘ.ₛₐₜ (Wm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-				               				<Label text=" Área " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+				               				<Label text=" Wₘ.ₛ˖ₐₙᵢₗₗₒ " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
-				               				<Label text=" Volumen " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+				               				<Label text=" Wₘ.ₛ (Ws) " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
-				               				<Label text=" Peso Anillo " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+				               				<Label text=" Humedad (W%) " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="0" GridPane.rowIndex="5" ></Label>
-				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="5"  ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
-				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" Volₜₒₜₐₗ ₘ. ₛₐₜ (Vm) " GridPane.columnIndex="0" GridPane.rowIndex="5" ></Label>
+				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="5" ></TextField>
+				               				<Label text=" Volₛₒₗ (Vs)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="0"  ></TextField>
+				               				<Label text=" Volᵥₐ. (Vv)" GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
+				               				<Label text=" Vacíos (e) " GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="2" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
+				               				<Label text=" Grado de Saturación(G%)" GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="3" ></TextField>
-				               				<Label text=" Cte. Aparato " GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
-				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="4"  ></TextField>
+				               				<Label text=" Wₐ. ₘᵤₑₛₜᵣₐ ₛₐₜ (Ww) " GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
+				               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="4" ></TextField>
 				          		</GridPane>
                 				</AnchorPane>
            					</content>
@@ -248,18 +249,32 @@
 									    <items>
 										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL" >
 										    	<items>
-											    		<AnchorPane>
-							                				<GridPane  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-											               				<Label  text=" Incremento de Carga ?" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+											    		<GridPane hgap="10" vgap="20">
+							                				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+											               				<Label  text=" Incremento de Carga ΔP" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-											               				<Label text=" ----" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+											               				<Label text=" Aproximación del micrómetro " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-											               				<Label text=" -----" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+											               				<Label text=" Carga total del portapesas" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+											               				<Label text=" Presión en la pastilla" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
 											               				
 											          		</GridPane>
-							                				</AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
+							                				</GridPane>
+											    	<GridPane hgap="10" vgap="20">
+							                				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+											               				<Label  text=" Incremento de Carga ΔP" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+											               				<Label text=" Aproximación del micrómetro " GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+											               				<Label text=" Carga total del portapesas" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+											               				<Label text=" Presión en la pastilla" GridPane.columnIndex="3" GridPane.rowIndex="0" ></Label>
+											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+											               				
+											          		</GridPane>
+							                				</GridPane>
 											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
 										    	</items>
 										    </SplitPane>
