@@ -23,9 +23,9 @@ public class Interfaz extends Application {
         Image icon = new Image(getClass().getResourceAsStream("logo_uv.png"));
 		primaryStage.getIcons().add(icon);
 		
+		primaryStage.setMaximized(true);
 		primaryStage.show();
-        
-        
+                
 	}
 	
 	public static void main(String[] args) {

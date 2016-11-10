@@ -275,10 +275,14 @@
 											               				
 											          		</GridPane>
 							                				</GridPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
+											    	
 										    	</items>
 										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+										    <SplitPane orientation="VERTICAL" >
+										    <AnchorPane><Label text="Descarga" /></AnchorPane>
+										    										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
+										    
+										    </SplitPane>
 									    	</items>
 									</SplitPane>
            					</content>
