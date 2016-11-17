@@ -21,13 +21,18 @@
 <?import java.*?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.ScrollPane?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"   prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"   prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml" fx:controller="interfaz.controladorInterfaz" >
+
 
   <bottom>
     <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: linear-gradient(to bottom, paleturquoise, azure, paleturquoise);&#10;" text="#" textAlignment="LEFT" BorderPane.alignment="CENTER" />
   </bottom>
   	<center>
+  	
   		<SplitPane dividerPositions="0.3492462311557789"  focusTraversable="false" prefWidth="300">
   			<items>
   			<SplitPane maxWidth="300" orientation="VERTICAL">  				
@@ -36,15 +41,15 @@
   				<Region GridPane.columnIndex="0"></Region>
   				<Label GridPane.rowIndex="2" GridPane.columnIndex="1" text="Datos del Proyecto" style="-fx-font-size: 15;-fx-font-weight:bold"  ></Label>
   				<GridPane  GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-font-size: 14"  gridLinesVisible="true" >
-               				<Label text=" Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+               				<Label wrapText="true" text=" Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
                				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-               				<Label text=" Ubicación" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+               				<Label wrapText="true" text=" Ubicación" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
                				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-               				<Label text=" Muestra" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+               				<Label wrapText="true" text=" Muestra" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
                				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
-               				<Label text=" PCA" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+               				<Label wrapText="true" text=" PCA" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
                				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
-               				<Label text=" Profundidad (m) " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+               				<Label wrapText="true" text=" Profundidad (m) " GridPane.columnIndex="0" GridPane.rowIndex="4"  ></Label>
                				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
           		</GridPane>
           		<Region GridPane.columnIndex="3"></Region>
@@ -243,204 +248,48 @@
                 </Tab>
                 <Tab text="Registro de carga">
                    <content>
-                   	 <VBox>
-       					 <TitledPane animated="false" text="Carga 1" expanded="true">
+                   	 <VBox >
+       					 <TitledPane  text="Carga 1" expanded="true">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL" >
-										    	<items>
-<!-- 										    	Datos -->
-											    		<GridPane hgap="10" vgap="20">
-							                				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-											               				<Label wrapText="true" text=" Incremento de Carga ΔP" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-											               				<Label wrapText="true" text=" Aproximación del micrómetro " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
-											               				<Label wrapText="true" text=" Carga total del portapesas" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
-											               				<Label wrapText="true" text=" Presión en la pastilla" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
-											               			
-											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
-											               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
-											          		</GridPane>
-						                				</GridPane>
-<!-- 						                				Descarga -->
-											    	<GridPane hgap="10" vgap="10"  >
-											    			<Label  GridPane.halignment="CENTER" text="Descarga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
-								                				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Hora" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
-												               				<Label  GridPane.halignment="CENTER" wrapText="true" text="Tiempo&#10;(min)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Micrómetro&#10;(mm)" GridPane.columnIndex="3" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Diferencia&#10;Micrometro" GridPane.columnIndex="4" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Corrección&#10;Aparato" GridPane.columnIndex="5" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Deformación&#10;(mm)" GridPane.columnIndex="6" GridPane.rowIndex="0" ></Label>
-												               				
-												               				
-												               				<TextField GridPane.columnIndex="0" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="2" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="4" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="5" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="6" GridPane.rowIndex="1" ></TextField>
-												               				
-												               				
-												          		</GridPane>
-												          		<Button GridPane.valignment="TOP" style="-fx-font-size:11" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Agregar Registro" GridPane.columnIndex="1"  GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
-				                							<Region GridPane.columnIndex="2"></Region>
-				                					</GridPane>
-											    	
-										    	</items>
-										    </SplitPane>
-										    <SplitPane orientation="VERTICAL" >
-										    <GridPane hgap="10" vgap="10"  >
-											    			<Label  GridPane.halignment="CENTER"  text="Descarga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
-								                				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Hora" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
-												               				<Label  GridPane.halignment="CENTER" wrapText="true" text="Tiempo&#10;(min)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Micrómetro&#10;(mm)" GridPane.columnIndex="3" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Diferencia&#10;Micrometro" GridPane.columnIndex="4" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Corrección&#10;Aparato" GridPane.columnIndex="5" GridPane.rowIndex="0" ></Label>
-												               				<Label GridPane.halignment="CENTER" wrapText="true" text="Deformación&#10;(mm)" GridPane.columnIndex="6" GridPane.rowIndex="0" ></Label>
-												               				
-												               				
-												               				<TextField GridPane.columnIndex="0" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="2" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="4" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="5" GridPane.rowIndex="1" ></TextField>
-												               				<TextField GridPane.columnIndex="6" GridPane.rowIndex="1" ></TextField>
-												               				
-												               				
-												          		</GridPane>
-												          		<Button GridPane.valignment="TOP" style="-fx-font-size:11" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Agregar Registro" GridPane.columnIndex="1"  GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
-				                							<Region GridPane.columnIndex="2"></Region>
-				                					</GridPane>
-									    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-										    
-										    </SplitPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane animated="false" text="Carga 2" expanded="false">
+       					 <TitledPane  text="Carga 2" expanded="false">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
-										    	<items>
-											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
-										    	</items>
-										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane animated="false" text="Carga 3" expanded="false">
+       					 <TitledPane  text="Carga 3" expanded="false">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
-										    	<items>
-											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
-										    	</items>
-										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane animated="false" text="Carga 4" expanded="false">
+       					 <TitledPane  text="Carga 4" expanded="false">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
-										    	<items>
-											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
-										    	</items>
-										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane animated="false" text="Carga 5" expanded="false">
+       					 <TitledPane  text="Carga 5" expanded="false">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
-										    	<items>
-											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
-										    	</items>
-										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane animated="false" text="Carga 6" expanded="false">
+       					 <TitledPane  text="Carga 6" expanded="false">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
-										    	<items>
-											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
-										    	</items>
-										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane animated="false" text="Carga 7" expanded="false">
+       					 <TitledPane  text="Carga 7" expanded="false">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
-										    	<items>
-											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
-										    	</items>
-										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane animated="false" text="Carga 8" expanded="false">
+       					 <TitledPane  text="Carga 8" expanded="false">
            					<content>
-									<SplitPane prefHeight="800.0" prefWidth="600.0" >
-									    <items>
-										    <SplitPane  prefHeight="800" prefWidth="300"  orientation="VERTICAL">
-										    	<items>
-											    	<AnchorPane ><Label text="Datos de Carga"/></AnchorPane>
-											    	<AnchorPane ><Label text="Carga" /></AnchorPane>
-											    	<AnchorPane><Label text="Descarga" /></AnchorPane>
-										    	</items>
-										    </SplitPane>
-										    	<AnchorPane prefHeight="500" prefWidth="300"> <Label text="Grafica"/></AnchorPane>
-									    	</items>
-									</SplitPane>
+									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-	                  
 	                </VBox>
-	                  
                  </content>
                 </Tab>
                 <Tab text="Resultados">
@@ -475,6 +324,8 @@
        </SplitPane>
   </center>
   <top>
+  
+  
     <VBox prefHeight="-1.0" prefWidth="-1.0">
       <children>
         
