@@ -44,7 +44,7 @@
         				</GridPane>
   				</GridPane>
 	<!-- 	Descarga -->
-		    	<GridPane fx:id="c1" hgap="10" vgap="10"  >
+		    	<GridPane  hgap="10" vgap="10"  >
 		    			<Label  GridPane.halignment="CENTER" text="Carga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
            				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
@@ -68,7 +68,7 @@
 	    	</items>
 	    </SplitPane>
 	    	<SplitPane orientation="VERTICAL" >
-	    		<GridPane fx:id="d1" maxHeight="150" hgap="10" vgap="10"  >
+	    		<GridPane maxHeight="150" hgap="10" vgap="10"  >
 		    			<Label  GridPane.halignment="CENTER"  text="Descarga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
            				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
