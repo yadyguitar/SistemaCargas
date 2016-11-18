@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.TextInputControl?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.SubScene?>
-<?import java.*?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.XYChart?>
+
+
 
 <SplitPane prefHeight="800.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="interfaz.controladorInterfaz">
 	<items>
@@ -31,7 +17,7 @@
     		<items>
 	<!-- 	Datos -->
 		   		<GridPane  maxHeight="120" hgap="10" vgap="20">
-           				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+           				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" >
               				<Label wrapText="true" text=" Incremento de Carga ΔP" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
               				<Label wrapText="true" text=" Aproximación del micrómetro " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
               				<Label wrapText="true" text=" Carga total del portapesas" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
@@ -46,7 +32,7 @@
 	<!-- 	Descarga -->
 		    	<GridPane  hgap="10" vgap="10"  >
 		    			<Label  GridPane.halignment="CENTER" text="Carga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
-           				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+           				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" >
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Hora" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
               				<Label  GridPane.halignment="CENTER" wrapText="true" text="Tiempo&#10;(min)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
@@ -70,7 +56,7 @@
 	    	<SplitPane orientation="VERTICAL" >
 	    		<GridPane maxHeight="150" hgap="10" vgap="10"  >
 		    			<Label  GridPane.halignment="CENTER"  text="Descarga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
-           				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+           				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true">
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Hora" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
               				<Label  GridPane.halignment="CENTER" wrapText="true" text="Tiempo&#10;(min)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
