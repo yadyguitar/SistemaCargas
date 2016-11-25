@@ -22,6 +22,7 @@ public class controladorInterfaz implements Initializable{
 	
 	//Métodos de FXML//
 	@FXML public void agregaFila(MouseEvent e){
+		
 		Button b=(Button)e.getSource();
 		GridPane grid=(GridPane)b.parentProperty().getValue();
 		GridPane tabla = (GridPane) grid.getChildren().get(1);
