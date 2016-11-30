@@ -155,7 +155,7 @@
                 				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" Flanera " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" Wm<sup>+ tara<sup>" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" Wm+ tara" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
 				               				<Label text=" Ws + tara " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
