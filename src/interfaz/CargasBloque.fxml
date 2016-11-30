@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.XYChart?>
+
+
+
+<SplitPane prefHeight="800.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="interfaz.controladorInterfaz">
+	<items>
+		<SplitPane   orientation="VERTICAL" >
+    		<items>
+	<!-- 	Datos -->
+		   		<GridPane  maxHeight="120" hgap="10" vgap="20">
+           				<GridPane GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" >
+              				<Label wrapText="true" text=" Incremento de Carga ΔP" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+              				<Label wrapText="true" text=" Aproximación del micrómetro " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+              				<Label wrapText="true" text=" Carga total del portapesas" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+              				<Label wrapText="true" text=" Presión en la pastilla" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+              			
+              				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+              				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+              				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+        				</GridPane>
+  				</GridPane>
+	<!-- 	Descarga -->
+		    	<GridPane  hgap="10" vgap="10"  >
+		    			<Label  GridPane.halignment="CENTER" text="Carga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
+           				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" >
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Hora" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
+              				<Label  GridPane.halignment="CENTER" wrapText="true" text="Tiempo&#10;(min)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Micrómetro&#10;(mm)" GridPane.columnIndex="3" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Diferencia&#10;Micrometro" GridPane.columnIndex="4" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Corrección&#10;Aparato" GridPane.columnIndex="5" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Deformación&#10;(mm)" GridPane.columnIndex="6" GridPane.rowIndex="0" ></Label>
+              				
+              				<TextField GridPane.columnIndex="0" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="2" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="4" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="5" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="6" GridPane.rowIndex="1" ></TextField>
+          				</GridPane>
+	          			<Button  onMouseClicked="#agregaFila" GridPane.valignment="TOP" style="-fx-font-size:11" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Agregar Registro" GridPane.columnIndex="1"  GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+				</GridPane>
+	    	</items>
+	    </SplitPane>
+	    	<SplitPane orientation="VERTICAL" >
+	    		<GridPane maxHeight="150" hgap="10" vgap="10"  >
+		    			<Label  GridPane.halignment="CENTER"  text="Descarga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
+           				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true">
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Fecha" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Hora" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
+              				<Label  GridPane.halignment="CENTER" wrapText="true" text="Tiempo&#10;(min)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Micrómetro&#10;(mm)" GridPane.columnIndex="3" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Diferencia&#10;Micrometro" GridPane.columnIndex="4" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Corrección&#10;Aparato" GridPane.columnIndex="5" GridPane.rowIndex="0" ></Label>
+              				<Label GridPane.halignment="CENTER" wrapText="true" text="Deformación&#10;(mm)" GridPane.columnIndex="6" GridPane.rowIndex="0" ></Label>
+              				
+              				<TextField GridPane.columnIndex="0" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="2" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="4" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="5" GridPane.rowIndex="1" ></TextField>
+              				<TextField GridPane.columnIndex="6" GridPane.rowIndex="1" ></TextField>
+        				</GridPane>
+			          	<Button  onMouseClicked="#agregaFila"  GridPane.valignment="TOP" style="-fx-font-size:11" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Agregar Registro" GridPane.columnIndex="1"  GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+				</GridPane>
+				<LineChart >
+   					<xAxis><NumberAxis  lowerBound="0"   side="BOTTOM" /></xAxis>
+					<yAxis><NumberAxis  lowerBound="0"   side="LEFT" /></yAxis>
+   				</LineChart>
+	    </SplitPane>
+   	</items>
+</SplitPane>
