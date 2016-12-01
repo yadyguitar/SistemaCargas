@@ -18,13 +18,14 @@ public class Interfaz extends Application {
 		
 		Parent mainLayout = FXMLLoader.load(getClass().getResource("InterfazFXML.fxml"));
         Scene scene = new Scene(mainLayout, 1100, 600);
-        primaryStage.setTitle("Sistema de Cargas");
+        primaryStage.setTitle("Consolidómetro");
         primaryStage.setScene(scene);
-        
+
         Image icon = new Image(getClass().getResourceAsStream("logo_uv.png"));
 		primaryStage.getIcons().add(icon);
 		
 		primaryStage.setMaximized(true);
+		
 		primaryStage.show();
                 
 	}

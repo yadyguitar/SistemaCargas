@@ -21,36 +21,49 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.ScrollPane?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"   prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml" fx:controller="interfaz.controladorInterfaz" >
+<BorderPane   id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"   prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml" fx:controller="interfaz.controladorInterfaz" >
   <center>
-  		<SplitPane dividerPositions="0.3492462311557789"  focusTraversable="false" prefWidth="300">
+  		<SplitPane  dividerPositions="0.3492462311557789"  focusTraversable="false" prefWidth="300">
   			<items>
-  			<SplitPane maxWidth="300" orientation="VERTICAL">  				
+  			<SplitPane  maxWidth="300" orientation="VERTICAL">  				
   			<items>
-  			 <GridPane vgap="20" hgap="10">
+  			<BorderPane>
+  			<center>
+  			 <GridPane vgap="20" hgap="10" >
   				<Label GridPane.rowIndex="2" GridPane.columnIndex="1" text="Datos del Proyecto" style="-fx-font-size: 15;-fx-font-weight:bold"  ></Label>
   				<GridPane  GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-font-size: 14"  gridLinesVisible="true" >
-               				<Label wrapText="true" text=" Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+               				<Label  wrapText="true" text=" Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+               				<TextField fx:id="nombre" GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
                				<Label wrapText="true" text=" Ubicación" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
-               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+               				<TextField fx:id="ubicacion" GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
                				<Label wrapText="true" text=" Muestra" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
-               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+               				<TextField fx:id="muestra" GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
                				<Label wrapText="true" text=" PCA" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
-               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+               				<TextField fx:id="pca" GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
                				<Label wrapText="true" text=" Profundidad (m) " GridPane.columnIndex="0" GridPane.rowIndex="4"  ></Label>
-               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+               				<TextField fx:id="profundidad" GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
           		</GridPane>
           		<Region GridPane.columnIndex="3"></Region>
           		</GridPane>
-   				<ImageView
+          		</center>
+          		<bottom>
+          		<GridPane hgap="10" vgap="2" >
+          			<Button  GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300" text="Abrir..." onMouseClicked="#abrir"></Button>
+          			<Button GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="300" text="Nuevo" onMouseClicked="#nuevo"></Button>
+          			<Button GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300" text="Guardar" onMouseClicked="#guardar"></Button>
+          			<Region GridPane.columnIndex="2"></Region>
+          		</GridPane>
+          		
+          		</bottom>
+          		</BorderPane>
+   				<!-- <ImageView
 	                fx:id="imageView"
 	                fitHeight="100"
 					fitWidth="150"
 	                pickOnBounds="false"
 	                preserveRatio="false">
 		            <image><Image url="@logo_uv.png" backgroundLoading="true"/></image>
-		        </ImageView>
+		        </ImageView> -->
 			</items>
   			</SplitPane>
             <TabPane prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" >
@@ -61,14 +74,13 @@
        					 <TitledPane  text="Granulometría"  >
            					<content>
                 				<AnchorPane>
-                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+                				<GridPane  fx:id="granulometria" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" Grava % " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Arena % " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
 				               				<Label text=" Finos % " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
-				               				
 				          		</GridPane>
                 				</AnchorPane>
            					</content>
@@ -76,7 +88,7 @@
        					 <TitledPane text="Límites"  >
            					<content>
                 				<AnchorPane >
-                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+                				<GridPane fx:id="limites" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" LL %    " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" LP %    " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
@@ -85,7 +97,6 @@
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
 				               				<Label text=" CL %    " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
-				               				
 				          		</GridPane>
                 				</AnchorPane>
            					</content>
@@ -93,7 +104,7 @@
 	                  <TitledPane  text="Clasificación">
            					<content>
                 				<AnchorPane prefHeight="800">
-                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+                				<GridPane  fx:id="clasificacion" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" ɣm (g/cm³)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" δs" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
@@ -102,7 +113,6 @@
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
 				               				<Label text=" Clasificación SUCS " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
-				               				
 				          		</GridPane>
                 				</AnchorPane>
            					</content>
@@ -116,7 +126,7 @@
        					 <TitledPane  text="Constantes del equipo" >
            					<content>
                 				<AnchorPane >
-                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+                				<GridPane fx:id="constantes" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" Diámetro (cm)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Altura (cm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
@@ -137,7 +147,7 @@
        					 <TitledPane  text="Humedad Inicial"  >
            					<content>
                 				<AnchorPane prefHeight="800" >
-                				<GridPane  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+                				<GridPane fx:id="humedadInicial"  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" Flanera " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Wm˖ₜₐᵣₐ" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
@@ -161,7 +171,7 @@
        					 <TitledPane  text="Antes de la Prueba" >
            					<content>
                 				<AnchorPane >
-                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
+                				<GridPane fx:id="antesDeLaPrueba"  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" Wₘ˖ₐₙᵢₗₗₒ" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField  GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Wₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ(Wm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
@@ -191,8 +201,8 @@
        					 </TitledPane>
        					 <TitledPane  text="Despues de Consolidar"  >
            					<content>
-                				<AnchorPane prefHeight="800">
-                				<GridPane   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
+                				<AnchorPane  prefHeight="800">
+                				<GridPane fx:id="despuesDeConsolidar"   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
 				               				<Label  minWidth="150" text=" Wₘ.ₛₐₜ˖ₐₙᵢₗₗₒ " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Wₘ.ₛₐₜ (Wm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
@@ -227,42 +237,42 @@
                    <content>
                    <ScrollPane fitToWidth="true" fitToHeight="true" >
                    	 <VBox >
-       					 <TitledPane  text="Carga 1" expanded="true">
+       					 <TitledPane  fx:id="carga1" text="Carga 1" expanded="true" >
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  text="Carga 2" expanded="false">
+       					 <TitledPane  fx:id="carga2" text="Carga 2" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  text="Carga 3" expanded="false">
+       					 <TitledPane  fx:id="carga3" text="Carga 3" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  text="Carga 4" expanded="false">
+       					 <TitledPane  fx:id="carga4" text="Carga 4" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  text="Carga 5" expanded="false" >
+       					 <TitledPane fx:id="carga5"  text="Carga 5" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  text="Carga 6" expanded="false">
+       					 <TitledPane  fx:id="carga6" text="Carga 6" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  text="Carga 7" expanded="false">
+       					 <TitledPane  fx:id="carga7" text="Carga 7" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  text="Carga 8" expanded="false">
+       					 <TitledPane  fx:id="carga8" text="Carga 8" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
@@ -278,7 +288,7 @@
 	           					<content>
 	                				<SplitPane orientation="VERTICAL" prefHeight="800.0" prefWidth="600.0" >
 										    <items>
-											    <GridPane maxHeight="120" hgap="10" vgap="10" >
+											    <GridPane fx:id="TablaCalculos" maxHeight="120" hgap="10" vgap="10" >
 					                				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
 									               				<Label wrapText="true" minWidth="150" text=" Área del anillo" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 									               				<TextField  GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
@@ -298,7 +308,7 @@
 	                							</GridPane>
 											    <GridPane  hgap="10" vgap="10"  >
 										    			<Label  GridPane.halignment="CENTER"  text="Descarga" GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
-								           				<GridPane  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+								           				<GridPane fx:id="descarga"  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 								              				<Label GridPane.halignment="CENTER" wrapText="true" text="Δq&#10;(kg)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 								              				<Label GridPane.halignment="CENTER" wrapText="true" text="Σq&#10;(kg)" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
 								              				<Label  GridPane.halignment="CENTER" wrapText="true" text="σ&#10;(kg/cm²)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
@@ -328,7 +338,7 @@
 	           					</content>
 	       					 </TitledPane>
 	       				<TitledPane  text="Curva de Compresibilidad"  >
-           					<LineChart prefHeight="800" >
+           					<LineChart fx:id="curvaCompresibilidad" prefHeight="800" >
 			   					<xAxis><NumberAxis  lowerBound="0"   side="BOTTOM" /></xAxis>
 								<yAxis><NumberAxis  lowerBound="0"   side="LEFT" /></yAxis>
    							</LineChart>
