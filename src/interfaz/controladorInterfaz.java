@@ -12,10 +12,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import com.sun.javafx.scene.control.skin.SplitPaneSkin;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -38,6 +43,15 @@ public class controladorInterfaz implements Initializable{
 	@FXML GridPane humedadInicial;
 	@FXML GridPane antesDeLaPrueba;
 	@FXML GridPane despuesDeConsolidar;
+	
+	@FXML TitledPane carga1;
+	@FXML TitledPane carga2;
+	@FXML TitledPane carga3;
+	@FXML TitledPane carga4;
+	@FXML TitledPane carga5;
+	@FXML TitledPane carga6;
+	@FXML TitledPane carga7;
+	@FXML TitledPane carga8;
 	
 	////////
 	final int NumeroCargas=8;
@@ -76,13 +90,18 @@ public class controladorInterfaz implements Initializable{
 		String info=nombre+","+ubicacion+","+muestra+","+pca+","+profundidad+"\n";
 		
 		//Cadena de datos de granulometria
-		String granulometria=cadena(6,this.granulometria);
-		String limites=cadena(8,this.limites);
-		String clasificacion=cadena(8,this.clasificacion);
-		String constantes=cadena(12,this.constantes);
-		String humedadInicial=cadena(10,this.humedadInicial);
-		String antesDeLaPrueba=cadena(20,this.antesDeLaPrueba);
-		String despuesDeConsolidar=cadena(22,this.despuesDeConsolidar);
+		String granulometria=cadena(this.granulometria);
+		String limites=cadena(this.limites);
+		String clasificacion=cadena(this.clasificacion);
+		String constantes=cadena(this.constantes);
+		String humedadInicial=cadena(this.humedadInicial);
+		String antesDeLaPrueba=cadena(this.antesDeLaPrueba);
+		String despuesDeConsolidar=cadena(this.despuesDeConsolidar);
+		
+		
+		String cargas=cadenaCargas();
+		
+		//ponerlo en una función xD
 		
 		
 		
@@ -98,7 +117,7 @@ public class controladorInterfaz implements Initializable{
         	if(!file.getName().contains(".")) {
         		  file = new File(file.getAbsolutePath() + ".txt");
     		}
-        	SaveFile(""+info+granulometria+limites+clasificacion+constantes+humedadInicial+antesDeLaPrueba+despuesDeConsolidar,file);
+        	SaveFile(""+info+granulometria+limites+clasificacion+constantes+humedadInicial+antesDeLaPrueba+despuesDeConsolidar+cargas,file);
         }
 	}
 	@FXML public void nuevo() throws IOException{
@@ -123,34 +142,43 @@ public class controladorInterfaz implements Initializable{
 	            }
 	            //cont=1 es Granulometría
 	            if (cont==1){
-	            	insertarCadena(6, this.granulometria, linea);
+	            	insertarCadena( this.granulometria, linea);
 	            }
 	            //cont=2 es limites
 	            if(cont==2){
-	            	insertarCadena(8,this.limites,linea);
+	            	insertarCadena(this.limites,linea);
 	            }
 	            //cont=3 es clasificacion
 	            if(cont==3){
-	            	insertarCadena(8,this.clasificacion,linea);
+	            	insertarCadena(this.clasificacion,linea);
 	            }
 	            //constantes del equipo
 	            if(cont==4){
-	            	insertarCadena(12,this.constantes,linea);
+	            	insertarCadena(this.constantes,linea);
 	            }
 	            //Humedad inicial
 	            if(cont==5){
-	            	insertarCadena(10,this.humedadInicial,linea);
+	            	insertarCadena(this.humedadInicial,linea);
 	            }
 	            //antesdeLaPrueba
 	            if(cont==6){
-	            	insertarCadena(20,this.antesDeLaPrueba,linea);
+	            	insertarCadena(this.antesDeLaPrueba,linea);
 	            }
 	            //despuesDeConsolidar
 	            if(cont==7){
-	            	insertarCadena(22,this.despuesDeConsolidar,linea);
+	            	insertarCadena(this.despuesDeConsolidar,linea);
 	            }
 	            
-	            
+	            //Para cargas
+	            if(cont==8){
+	            	List<GridPane> temp = getCadenaCargas(this.carga1); //obtengo un List de GridPanes, de los elementos de cada carga
+	        		insertarCadena(temp.get(0),linea);
+	        		textfile=scanner.nextLine();
+		            linea=textfile.split(",");
+	        		insertarCadena(temp.get(1),linea);
+	        		insertarCadena(temp.get(2),linea);
+	        		
+	            }
 	            
 	           cont++;
 			}
@@ -160,30 +188,120 @@ public class controladorInterfaz implements Initializable{
 	    }
 	 }
 	
+	
 ///////////////////////////////////////////////////
-	public void insertarCadena(int tam, GridPane t, String[]linea){
+	
+	
+	public void insertarCadena(GridPane t, String []linea){
+		int tam=t.getChildren().size()-1;
+		
 		int j=0;
-    	for (int i=1;i<tam;i+=2){
-			TextField temp=(TextField)t.getChildren().get(i);
-			if(i%2!=0){
+		for (int i=0;i<tam;i++){
+			if( t.getChildren().get(i).getClass().equals(new TextField().getClass()) ){
+				TextField temp=(TextField)t.getChildren().get(i);
 				temp.setText(linea[j]);
 				j++;
 			}
 		}
+			
 	}
 	
-	public String cadena(int tam, GridPane t){
+	public void insertarCadenaCargas(GridPane t, String []linea){
+		int tam=t.getChildren().size()-1;
+		
+		int j=0;
+		for (int i=0;i<tam;i++){
+			if( t.getChildren().get(i).getClass().equals(new TextField().getClass()) ){
+				TextField temp=(TextField)t.getChildren().get(i);
+				temp.setText(linea[j]);
+				j++;
+			}
+		}
+			
+	}
+	
+	
+	public List<GridPane> getCadenaCargas(TitledPane carg){
+		SplitPane  general = (SplitPane)carg.getContent();
+		SplitPane lizq=(SplitPane)general.getItems().get(0);//Datos y  Descarga
+		SplitPane lder=(SplitPane)general.getItems().get(1);
+		GridPane datos=(GridPane)((GridPane)lizq.getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane descarga=(GridPane)((GridPane)lizq.getItems().get(1)).getChildren().get(1);  //Descarga (gridpane es el 2do elemento
+		GridPane carga=(GridPane)((GridPane)lder.getItems().get(0)).getChildren().get(1);
+		
+		List<GridPane> temp= new ArrayList<GridPane>();
+		temp.add(datos); //obtengo Gridpane de datos
+		temp.add(descarga);//obtengo GridPane de descarga
+		temp.add(carga);//obtengo GridPane de carga
+		return temp;	
+	}
+	
+	public String cadenaCargas(){
+		//meter en un sola cadena que incluye "\n", toda la información de las 8 cargas
+		List<GridPane> temp = getCadenaCargas(this.carga1); //obtengo un List de GridPanes, de los elementos de cada carga
+		String cad=""; 
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		
+		temp = getCadenaCargas(this.carga2);
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		temp = getCadenaCargas(this.carga3);
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		temp = getCadenaCargas(this.carga4);
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		temp = getCadenaCargas(this.carga5);
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		temp = getCadenaCargas(this.carga6);
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		temp = getCadenaCargas(this.carga7);
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		temp = getCadenaCargas(this.carga8);
+		cad+=cadena(temp.get(0));
+		cad+=cadena(temp.get(1));
+		cad+=cadena(temp.get(2));
+		
+		return cad;
+		
+		
+	}
+	
+	public String cadena( GridPane t){
 		String c="";
-		for (int i=1;i<tam;i+=2){
-			TextField temp=(TextField)t.getChildren().get(i);
-			if(i==tam-1){
-				c+=temp.getText()+"\n";
-			}else{
-				c+=temp.getText()+",";
+		int tam=t.getChildren().size()-1;
+		for (int i=0;i<tam;i++){
+			if( t.getChildren().get(i).getClass().equals(new TextField().getClass()) ){		//si es textfield, entonces guardalo
+				TextField temp=(TextField)t.getChildren().get(i);
+				if(i==tam-1){
+					c+=temp.getText()+"\n";
+				}else{
+					c+=temp.getText()+",";
+				}
 			}
 		}
 		return c;
 	}
+	
+	
 	
 	private void SaveFile(String content, File file){
         try {
