@@ -173,18 +173,59 @@ public class controladorInterfaz implements Initializable{
 	            if(cont==8){
 	            	List<GridPane> temp = getCadenaCargas(this.carga1); //obtengo un List de GridPanes, de los elementos de cada carga
 	        		insertarCadena(temp.get(0),linea);
-	        		textfile=scanner.nextLine();
-		            linea=textfile.split(",");
+	        		
+	        		textfile=scanner.nextLine();	        		
+	        		linea=textfile.split(",");
+	        		int tam=linea.length;
+	        		
+	        		if (tam>7){
+	        			int contador=(tam/7)-1;
+	        			while (contador>0){
+	        					        				
+	        				int lastRow=temp.get(1).getChildren().size()/7;
+	        				lastRow+=1;
+	        				for (int i=0;i<7;i++){
+	        					temp.get(1).add(new TextField(), i, lastRow);	
+	        				}
+	        				temp.get(1).setGridLinesVisible(false);
+	        				temp.get(1).setGridLinesVisible(true);
+	        				
+	        				contador--;
+	        			}
+	        		}
+	        		
 	        		insertarCadena(temp.get(1),linea);
+	        		
+	        		textfile=scanner.nextLine();	        		
+	        		linea=textfile.split(",");
+	        		tam=linea.length;
+	        		
+	        		if (tam>7){
+	        			int contador=(tam/7)-1;
+	        			while (contador>0){
+	        					        				
+	        				int lastRow=temp.get(2).getChildren().size()/7;
+	        				lastRow+=1;
+	        				for (int i=0;i<7;i++){
+	        					temp.get(2).add(new TextField(), i, lastRow);	
+	        				}
+	        				temp.get(2).setGridLinesVisible(false);
+	        				temp.get(2).setGridLinesVisible(true);
+	        				
+	        				contador--;
+	        			}
+	        		}
+	        		
 	        		insertarCadena(temp.get(2),linea);
 	        		
 	            }
+	            
 	            
 	           cont++;
 			}
 
 	    } catch (Exception e) {
-	        
+	        System.out.println(e.getMessage());
 	    }
 	 }
 	
@@ -203,6 +244,7 @@ public class controladorInterfaz implements Initializable{
 				j++;
 			}
 		}
+		
 			
 	}
 	
@@ -291,6 +333,9 @@ public class controladorInterfaz implements Initializable{
 		for (int i=0;i<tam;i++){
 			if( t.getChildren().get(i).getClass().equals(new TextField().getClass()) ){		//si es textfield, entonces guardalo
 				TextField temp=(TextField)t.getChildren().get(i);
+				if (temp.getText().equals("")){
+					c+=" ";
+				}
 				if(i==tam-1){
 					c+=temp.getText()+"\n";
 				}else{
