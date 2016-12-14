@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,8 +14,12 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import com.sun.javafx.scene.control.skin.SplitPaneSkin;
+import com.sun.javafx.scene.layout.region.Margins.Converter;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
@@ -22,6 +27,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -52,6 +58,8 @@ public class controladorInterfaz implements Initializable{
 	@FXML TitledPane carga6;
 	@FXML TitledPane carga7;
 	@FXML TitledPane carga8;
+	@FXML BorderPane border;
+	
 	
 	////////
 	final int NumeroCargas=8;
@@ -366,8 +374,104 @@ public class controladorInterfaz implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+		try{
+			initialize();				
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+				
 	}
+	
+	float []consta= new float[4]; //0>diam 1>alt 2>ar 3>vol
+	float []humIni= new float[4]; //0>flanera 1>wm 2>ws 3>wf 4>wpercent
+	
+	float wp=0;
+	
+	
+	final float PI=3.14159265f;
+	@FXML
+    public void initialize() {
+		TextField area=(TextField)this.constantes.getChildren().get(5);
+		TextField diametro=(TextField)this.constantes.getChildren().get(1);
+		TextField altura=(TextField)this.constantes.getChildren().get(3);
+		TextField volumen=(TextField)this.constantes.getChildren().get(7);
+		
+		//para calcular las constantes de equipo/////////////////////////
+		diametro.textProperty().addListener((observable, oldValue, newValue) -> {
+		    try{
+		    	consta[0]=Float.parseFloat(((String)diametro.getText()));	
+		    	consta[2]=PI*consta[0]*consta[0]/4; 		    
+				area.setText(String.valueOf(consta[2]));
+		    }catch (Exception e) {
+				// TODO: handle exception
+		    	System.out.println("error, letras");
+			}
+			
+		    System.out.println(consta[0]);
+		});
+		
+		altura.textProperty().addListener((observable, oldValue, newValue) -> {
+			try{
+				consta[1]=Float.parseFloat(((String)altura.getText()));
+				consta[3]=consta[1]*consta[2];
+				volumen.setText(String.valueOf(consta[3]));
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("error, letras");
+			}
+			System.out.println(consta[1]);
+		});
+		//////////////////////////////////////////////////////////////////////////////
+		
+	///Para calcular la humedad inicial
+		
+		
+		TextField wm=(TextField)this.humedadInicial.getChildren().get(3);
+		TextField ws=(TextField)this.humedadInicial.getChildren().get(5);
+		TextField wf=(TextField)this.humedadInicial.getChildren().get(7);
+		TextField wpercent=(TextField)this.humedadInicial.getChildren().get(9);
+		
+		
+		
+		wm.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				humIni[0]=Float.parseFloat(((String)wm.getText()));
+				wpercent.setText(String.valueOf(humIni[3]));
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("error, letras");
+			}
+		});
+		
+		ws.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				humIni[1]=Float.parseFloat(((String)ws.getText()));
+				wpercent.setText(String.valueOf(humIni[3]));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		});
+		
+		wf.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				humIni[2]=Float.parseFloat(((String)wf.getText()));
+				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
+				wpercent.setText(String.valueOf(humIni[3]));
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("error, letras");
+			}
+		});
+		
+	//////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		
+
+	}
+	
 	
 	
 
