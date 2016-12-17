@@ -382,31 +382,45 @@ public class controladorInterfaz implements Initializable{
 				
 	}
 	
-	float []consta= new float[4]; //0>diam 1>alt 2>ar 3>vol
-	float []humIni= new float[4]; //0>flanera 1>wm 2>ws 3>wf 4>wpercent
+	float []consta= new float[5]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo
+	float []humIni= new float[4]; //0>wm 1>ws 2>wf 3>wpercent
 	
-	float wp=0;
-	
+	float [] antPrueba=new float[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
 	
 	final float PI=3.14159265f;
 	@FXML
     public void initialize() {
-		TextField area=(TextField)this.constantes.getChildren().get(5);
 		TextField diametro=(TextField)this.constantes.getChildren().get(1);
 		TextField altura=(TextField)this.constantes.getChildren().get(3);
+		TextField area=(TextField)this.constantes.getChildren().get(5);
 		TextField volumen=(TextField)this.constantes.getChildren().get(7);
+		TextField pesoAnillo=(TextField)this.constantes.getChildren().get(9);
 		
+		//--------------------
+		TextField wm=(TextField)this.humedadInicial.getChildren().get(3);
+		TextField ws=(TextField)this.humedadInicial.getChildren().get(5);
+		TextField wf=(TextField)this.humedadInicial.getChildren().get(7);
+		TextField wpercent=(TextField)this.humedadInicial.getChildren().get(9);
+		//---------------------
+		TextField wma=(TextField)this.antesDeLaPrueba.getChildren().get(1);
+		TextField wmnatural=(TextField)this.antesDeLaPrueba.getChildren().get(3);
+		TextField hum=(TextField)this.antesDeLaPrueba.getChildren().get(5);
+		TextField wmnaturals=(TextField)this.antesDeLaPrueba.getChildren().get(7);
+		TextField volmnatural=(TextField)this.antesDeLaPrueba.getChildren().get(9);
+		
+		//---------------------
 		//para calcular las constantes de equipo/////////////////////////
 		diametro.textProperty().addListener((observable, oldValue, newValue) -> {
 		    try{
 		    	consta[0]=Float.parseFloat(((String)diametro.getText()));	
-		    	consta[2]=PI*consta[0]*consta[0]/4; 		    
+		    	consta[2]=PI*consta[0]*consta[0]/4; 
+		    	consta[3]=consta[1]*consta[2];
 				area.setText(String.valueOf(consta[2]));
+				volumen.setText(String.valueOf(consta[3]));
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
 			}
-			
 		    System.out.println(consta[0]);
 		});
 		
@@ -415,28 +429,29 @@ public class controladorInterfaz implements Initializable{
 				consta[1]=Float.parseFloat(((String)altura.getText()));
 				consta[3]=consta[1]*consta[2];
 				volumen.setText(String.valueOf(consta[3]));
-				
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
 			}
 			System.out.println(consta[1]);
 		});
+		
+		pesoAnillo.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				consta[4]=Float.parseFloat(((String)pesoAnillo.getText()));
+				wmnatural.setText( String.valueOf(antPrueba[0]-consta[4]));		
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("error, letras");
+			}
+		});
 		//////////////////////////////////////////////////////////////////////////////
 		
 	///Para calcular la humedad inicial
-		
-		
-		TextField wm=(TextField)this.humedadInicial.getChildren().get(3);
-		TextField ws=(TextField)this.humedadInicial.getChildren().get(5);
-		TextField wf=(TextField)this.humedadInicial.getChildren().get(7);
-		TextField wpercent=(TextField)this.humedadInicial.getChildren().get(9);
-		
-		
-		
 		wm.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
 				humIni[0]=Float.parseFloat(((String)wm.getText()));
+				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
 				wpercent.setText(String.valueOf(humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -447,6 +462,7 @@ public class controladorInterfaz implements Initializable{
 		ws.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
 				humIni[1]=Float.parseFloat(((String)ws.getText()));
+				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
 				wpercent.setText(String.valueOf(humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -458,17 +474,55 @@ public class controladorInterfaz implements Initializable{
 				humIni[2]=Float.parseFloat(((String)wf.getText()));
 				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
 				wpercent.setText(String.valueOf(humIni[3]));
-				
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
 			}
 		});
 		
-	//////////////////////////////////////////////////////////////////////////////////////////
-		
-		
-		
+		wpercent.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				antPrueba[2]=Float.parseFloat((String)wpercent.getText());
+				hum.setText(wpercent.getText());
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		});
+		////////////////////////////////////////////////////////////////////
+		/////////////////////ANTES DE LA PRUEBA////////////////////////////
+		wma.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
+				antPrueba[1]=antPrueba[0]-consta[4];
+				wmnatural.setText( String.valueOf(antPrueba[1]));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		});
+		wmnatural.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
+				antPrueba[1]=antPrueba[0]-consta[4];
+				wmnatural.setText( String.valueOf(antPrueba[1]));
+				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
+				wmnaturals.setText(String.valueOf(antPrueba[3]));
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		});
+		hum.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
+				antPrueba[1]=antPrueba[0]-consta[4];
+				wmnatural.setText( String.valueOf(antPrueba[1]));
+				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
+				wmnaturals.setText(String.valueOf(antPrueba[3]));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		});
+		///////////////////////////////////////////////////////////////////
 
 	}
 	
