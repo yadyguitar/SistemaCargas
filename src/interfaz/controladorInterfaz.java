@@ -23,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
@@ -41,6 +42,7 @@ public class controladorInterfaz implements Initializable{
 	@FXML TextField muestra;
 	@FXML TextField pca;
 	@FXML TextField profundidad;
+	@FXML Label name;
 	
 	@FXML GridPane granulometria;
 	@FXML GridPane limites;
@@ -384,12 +386,14 @@ public class controladorInterfaz implements Initializable{
 	
 	float []consta= new float[5]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo
 	float []humIni= new float[4]; //0>wm 1>ws 2>wf 3>wpercent
-	
 	float [] antPrueba=new float[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
 	
 	final float PI=3.14159265f;
 	@FXML
     public void initialize() {
+		TextField gm = (TextField)this.clasificacion.getChildren().get(1);
+		TextField Ss=(TextField)this.clasificacion.getChildren().get(3);
+		
 		TextField diametro=(TextField)this.constantes.getChildren().get(1);
 		TextField altura=(TextField)this.constantes.getChildren().get(3);
 		TextField area=(TextField)this.constantes.getChildren().get(5);
@@ -407,8 +411,32 @@ public class controladorInterfaz implements Initializable{
 		TextField hum=(TextField)this.antesDeLaPrueba.getChildren().get(5);
 		TextField wmnaturals=(TextField)this.antesDeLaPrueba.getChildren().get(7);
 		TextField volmnatural=(TextField)this.antesDeLaPrueba.getChildren().get(9);
+		TextField pesoWw=(TextField)this.antesDeLaPrueba.getChildren().get(11);
+		TextField volVm=(TextField)this.antesDeLaPrueba.getChildren().get(13);
+		TextField volVv=(TextField)this.antesDeLaPrueba.getChildren().get(15);
+		TextField vacios=(TextField)this.antesDeLaPrueba.getChildren().get(17);
+		TextField gsat=(TextField)this.antesDeLaPrueba.getChildren().get(19);
 		
-		//---------------------
+		//Los listener se aplican a los input, al cambiar alguno, modificaran los cálculos
+		//Listener Ss en clasificación
+		nombre.textProperty().addListener((observable,oldValue,newValue)->{
+		try{
+			name.setText(nombre.getText());
+		}catch(Exception e){}	
+			
+		});
+		
+		Ss.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float ss=Float.parseFloat(((String)Ss.getText()));
+				antPrueba[4]=antPrueba[3]/ss;
+				volmnatural.setText(String.valueOf(antPrueba[4]));
+			}catch(Exception e){
+				
+			}
+			
+		});
+		
 		//para calcular las constantes de equipo/////////////////////////
 		diametro.textProperty().addListener((observable, oldValue, newValue) -> {
 		    try{
@@ -417,6 +445,7 @@ public class controladorInterfaz implements Initializable{
 		    	consta[3]=consta[1]*consta[2];
 				area.setText(String.valueOf(consta[2]));
 				volumen.setText(String.valueOf(consta[3]));
+				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
@@ -429,6 +458,7 @@ public class controladorInterfaz implements Initializable{
 				consta[1]=Float.parseFloat(((String)altura.getText()));
 				consta[3]=consta[1]*consta[2];
 				volumen.setText(String.valueOf(consta[3]));
+				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
@@ -440,11 +470,15 @@ public class controladorInterfaz implements Initializable{
 			try{
 				consta[4]=Float.parseFloat(((String)pesoAnillo.getText()));
 				wmnatural.setText( String.valueOf(antPrueba[0]-consta[4]));		
+				
+				
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
 			}
 		});
+		
+		
 		//////////////////////////////////////////////////////////////////////////////
 		
 	///Para calcular la humedad inicial
@@ -480,10 +514,19 @@ public class controladorInterfaz implements Initializable{
 			}
 		});
 		
+		//excepción
 		wpercent.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
 				antPrueba[2]=Float.parseFloat((String)wpercent.getText());
 				hum.setText(wpercent.getText());
+				
+				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
+				wmnaturals.setText(String.valueOf(antPrueba[3]));
+				float ss=Float.parseFloat(((String)Ss.getText()));
+				antPrueba[4]=antPrueba[3]/ss;
+				volmnatural.setText(String.valueOf(antPrueba[4]));
+				antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
+				
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -495,33 +538,26 @@ public class controladorInterfaz implements Initializable{
 				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
 				antPrueba[1]=antPrueba[0]-consta[4];
 				wmnatural.setText( String.valueOf(antPrueba[1]));
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-		});
-		wmnatural.textProperty().addListener((observable, oldValue, newValue)->{
-			try{
-				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
-				antPrueba[1]=antPrueba[0]-consta[4];
-				wmnatural.setText( String.valueOf(antPrueba[1]));
+				
+				
 				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
 				wmnaturals.setText(String.valueOf(antPrueba[3]));
+				
+				gm.setText(String.valueOf(antPrueba[1]/consta[3]));//modifica valor en clasificacion 
+				
+				float ss=Float.parseFloat(((String)Ss.getText()));
+				antPrueba[4]=antPrueba[3]/ss;
+				volmnatural.setText(String.valueOf(antPrueba[4]));
+				antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
+				
 				
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
 		});
-		hum.textProperty().addListener((observable, oldValue, newValue)->{
-			try{
-				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
-				antPrueba[1]=antPrueba[0]-consta[4];
-				wmnatural.setText( String.valueOf(antPrueba[1]));
-				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
-				wmnaturals.setText(String.valueOf(antPrueba[3]));
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-		});
+	
+		
+		
 		///////////////////////////////////////////////////////////////////
 
 	}

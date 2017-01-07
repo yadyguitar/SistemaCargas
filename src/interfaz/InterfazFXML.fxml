@@ -107,7 +107,7 @@
                 				<GridPane  fx:id="clasificacion" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" ɣm (g/cm³)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
-				               				<Label text=" δs" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+				               				<Label text=" Ss" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
 				               				<Label text=" Carga de Sitio (g/cm²)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
@@ -352,7 +352,7 @@
        </SplitPane>
   </center>
   <bottom>
-    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: linear-gradient(to bottom, paleturquoise, azure, paleturquoise);&#10;" text="#" textAlignment="LEFT" BorderPane.alignment="CENTER" />
+    <Label fx:id="name" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: linear-gradient(to bottom, paleturquoise, azure, paleturquoise);&#10;" text="#" textAlignment="LEFT" BorderPane.alignment="CENTER" />
   </bottom>
 
 </BorderPane>
