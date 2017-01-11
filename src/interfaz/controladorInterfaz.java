@@ -97,7 +97,7 @@ public class controladorInterfaz implements Initializable{
 		String pca=this.pca.getText();
 		String profundidad=this.profundidad.getText();
 		
-		String info=nombre+","+ubicacion+","+muestra+","+pca+","+profundidad+"\n";
+		String info=nombre+";"+ubicacion+";"+muestra+";"+pca+";"+profundidad+"\n";
 		
 		//Cadena de datos de granulometria
 		String granulometria=cadena(this.granulometria);
@@ -141,7 +141,7 @@ public class controladorInterfaz implements Initializable{
 	        int cont=0;
 			while (scanner.hasNext()){
 	            String textfile=scanner.nextLine();
-	            linea=textfile.split(",");
+	            linea=textfile.split(";");
 	            //cont=0 son los Datos del Proyecto
 	            if(cont==0){
 	            this.nombre.setText(linea[0]);
@@ -185,7 +185,7 @@ public class controladorInterfaz implements Initializable{
 	        		insertarCadena(temp.get(0),linea);
 	        		
 	        		textfile=scanner.nextLine();	        		
-	        		linea=textfile.split(",");
+	        		linea=textfile.split(";");
 	        		int tam=linea.length;
 	        		
 	        		if (tam>7){
@@ -207,7 +207,7 @@ public class controladorInterfaz implements Initializable{
 	        		insertarCadena(temp.get(1),linea);
 	        		
 	        		textfile=scanner.nextLine();	        		
-	        		linea=textfile.split(",");
+	        		linea=textfile.split(";");
 	        		tam=linea.length;
 	        		
 	        		if (tam>7){
@@ -349,7 +349,7 @@ public class controladorInterfaz implements Initializable{
 				if(i==tam-1){
 					c+=temp.getText()+"\n";
 				}else{
-					c+=temp.getText()+",";
+					c+=temp.getText()+";";
 				}
 			}
 		}
@@ -387,7 +387,7 @@ public class controladorInterfaz implements Initializable{
 	float []consta= new float[5]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo
 	float []humIni= new float[4]; //0>wm 1>ws 2>wf 3>wpercent
 	float [] antPrueba=new float[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
-	
+	float [] despPrueba= new float[11];//0>pesomanillo 1>Wm 2>pesomseca 3>Ws 4>W% 5>Vm 6>Vs 7>Vv 8>e 9>G% 10>Ww 
 	final float PI=3.14159265f;
 	@FXML
     public void initialize() {
@@ -446,6 +446,7 @@ public class controladorInterfaz implements Initializable{
 				area.setText(String.valueOf(consta[2]));
 				volumen.setText(String.valueOf(consta[3]));
 				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
+				volVm.setText(String.valueOf(consta[3]));
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
@@ -458,6 +459,7 @@ public class controladorInterfaz implements Initializable{
 				consta[1]=Float.parseFloat(((String)altura.getText()));
 				consta[3]=consta[1]*consta[2];
 				volumen.setText(String.valueOf(consta[3]));
+				volVm.setText(String.valueOf(consta[3]));
 				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -549,8 +551,15 @@ public class controladorInterfaz implements Initializable{
 				antPrueba[4]=antPrueba[3]/ss;
 				volmnatural.setText(String.valueOf(antPrueba[4]));
 				antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
-				
-				
+				pesoWw.setText(String.valueOf(antPrueba[5]));
+				antPrueba[6]=consta[3];
+				antPrueba[7]=antPrueba[6]-antPrueba[4];
+				volVv.setText(String.valueOf(antPrueba[7]));
+				antPrueba[8]=antPrueba[7]/antPrueba[4];
+				vacios.setText(String.valueOf(antPrueba[8]));
+				antPrueba[9]=(antPrueba[5]/antPrueba[7])*100;
+				gsat.setText(String.valueOf(antPrueba[9]));
+				volVm.setText(String.valueOf(consta[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
 			}

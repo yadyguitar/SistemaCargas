@@ -106,7 +106,7 @@
                 				<AnchorPane prefHeight="800">
                 				<GridPane  fx:id="clasificacion" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
 				               				<Label minWidth="150" text=" ɣm (g/cm³)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+				               				<TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
 				               				<Label text=" Ss" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
 				               				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
 				               				<Label text=" Carga de Sitio (g/cm²)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
