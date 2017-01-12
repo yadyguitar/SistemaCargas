@@ -228,6 +228,35 @@ public class controladorInterfaz implements Initializable{
 	        				for (int i=0;i<7;i++){
 	        					temp.get(1).add(new TextField(), i, lastRow);	
 	        				}
+	        				
+	        				TextField t=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
+	        				System.out.println("t: "+t.contextMenuProperty());
+	        				
+	        				int tama=(temp.get(1).getChildren().size()-1);
+	        				t.textProperty().addListener((observable,lastValue,newValue)->{
+	        					
+	        					try{
+	        						float ini=Float.parseFloat(((TextField)temp.get(1).getChildren().get(7)).getText());
+	        						
+	        						float rest=ini-(Float.parseFloat(t.getText()));
+	        						
+	        						((TextField)temp.get(1).getChildren().get(tama-3)).setText(String.valueOf(rest));
+	        						((TextField)temp.get(1).getChildren().get(tama-3)).setEditable(false);
+	        						
+	        						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
+	        						
+	        						if (((TextField)temp.get(1).getChildren().get(tama-2)).getText().equals("") || ((TextField)temp.get(1).getChildren().get(tama-2)).getText().equals(" ")  ){
+	        							((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
+	        						}else{
+	        							rest=rest-(Float.parseFloat(((TextField)temp.get(1).getChildren().get(tama-2)).getText()));
+	        							((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
+	        						}
+	        						
+	        					}catch(Exception ec){
+	        						System.out.println(ec.getMessage());
+	        					}
+	        					
+	        				});
 	        				temp.get(1).setGridLinesVisible(false);
 	        				temp.get(1).setGridLinesVisible(true);
 	        				
