@@ -65,16 +65,45 @@ public class controladorInterfaz implements Initializable{
 	
 	////////
 	final int NumeroCargas=8;
+	//List <Float>c1 = new ArrayList<Float>();
+	
 /////////////Métodos de FXML/////////////////////////////////////////
 	@FXML public void agregaFila(MouseEvent e){
 		Button b=(Button)e.getSource();
 		GridPane grid=(GridPane)b.parentProperty().getValue();
 		GridPane tabla = (GridPane) grid.getChildren().get(1);
 		int lastRow=tabla.getChildren().size()/7;
+		
 		lastRow+=1;
 		for (int i=0;i<7;i++){
-			tabla.add(new TextField(), i, lastRow);	
+			tabla.add(new TextField(), i, lastRow);
 		}
+		int tam=tabla.getChildren().size()-1;
+		
+		TextField t=(TextField)tabla.getChildren().get(tam-3);//18
+		
+		t.textProperty().addListener((observable,lastValue,newValue)->{
+			try{
+				float ini=Float.parseFloat(((TextField)tabla.getChildren().get(7)).getText());
+				System.out.println(ini);
+				float rest=ini-(Float.parseFloat(t.getText()));
+				((TextField)tabla.getChildren().get(tam-3)).setText(String.valueOf(rest));
+				((TextField)tabla.getChildren().get(tam-3)).setEditable(false);
+				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
+				
+				if (((TextField)tabla.getChildren().get(tam-2)).getText().equals("")){
+					((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest));
+				}else{
+					rest=rest-(Float.parseFloat(((TextField)tabla.getChildren().get(tam-2)).getText()));
+					((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest));
+				}
+				
+			}catch(Exception ec){
+				System.out.println(ec.getMessage());
+			}
+			
+		});
+		
 		tabla.setGridLinesVisible(false);
 		tabla.setGridLinesVisible(true);
 	}
@@ -187,10 +216,12 @@ public class controladorInterfaz implements Initializable{
 	        		textfile=scanner.nextLine();	        		
 	        		linea=textfile.split(";");
 	        		int tam=linea.length;
-	        		
+	        	    
+	        		int tamactual=(temp.get(1).getChildren().size()-1)-7;
+	        		System.out.println(tamactual);
 	        		if (tam>7){
-	        			int contador=(tam/7)-1;
-	        			while (contador>0){
+	        			
+	        			while (tamactual<tam){
 	        					        				
 	        				int lastRow=temp.get(1).getChildren().size()/7;
 	        				lastRow+=1;
@@ -200,7 +231,7 @@ public class controladorInterfaz implements Initializable{
 	        				temp.get(1).setGridLinesVisible(false);
 	        				temp.get(1).setGridLinesVisible(true);
 	        				
-	        				contador--;
+	        				tam-=7;
 	        			}
 	        		}
 	        		
@@ -209,10 +240,11 @@ public class controladorInterfaz implements Initializable{
 	        		textfile=scanner.nextLine();	        		
 	        		linea=textfile.split(";");
 	        		tam=linea.length;
-	        		
+	        		tamactual=(temp.get(2).getChildren().size()-1)-7;
+	        		System.out.println(tamactual);
 	        		if (tam>7){
-	        			int contador=(tam/7)-1;
-	        			while (contador>0){
+	        			
+	        			while (tamactual<tam){
 	        					        				
 	        				int lastRow=temp.get(2).getChildren().size()/7;
 	        				lastRow+=1;
@@ -222,7 +254,7 @@ public class controladorInterfaz implements Initializable{
 	        				temp.get(2).setGridLinesVisible(false);
 	        				temp.get(2).setGridLinesVisible(true);
 	        				
-	        				contador--;
+	        				tam-=7;
 	        			}
 	        		}
 	        		
@@ -278,13 +310,13 @@ public class controladorInterfaz implements Initializable{
 		SplitPane lizq=(SplitPane)general.getItems().get(0);//Datos y  Descarga
 		SplitPane lder=(SplitPane)general.getItems().get(1);
 		GridPane datos=(GridPane)((GridPane)lizq.getItems().get(0)).getChildren().get(0);  //Datos
-		GridPane descarga=(GridPane)((GridPane)lizq.getItems().get(1)).getChildren().get(1);  //Descarga (gridpane es el 2do elemento
-		GridPane carga=(GridPane)((GridPane)lder.getItems().get(0)).getChildren().get(1);
+		GridPane carga=(GridPane)((GridPane)lizq.getItems().get(1)).getChildren().get(1);  //carga (gridpane es el 2do elemento
+		GridPane descarga=(GridPane)((GridPane)lder.getItems().get(0)).getChildren().get(1);
 		
 		List<GridPane> temp= new ArrayList<GridPane>();
 		temp.add(datos); //obtengo Gridpane de datos
-		temp.add(descarga);//obtengo GridPane de descarga
-		temp.add(carga);//obtengo GridPane de carga
+		temp.add(carga);//obtengo GridPane de descarga
+		temp.add(descarga);//obtengo GridPane de carga
 		return temp;	
 	}
 	
@@ -416,6 +448,18 @@ public class controladorInterfaz implements Initializable{
 		TextField volVv=(TextField)this.antesDeLaPrueba.getChildren().get(15);
 		TextField vacios=(TextField)this.antesDeLaPrueba.getChildren().get(17);
 		TextField gsat=(TextField)this.antesDeLaPrueba.getChildren().get(19);
+		//--------------------------
+		TextField wmsa=(TextField)this.despuesDeConsolidar.getChildren().get(1);
+		TextField wmsat=(TextField)this.despuesDeConsolidar.getChildren().get(3);
+		TextField wmsanillo=(TextField)this.despuesDeConsolidar.getChildren().get(5);
+		TextField wms=(TextField)this.despuesDeConsolidar.getChildren().get(7);
+		TextField wper=(TextField)this.despuesDeConsolidar.getChildren().get(9);
+		TextField voltotmsat=(TextField)this.despuesDeConsolidar.getChildren().get(11);
+		TextField volsol=(TextField)this.despuesDeConsolidar.getChildren().get(13);
+		TextField volva=(TextField)this.despuesDeConsolidar.getChildren().get(15);
+		TextField va=(TextField)this.despuesDeConsolidar.getChildren().get(17);
+		TextField gpercent=(TextField)this.despuesDeConsolidar.getChildren().get(19);
+		TextField wamuestrasat=(TextField)this.despuesDeConsolidar.getChildren().get(21);
 		
 		//Los listener se aplican a los input, al cambiar alguno, modificaran los cálculos
 		//Listener Ss en clasificación
@@ -431,6 +475,11 @@ public class controladorInterfaz implements Initializable{
 				float ss=Float.parseFloat(((String)Ss.getText()));
 				antPrueba[4]=antPrueba[3]/ss;
 				volmnatural.setText(String.valueOf(antPrueba[4]));
+				
+				despPrueba[6]=despPrueba[3]/ss;
+				volsol.setText(String.valueOf(despPrueba[6]));
+				despPrueba[7]=despPrueba[5]-despPrueba[6];
+				volva.setText(String.valueOf(despPrueba[7]));
 			}catch(Exception e){
 				
 			}
@@ -472,8 +521,10 @@ public class controladorInterfaz implements Initializable{
 			try{
 				consta[4]=Float.parseFloat(((String)pesoAnillo.getText()));
 				wmnatural.setText( String.valueOf(antPrueba[0]-consta[4]));		
-				
-				
+				despPrueba[1]=despPrueba[0]-consta[4];
+				despPrueba[2]=consta[4]+antPrueba[3];
+				wmsat.setText(String.valueOf(despPrueba[1]));
+				wmsanillo.setText(String.valueOf(despPrueba[2]));
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
@@ -560,11 +611,43 @@ public class controladorInterfaz implements Initializable{
 				antPrueba[9]=(antPrueba[5]/antPrueba[7])*100;
 				gsat.setText(String.valueOf(antPrueba[9]));
 				volVm.setText(String.valueOf(consta[3]));
+				
+				despPrueba[2]=consta[4]+antPrueba[3];
+				wmsanillo.setText(String.valueOf(despPrueba[2]));
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
 		});
 	
+		//////////////DESPUES DE LA PRUEBA////////////////////////////////
+		wmsa.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				despPrueba[0]=Float.parseFloat(((String)wmsa.getText()));
+				despPrueba[1]=despPrueba[0]-consta[4];
+				despPrueba[2]=consta[4]+antPrueba[3];
+				despPrueba[3]=antPrueba[3];
+				despPrueba[4]=((despPrueba[1]-despPrueba[3])/despPrueba[3])*100;
+				despPrueba[5]=consta[2]*1;//falta vincularlo con resultados
+				despPrueba[6]=despPrueba[3]/Float.parseFloat(((String)Ss.getText()));
+				despPrueba[7]=despPrueba[5]-despPrueba[6];
+				despPrueba[8]=1;//datos de resultados
+				despPrueba[10]=despPrueba[0]-despPrueba[2];
+				despPrueba[9]=(despPrueba[10]/despPrueba[7])*100;
+				
+				wmsat.setText(String.valueOf(despPrueba[1]));
+				wmsanillo.setText(String.valueOf(despPrueba[2]));
+				wms.setText(String.valueOf(despPrueba[3]));
+				wper.setText(String.valueOf(despPrueba[4]));
+				voltotmsat.setText(String.valueOf(despPrueba[5]));
+				volsol.setText(String.valueOf(despPrueba[6]));
+				volva.setText(String.valueOf(despPrueba[7]));
+				va.setText(String.valueOf(despPrueba[8]));
+				gpercent.setText(String.valueOf(despPrueba[9]));
+				wamuestrasat.setText(String.valueOf(despPrueba[10]));
+			}catch(Exception e){
+				
+			}
+		});
 		
 		
 		///////////////////////////////////////////////////////////////////

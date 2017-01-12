@@ -41,11 +41,11 @@
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Micrómetro&#10;(mm)" GridPane.columnIndex="3" GridPane.rowIndex="0" ></Label>
               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Diferencia&#10;Micrometro" GridPane.columnIndex="4" GridPane.rowIndex="0" ></Label>
-              				<TextField GridPane.columnIndex="4" GridPane.rowIndex="1" ></TextField>
+              				<TextField text="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" ></TextField>
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Corrección&#10;Aparato" GridPane.columnIndex="5" GridPane.rowIndex="0" ></Label>
               				<TextField GridPane.columnIndex="5" GridPane.rowIndex="1" ></TextField>
               				<Label GridPane.halignment="CENTER" wrapText="true" text="Deformación&#10;(mm)" GridPane.columnIndex="6" GridPane.rowIndex="0" ></Label>
-              				<TextField GridPane.columnIndex="6" GridPane.rowIndex="1" ></TextField>
+              				<TextField text="0.0" editable="false" GridPane.columnIndex="6" GridPane.rowIndex="1" ></TextField>
           				</GridPane>
 	          			<Button  onMouseClicked="#agregaFila" GridPane.valignment="TOP" style="-fx-font-size:11" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Agregar Registro" GridPane.columnIndex="1"  GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
 				</GridPane>
