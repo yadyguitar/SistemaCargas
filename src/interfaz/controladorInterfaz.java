@@ -12,16 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 import com.sun.javafx.scene.control.skin.SplitPaneSkin;
 import com.sun.javafx.scene.layout.region.Margins.Converter;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -62,7 +61,14 @@ public class controladorInterfaz implements Initializable{
 	@FXML TitledPane carga8;
 	@FXML BorderPane border;
 	
-	
+	static XYChart.Series s1 = new XYChart.Series<>();
+	static XYChart.Series s2 = new XYChart.Series<>();
+	static XYChart.Series s3 = new XYChart.Series<>();
+	static XYChart.Series s4 = new XYChart.Series<>();
+	static XYChart.Series s5 = new XYChart.Series<>();
+	static XYChart.Series s6 = new XYChart.Series<>();
+	static XYChart.Series s7 = new XYChart.Series<>();
+	static XYChart.Series s8 = new XYChart.Series<>();
 	////////
 	final int NumeroCargas=8;
 	//List <Float>c1 = new ArrayList<Float>();
@@ -79,14 +85,54 @@ public class controladorInterfaz implements Initializable{
 			tabla.add(new TextField(), i, lastRow);
 		}
 		int tam=tabla.getChildren().size()-1;
+		///Parte de grafica
+		SplitPane general=(SplitPane)((SplitPane)grid.getParent().getParent()).getParent().getParent();
+		TitledPane carga = (TitledPane)general.getParent().getParent();
 		
-		TextField t=(TextField)tabla.getChildren().get(tam-3);//18
+		SplitPane lder=(SplitPane)general.getItems().get(1);
+		LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
 		
-		t.textProperty().addListener((observable,lastValue,newValue)->{
+		switch(carga.getId()){
+		case "carga1":
+			grafica.getData().add(s1);
+			break;
+		case "carga2":
+			grafica.getData().add(s2);
+			break;
+		case "carga3":
+			grafica.getData().add(s3);
+			break;
+		case "carga4":
+			grafica.getData().add(s4);
+			break;
+		case "carga5":
+			grafica.getData().add(s5);
+			break;
+		case "carga6":
+			grafica.getData().add(s6);
+			break;
+		case "carga7":
+			grafica.getData().add(s7);
+			break;
+		case "carga8":
+			grafica.getData().add(s8);
+			break;
+		default:
+			break;
+			
+		}
+		
+		
+		
+		
+		//////////////////////////////////
+		TextField mm=(TextField)tabla.getChildren().get(tam-3);//18
+		
+		mm.textProperty().addListener((observable,lastValue,newValue)->{
 			try{
 				float ini=Float.parseFloat(((TextField)tabla.getChildren().get(7)).getText());
 				System.out.println(ini);
-				float rest=ini-(Float.parseFloat(t.getText()));
+				float rest=ini-(Float.parseFloat(mm.getText()));
 				((TextField)tabla.getChildren().get(tam-3)).setText(String.valueOf(rest));
 				((TextField)tabla.getChildren().get(tam-3)).setEditable(false);
 				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
@@ -104,9 +150,59 @@ public class controladorInterfaz implements Initializable{
 			
 		});
 		
+		TextField min=(TextField)tabla.getChildren().get(tam-4);
+		min.textProperty().addListener((observable,lastValue,newValue)->{
+			try{
+					switch(carga.getId()){
+					case "carga1": s1.getData().clear();break;
+					case "carga2": s2.getData().clear();break;
+					case "carga3": s3.getData().clear();break;
+					case "carga4": s4.getData().clear();break;
+					case "carga5": s5.getData().clear();break;
+					case "carga6": s6.getData().clear();break;
+					case "carga7": s7.getData().clear();break;
+					case "carga8": s8.getData().clear();break;
+					}
+				
+				//int cantidad=((tam-16)/7)+1;
+				//System.out.println(cantidad);
+				for (int i=16; i<tabla.getChildren().size();i+=7){
+					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
+					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+4)).getText());
+					switch(carga.getId()){
+						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
+						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
+						case "carga3":	s3.getData().add(new XYChart.Data(m,df));break;
+						case "carga4":  s4.getData().add(new XYChart.Data(m,df));break;
+						case "carga5":	s5.getData().add(new XYChart.Data(m,df));break;
+						case "carga6":	s6.getData().add(new XYChart.Data(m,df));break;
+						case "carga7":	s7.getData().add(new XYChart.Data(m,df));break;
+						case "carga8":	s8.getData().add(new XYChart.Data(m,df));break;
+						default:break;
+					}
+					
+					
+				
+				}
+				
+			}catch(Exception ec){
+				System.out.println(ec.getMessage());
+			}
+		});
+		
+		TextField def=(TextField)tabla.getChildren().get(tam);
+		def.textProperty().addListener((observable,lastValue,newValue)->{
+			try{
+				System.out.println("dec");
+			}catch(Exception ec){}
+		});
+		
 		tabla.setGridLinesVisible(false);
 		tabla.setGridLinesVisible(true);
 	}
+	
+
+	
 	@FXML public void agregaFilaR(MouseEvent e){
 		Button b=(Button)e.getSource();
 		GridPane grid=(GridPane)b.parentProperty().getValue();
@@ -207,7 +303,6 @@ public class controladorInterfaz implements Initializable{
 	            if(cont==7){
 	            	insertarCadena(this.despuesDeConsolidar,linea);
 	            }
-	            
 	            //Para cargas
 	            if(cont==8){
 	            	List<GridPane> temp = getCadenaCargas(this.carga1); //obtengo un List de GridPanes, de los elementos de cada carga
@@ -220,21 +315,15 @@ public class controladorInterfaz implements Initializable{
 	        		int tamactual=(temp.get(1).getChildren().size()-1)-7;
 	        		System.out.println(tamactual);
 	        		if (tam>7){
-	        			
 	        			while (tamactual<tam){
-	        					        				
 	        				int lastRow=temp.get(1).getChildren().size()/7;
 	        				lastRow+=1;
 	        				for (int i=0;i<7;i++){
 	        					temp.get(1).add(new TextField(), i, lastRow);	
 	        				}
-	        				
 	        				TextField t=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
-	        				System.out.println("t: "+t.contextMenuProperty());
-	        				
 	        				int tama=(temp.get(1).getChildren().size()-1);
 	        				t.textProperty().addListener((observable,lastValue,newValue)->{
-	        					
 	        					try{
 	        						float ini=Float.parseFloat(((TextField)temp.get(1).getChildren().get(7)).getText());
 	        						
@@ -394,8 +483,6 @@ public class controladorInterfaz implements Initializable{
 		cad+=cadena(temp.get(2));
 		
 		return cad;
-		
-		
 	}
 	
 	public String cadena( GridPane t){
@@ -416,9 +503,6 @@ public class controladorInterfaz implements Initializable{
 		}
 		return c;
 	}
-	
-	
-	
 	private void SaveFile(String content, File file){
         try {
             FileWriter fileWriter = null;
@@ -450,8 +534,9 @@ public class controladorInterfaz implements Initializable{
 	float [] antPrueba=new float[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
 	float [] despPrueba= new float[11];//0>pesomanillo 1>Wm 2>pesomseca 3>Ws 4>W% 5>Vm 6>Vs 7>Vv 8>e 9>G% 10>Ww 
 	final float PI=3.14159265f;
-	@FXML
-    public void initialize() {
+	
+@FXML
+public void initialize() {
 		TextField gm = (TextField)this.clasificacion.getChildren().get(1);
 		TextField Ss=(TextField)this.clasificacion.getChildren().get(3);
 		
@@ -679,11 +764,147 @@ public class controladorInterfaz implements Initializable{
 		});
 		
 		
+		//Datos///
+		
+		GridPane in1=(GridPane)((GridPane)((SplitPane)((SplitPane)carga1.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane in2=(GridPane)((GridPane)((SplitPane)((SplitPane)carga2.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane in3=(GridPane)((GridPane)((SplitPane)((SplitPane)carga3.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane in4=(GridPane)((GridPane)((SplitPane)((SplitPane)carga4.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane in5=(GridPane)((GridPane)((SplitPane)((SplitPane)carga5.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane in6=(GridPane)((GridPane)((SplitPane)((SplitPane)carga6.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane in7=(GridPane)((GridPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		GridPane in8=(GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
+		
+		TextField i1=(TextField)in1.getChildren().get(1);
+		TextField i2=(TextField)in2.getChildren().get(1);
+		TextField i3=(TextField)in3.getChildren().get(1);
+		TextField i4=(TextField)in4.getChildren().get(1);
+		TextField i5=(TextField)in5.getChildren().get(1);
+		TextField i6=(TextField)in6.getChildren().get(1);
+		TextField i7=(TextField)in7.getChildren().get(1);
+		TextField i8=(TextField)in8.getChildren().get(1);
+		
+		i1.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				((TextField)in1.getChildren().get(5)).setText(i1.getText());
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		i2.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float c=Float.parseFloat(((TextField)in1.getChildren().get(5)).getText());
+				float sum=c+(Float.parseFloat(i2.getText()));
+				((TextField)in2.getChildren().get(5)).setText(String.valueOf(sum));
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		
+		i3.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float c=Float.parseFloat(((TextField)in2.getChildren().get(5)).getText());
+				float sum=c+(Float.parseFloat(i3.getText()));
+				((TextField)in3.getChildren().get(5)).setText(String.valueOf(sum));
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		
+		i4.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float c=Float.parseFloat(((TextField)in3.getChildren().get(5)).getText());
+				float sum=c+(Float.parseFloat(i4.getText()));
+				((TextField)in4.getChildren().get(5)).setText(String.valueOf(sum));
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		
+		i5.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float c=Float.parseFloat(((TextField)in4.getChildren().get(5)).getText());
+				float sum=c+(Float.parseFloat(i5.getText()));
+				((TextField)in5.getChildren().get(5)).setText(String.valueOf(sum));
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		i6.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float c=Float.parseFloat(((TextField)in5.getChildren().get(5)).getText());
+				float sum=c+(Float.parseFloat(i6.getText()));
+				((TextField)in6.getChildren().get(5)).setText(String.valueOf(sum));
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		
+		i7.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float c=Float.parseFloat(((TextField)in6.getChildren().get(5)).getText());
+				float sum=c+(Float.parseFloat(i7.getText()));
+				((TextField)in7.getChildren().get(5)).setText(String.valueOf(sum));
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		
+		i8.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				float c=Float.parseFloat(((TextField)in7.getChildren().get(5)).getText());
+				float sum=c+(Float.parseFloat(i8.getText()));
+				((TextField)in8.getChildren().get(5)).setText(String.valueOf(sum));
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		});
+		
+		//descargas///////
+		GridPane d1= (GridPane)((GridPane)((SplitPane)((SplitPane)carga1.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		GridPane d2= (GridPane)((GridPane)((SplitPane)((SplitPane)carga2.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		GridPane d3= (GridPane)((GridPane)((SplitPane)((SplitPane)carga3.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		GridPane d4= (GridPane)((GridPane)((SplitPane)((SplitPane)carga4.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		GridPane d5= (GridPane)((GridPane)((SplitPane)((SplitPane)carga5.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		GridPane d6= (GridPane)((GridPane)((SplitPane)((SplitPane)carga6.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		GridPane d7= (GridPane)((GridPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		GridPane d8= (GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
+		
+		descargas(d8,d7);
+		descargas(d7,d6);
+		descargas(d6,d5);
+		descargas(d5,d4);
+		descargas(d4,d3);
+		descargas(d3,d2);
+		descargas(d2,d1);
+			
+		
 		///////////////////////////////////////////////////////////////////
 
 	}
 	
 	
-	
+	void descargas(GridPane d, GridPane d2){
+		TextField c=(TextField)d.getChildren().get(17);
+		
+		c.textProperty().addListener((observable, oldValue, newValue)->{
+			try{
+				((TextField)d2.getChildren().get(7)).setText(c.getText());
+				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
+				((TextField)d.getChildren().get(18)).setText(String.valueOf(res));
+				
+				if(((TextField)d.getChildren().get(19)).getText().equals("")|| ((TextField)d.getChildren().get(19)).getText().equals(" ")){
+					((TextField)d.getChildren().get(20)).setText(String.valueOf(res));
+				}else{
+					res=res-(Float.parseFloat(((TextField)d.getChildren().get(19)).getText()));
+					
+				}
+				
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+			
+		});
+	}
 
 }
