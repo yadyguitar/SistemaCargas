@@ -92,38 +92,21 @@ public class controladorInterfaz implements Initializable{
 		SplitPane lder=(SplitPane)general.getItems().get(1);
 		LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
 		
-		switch(carga.getId()){
-		case "carga1":
-			grafica.getData().add(s1);
-			break;
-		case "carga2":
-			grafica.getData().add(s2);
-			break;
-		case "carga3":
-			grafica.getData().add(s3);
-			break;
-		case "carga4":
-			grafica.getData().add(s4);
-			break;
-		case "carga5":
-			grafica.getData().add(s5);
-			break;
-		case "carga6":
-			grafica.getData().add(s6);
-			break;
-		case "carga7":
-			grafica.getData().add(s7);
-			break;
-		case "carga8":
-			grafica.getData().add(s8);
-			break;
-		default:
-			break;
+		if(grafica.getData().isEmpty()){
+			switch(carga.getId()){
+			case "carga1":grafica.getData().add(s1);break;
+			case "carga2":grafica.getData().add(s2);break;
+			case "carga3":grafica.getData().add(s3);break;
+			case "carga4":grafica.getData().add(s4);break;
+			case "carga5":grafica.getData().add(s5);break;
+			case "carga6":grafica.getData().add(s6);break;
+			case "carga7":grafica.getData().add(s7);break;
+			case "carga8":grafica.getData().add(s8);break;
+			default:break;
+		}
 			
 		}
-		
-		
-		
+	
 		
 		//////////////////////////////////
 		TextField mm=(TextField)tabla.getChildren().get(tam-3);//18
@@ -136,18 +119,15 @@ public class controladorInterfaz implements Initializable{
 				((TextField)tabla.getChildren().get(tam-3)).setText(String.valueOf(rest));
 				((TextField)tabla.getChildren().get(tam-3)).setEditable(false);
 				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
-				
 				if (((TextField)tabla.getChildren().get(tam-2)).getText().equals("")){
 					((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest));
 				}else{
 					rest=rest-(Float.parseFloat(((TextField)tabla.getChildren().get(tam-2)).getText()));
 					((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest));
 				}
-				
 			}catch(Exception ec){
 				System.out.println(ec.getMessage());
 			}
-			
 		});
 		
 		TextField min=(TextField)tabla.getChildren().get(tam-4);
@@ -162,7 +142,7 @@ public class controladorInterfaz implements Initializable{
 					case "carga6": s6.getData().clear();break;
 					case "carga7": s7.getData().clear();break;
 					case "carga8": s8.getData().clear();break;
-					}
+				}
 				
 				//int cantidad=((tam-16)/7)+1;
 				//System.out.println(cantidad);
@@ -180,11 +160,7 @@ public class controladorInterfaz implements Initializable{
 						case "carga8":	s8.getData().add(new XYChart.Data(m,df));break;
 						default:break;
 					}
-					
-					
-				
 				}
-				
 			}catch(Exception ec){
 				System.out.println(ec.getMessage());
 			}
@@ -193,8 +169,41 @@ public class controladorInterfaz implements Initializable{
 		TextField def=(TextField)tabla.getChildren().get(tam);
 		def.textProperty().addListener((observable,lastValue,newValue)->{
 			try{
-				System.out.println("dec");
-			}catch(Exception ec){}
+				try{
+					switch(carga.getId()){
+					case "carga1": s1.getData().clear();break;
+					case "carga2": s2.getData().clear();break;
+					case "carga3": s3.getData().clear();break;
+					case "carga4": s4.getData().clear();break;
+					case "carga5": s5.getData().clear();break;
+					case "carga6": s6.getData().clear();break;
+					case "carga7": s7.getData().clear();break;
+					case "carga8": s8.getData().clear();break;
+				}
+				
+				//int cantidad=((tam-16)/7)+1;
+				//System.out.println(cantidad);
+				for (int i=16; i<tabla.getChildren().size();i+=7){
+					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
+					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+4)).getText());
+					switch(carga.getId()){
+						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
+						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
+						case "carga3":	s3.getData().add(new XYChart.Data(m,df));break;
+						case "carga4":  s4.getData().add(new XYChart.Data(m,df));break;
+						case "carga5":	s5.getData().add(new XYChart.Data(m,df));break;
+						case "carga6":	s6.getData().add(new XYChart.Data(m,df));break;
+						case "carga7":	s7.getData().add(new XYChart.Data(m,df));break;
+						case "carga8":	s8.getData().add(new XYChart.Data(m,df));break;
+						default:break;
+					}
+				}
+			}catch(Exception ec){
+				System.out.println(ec.getMessage());
+			}
+			}catch(Exception ec){
+				System.out.println(ec.getMessage());
+			}
 		});
 		
 		tabla.setGridLinesVisible(false);
@@ -303,7 +312,7 @@ public class controladorInterfaz implements Initializable{
 	            if(cont==7){
 	            	insertarCadena(this.despuesDeConsolidar,linea);
 	            }
-	            //Para cargas
+	            //Para cargas// Carga 1
 	            if(cont==8){
 	            	List<GridPane> temp = getCadenaCargas(this.carga1); //obtengo un List de GridPanes, de los elementos de cada carga
 	        		insertarCadena(temp.get(0),linea);
@@ -321,7 +330,9 @@ public class controladorInterfaz implements Initializable{
 	        				for (int i=0;i<7;i++){
 	        					temp.get(1).add(new TextField(), i, lastRow);	
 	        				}
+
 	        				TextField t=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
+	        				
 	        				int tama=(temp.get(1).getChildren().size()-1);
 	        				t.textProperty().addListener((observable,lastValue,newValue)->{
 	        					try{
@@ -331,7 +342,6 @@ public class controladorInterfaz implements Initializable{
 	        						
 	        						((TextField)temp.get(1).getChildren().get(tama-3)).setText(String.valueOf(rest));
 	        						((TextField)temp.get(1).getChildren().get(tama-3)).setEditable(false);
-	        						
 	        						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
 	        						
 	        						if (((TextField)temp.get(1).getChildren().get(tama-2)).getText().equals("") || ((TextField)temp.get(1).getChildren().get(tama-2)).getText().equals(" ")  ){
@@ -349,6 +359,47 @@ public class controladorInterfaz implements Initializable{
 	        				temp.get(1).setGridLinesVisible(false);
 	        				temp.get(1).setGridLinesVisible(true);
 	        				
+	        				//aqui la parte de la grafica
+	        				SplitPane lder=(SplitPane)((SplitPane)this.carga1.getContent()).getItems().get(1);
+	        				LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
+	        				
+	        				if(!grafica.getData().contains(s1)){
+	        					grafica.getData().add(s1); //porque es carga 1
+	        				}
+	        				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
+	        				
+	        				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
+	        					try{
+	        					s1.getData().clear();
+	        					//int cantidad=((tam-16)/7)+1;
+	        					//System.out.println(cantidad);
+	        					for (int i=16; i<temp.get(1).getChildren().size();i+=7){
+	        						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+4)).getText());
+	        						s1.getData().add(new XYChart.Data(m,df));
+	        					}
+	        				}catch(Exception ec){
+	        					System.out.println(ec.getMessage());
+	        				}
+	        				});
+	        				
+	        				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
+	        				def.textProperty().addListener((observable,lastValue,newValue)->{
+	        					try{
+	        					s1.getData().clear();
+	        					//int cantidad=((tam-16)/7)+1;
+	        					//System.out.println(cantidad);
+	        					for (int i=16; i<temp.get(1).getChildren().size();i+=7){
+	        						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+4)).getText());
+	        						s1.getData().add(new XYChart.Data(m,df));
+	        					}
+	        				}catch(Exception ec){
+	        					System.out.println(ec.getMessage());
+	        				}
+	        				});
+	        				
+	        				
 	        				tam-=7;
 	        			}
 	        		}
@@ -361,7 +412,6 @@ public class controladorInterfaz implements Initializable{
 	        		tamactual=(temp.get(2).getChildren().size()-1)-7;
 	        		System.out.println(tamactual);
 	        		if (tam>7){
-	        			
 	        			while (tamactual<tam){
 	        					        				
 	        				int lastRow=temp.get(2).getChildren().size()/7;
@@ -375,12 +425,8 @@ public class controladorInterfaz implements Initializable{
 	        				tam-=7;
 	        			}
 	        		}
-	        		
 	        		insertarCadena(temp.get(2),linea);
-	        		
 	            }
-	            
-	            
 	           cont++;
 			}
 
@@ -882,6 +928,7 @@ public void initialize() {
 		///////////////////////////////////////////////////////////////////
 
 	}
+
 	
 	
 	void descargas(GridPane d, GridPane d2){
