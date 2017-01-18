@@ -930,7 +930,6 @@ public void initialize() {
 	}
 
 	
-	
 	void descargas(GridPane d, GridPane d2){
 		TextField c=(TextField)d.getChildren().get(17);
 		
