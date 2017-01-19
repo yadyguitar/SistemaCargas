@@ -237,42 +237,42 @@
                    <content>
                    <ScrollPane fitToWidth="true" fitToHeight="true" >
                    	 <VBox >
-       					 <TitledPane  fx:id="carga1" text="Carga 1" expanded="true" >
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga1" text="Carga 1" expanded="true" >
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  fx:id="carga2" text="Carga 2" expanded="false">
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga2" text="Carga 2" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  fx:id="carga3" text="Carga 3" expanded="false">
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga3" text="Carga 3" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  fx:id="carga4" text="Carga 4" expanded="false">
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga4" text="Carga 4" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane fx:id="carga5"  text="Carga 5" expanded="false">
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga5"  text="Carga 5" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  fx:id="carga6" text="Carga 6" expanded="false">
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga6" text="Carga 6" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  fx:id="carga7" text="Carga 7" expanded="false">
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga7" text="Carga 7" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>
        					 </TitledPane>
-       					 <TitledPane  fx:id="carga8" text="Carga 8" expanded="false">
+       					 <TitledPane onMouseClicked="#actualiza" fx:id="carga8" text="Carga 8" expanded="false">
            					<content>
 									<fx:include source="CargasBloque.fxml"/>
            					</content>

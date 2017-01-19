@@ -928,7 +928,13 @@ public void initialize() {
 		///////////////////////////////////////////////////////////////////
 
 	}
+ @FXML void actualiza(MouseEvent e){
 
+	 TitledPane cargaTemporal=(TitledPane)e.getSource();
+	SplitPane splitTemporal=(SplitPane)cargaTemporal.getContent();
+	System.out.println(splitTemporal);
+	splitTemporal.autosize();
+ }
 	
 	void descargas(GridPane d, GridPane d2){
 		TextField c=(TextField)d.getChildren().get(17);
