@@ -78,10 +78,10 @@ public class controladorInterfaz implements Initializable{
 		Button b=(Button)e.getSource();
 		GridPane grid=(GridPane)b.parentProperty().getValue();
 		GridPane tabla = (GridPane) grid.getChildren().get(1);
-		int lastRow=tabla.getChildren().size()/7;
+		int lastRow=tabla.getChildren().size()/6;
 		
 		lastRow+=1;
-		for (int i=0;i<7;i++){
+		for (int i=0;i<6;i++){
 			tabla.add(new TextField(), i, lastRow);
 		}
 		int tam=tabla.getChildren().size()-1;
@@ -109,28 +109,28 @@ public class controladorInterfaz implements Initializable{
 	
 		
 		//////////////////////////////////
-		TextField mm=(TextField)tabla.getChildren().get(tam-3);//18
+		TextField mm=(TextField)tabla.getChildren().get(tam-2);//18
 		
 		mm.textProperty().addListener((observable,lastValue,newValue)->{
 			try{
 				float ini=Float.parseFloat(((TextField)tabla.getChildren().get(7)).getText());
 				System.out.println(ini);
 				float rest=ini-(Float.parseFloat(mm.getText()));
-				((TextField)tabla.getChildren().get(tam-3)).setText(String.valueOf(rest));
-				((TextField)tabla.getChildren().get(tam-3)).setEditable(false);
-				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
-				if (((TextField)tabla.getChildren().get(tam-2)).getText().equals("")){
-					((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest));
+				((TextField)tabla.getChildren().get(tam-2)).setText(String.valueOf(rest));
+				((TextField)tabla.getChildren().get(tam-2)).setEditable(false);
+				((TextField)tabla.getChildren().get(tam)).setEditable(false);
+				if (((TextField)tabla.getChildren().get(tam-1)).getText().equals("")){
+					((TextField)tabla.getChildren().get(tam)).setText(String.valueOf(rest));
 				}else{
-					rest=rest-(Float.parseFloat(((TextField)tabla.getChildren().get(tam-2)).getText()));
-					((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest));
+					rest=rest-(Float.parseFloat(((TextField)tabla.getChildren().get(tam-1)).getText()));
+					((TextField)tabla.getChildren().get(tam)).setText(String.valueOf(rest));
 				}
 			}catch(Exception ec){
 				System.out.println(ec.getMessage());
 			}
 		});
 		
-		TextField min=(TextField)tabla.getChildren().get(tam-4);
+		TextField min=(TextField)tabla.getChildren().get(tam-3);
 		min.textProperty().addListener((observable,lastValue,newValue)->{
 			try{
 					switch(carga.getId()){
@@ -146,9 +146,9 @@ public class controladorInterfaz implements Initializable{
 				
 				//int cantidad=((tam-16)/7)+1;
 				//System.out.println(cantidad);
-				for (int i=16; i<tabla.getChildren().size();i+=7){
+				for (int i=14; i<tabla.getChildren().size();i+=6){
 					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
-					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+4)).getText());
+					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
 						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
 						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
@@ -183,9 +183,9 @@ public class controladorInterfaz implements Initializable{
 				
 				//int cantidad=((tam-16)/7)+1;
 				//System.out.println(cantidad);
-				for (int i=16; i<tabla.getChildren().size();i+=7){
+				for (int i=14; i<tabla.getChildren().size();i+=6){
 					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
-					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+4)).getText());
+					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
 						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
 						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
@@ -321,17 +321,17 @@ public class controladorInterfaz implements Initializable{
 	        		linea=textfile.split(";");
 	        		int tam=linea.length;
 	        	    
-	        		int tamactual=(temp.get(1).getChildren().size()-1)-7;
+	        		int tamactual=(temp.get(1).getChildren().size()-1)-6;
 	        		System.out.println(tamactual);
-	        		if (tam>7){
+	        		if (tam>6){
 	        			while (tamactual<tam){
-	        				int lastRow=temp.get(1).getChildren().size()/7;
+	        				int lastRow=temp.get(1).getChildren().size()/6;
 	        				lastRow+=1;
-	        				for (int i=0;i<7;i++){
+	        				for (int i=0;i<6;i++){
 	        					temp.get(1).add(new TextField(), i, lastRow);	
 	        				}
 
-	        				TextField t=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
+	        				TextField t=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-2);
 	        				
 	        				int tama=(temp.get(1).getChildren().size()-1);
 	        				t.textProperty().addListener((observable,lastValue,newValue)->{
@@ -340,15 +340,15 @@ public class controladorInterfaz implements Initializable{
 	        						
 	        						float rest=ini-(Float.parseFloat(t.getText()));
 	        						
-	        						((TextField)temp.get(1).getChildren().get(tama-3)).setText(String.valueOf(rest));
-	        						((TextField)temp.get(1).getChildren().get(tama-3)).setEditable(false);
-	        						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
+	        						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.valueOf(rest));
+	        						((TextField)temp.get(1).getChildren().get(tama-2)).setEditable(false);
+	        						((TextField)temp.get(1).getChildren().get(tama)).setEditable(false);
 	        						
-	        						if (((TextField)temp.get(1).getChildren().get(tama-2)).getText().equals("") || ((TextField)temp.get(1).getChildren().get(tama-2)).getText().equals(" ")  ){
-	        							((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
+	        						if (((TextField)temp.get(1).getChildren().get(tama-1)).getText().equals("") || ((TextField)temp.get(1).getChildren().get(tama-1)).getText().equals(" ")  ){
+	        							((TextField)temp.get(1).getChildren().get(tama)).setText(String.valueOf(rest));
 	        						}else{
-	        							rest=rest-(Float.parseFloat(((TextField)temp.get(1).getChildren().get(tama-2)).getText()));
-	        							((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
+	        							rest=rest-(Float.parseFloat(((TextField)temp.get(1).getChildren().get(tama-1)).getText()));
+	        							((TextField)temp.get(1).getChildren().get(tama)).setText(String.valueOf(rest));
 	        						}
 	        						
 	        					}catch(Exception ec){
@@ -366,16 +366,16 @@ public class controladorInterfaz implements Initializable{
 	        				if(!grafica.getData().contains(s1)){
 	        					grafica.getData().add(s1); //porque es carga 1
 	        				}
-	        				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
+	        				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
 	        				
 	        				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
 	        					try{
 	        					s1.getData().clear();
 	        					//int cantidad=((tam-16)/7)+1;
 	        					//System.out.println(cantidad);
-	        					for (int i=16; i<temp.get(1).getChildren().size();i+=7){
+	        					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
 	        						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
-	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+4)).getText());
+	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
 	        						s1.getData().add(new XYChart.Data(m,df));
 	        					}
 	        				}catch(Exception ec){
@@ -383,15 +383,15 @@ public class controladorInterfaz implements Initializable{
 	        				}
 	        				});
 	        				
-	        				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
+	        				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-2);
 	        				def.textProperty().addListener((observable,lastValue,newValue)->{
 	        					try{
 	        					s1.getData().clear();
 	        					//int cantidad=((tam-16)/7)+1;
 	        					//System.out.println(cantidad);
-	        					for (int i=16; i<temp.get(1).getChildren().size();i+=7){
+	        					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
 	        						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
-	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+4)).getText());
+	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
 	        						s1.getData().add(new XYChart.Data(m,df));
 	        					}
 	        				}catch(Exception ec){
@@ -400,7 +400,7 @@ public class controladorInterfaz implements Initializable{
 	        				});
 	        				
 	        				
-	        				tam-=7;
+	        				tam-=6;
 	        			}
 	        		}
 	        		
@@ -409,20 +409,20 @@ public class controladorInterfaz implements Initializable{
 	        		textfile=scanner.nextLine();	        		
 	        		linea=textfile.split(";");
 	        		tam=linea.length;
-	        		tamactual=(temp.get(2).getChildren().size()-1)-7;
+	        		tamactual=(temp.get(2).getChildren().size()-1)-6;
 	        		System.out.println(tamactual);
-	        		if (tam>7){
+	        		if (tam>6){
 	        			while (tamactual<tam){
 	        					        				
-	        				int lastRow=temp.get(2).getChildren().size()/7;
+	        				int lastRow=temp.get(2).getChildren().size()/6;
 	        				lastRow+=1;
-	        				for (int i=0;i<7;i++){
+	        				for (int i=0;i<6;i++){
 	        					temp.get(2).add(new TextField(), i, lastRow);	
 	        				}
 	        				temp.get(2).setGridLinesVisible(false);
 	        				temp.get(2).setGridLinesVisible(true);
 	        				
-	        				tam-=7;
+	        				tam-=6;
 	        			}
 	        		}
 	        		insertarCadena(temp.get(2),linea);
@@ -943,12 +943,12 @@ public void initialize() {
 			try{
 				((TextField)d2.getChildren().get(7)).setText(c.getText());
 				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
-				((TextField)d.getChildren().get(18)).setText(String.valueOf(res));
+				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
 				
-				if(((TextField)d.getChildren().get(19)).getText().equals("")|| ((TextField)d.getChildren().get(19)).getText().equals(" ")){
-					((TextField)d.getChildren().get(20)).setText(String.valueOf(res));
+				if(((TextField)d.getChildren().get(17)).getText().equals("")|| ((TextField)d.getChildren().get(17)).getText().equals(" ")){
+					((TextField)d.getChildren().get(18)).setText(String.valueOf(res));
 				}else{
-					res=res-(Float.parseFloat(((TextField)d.getChildren().get(19)).getText()));
+					res=res-(Float.parseFloat(((TextField)d.getChildren().get(17)).getText()));
 					
 				}
 				
