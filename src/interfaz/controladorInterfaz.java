@@ -118,13 +118,10 @@ public class controladorInterfaz implements Initializable{
 				float rest=ini-(Float.parseFloat(mm.getText()));
 				((TextField)tabla.getChildren().get(tam-2)).setText(String.valueOf(rest));
 				((TextField)tabla.getChildren().get(tam-2)).setEditable(false);
-				((TextField)tabla.getChildren().get(tam)).setEditable(false);
-				if (((TextField)tabla.getChildren().get(tam-1)).getText().equals("")){
-					((TextField)tabla.getChildren().get(tam)).setText(String.valueOf(rest));
-				}else{
-					rest=rest-(Float.parseFloat(((TextField)tabla.getChildren().get(tam-1)).getText()));
-					((TextField)tabla.getChildren().get(tam)).setText(String.valueOf(rest));
-				}
+				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
+				
+				((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest)); //faltaría condición de si no es "mm" multiplicarlo por 25.3
+				
 			}catch(Exception ec){
 				System.out.println(ec.getMessage());
 			}
@@ -244,9 +241,7 @@ public class controladorInterfaz implements Initializable{
 		
 		
 		String cargas=cadenaCargas();
-		
-		//ponerlo en una función xD
-		
+
 		
 		
 		/////FILE/////////////////////////////////////
@@ -342,14 +337,9 @@ public class controladorInterfaz implements Initializable{
 	        						
 	        						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.valueOf(rest));
 	        						((TextField)temp.get(1).getChildren().get(tama-2)).setEditable(false);
-	        						((TextField)temp.get(1).getChildren().get(tama)).setEditable(false);
+	        						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
 	        						
-	        						if (((TextField)temp.get(1).getChildren().get(tama-1)).getText().equals("") || ((TextField)temp.get(1).getChildren().get(tama-1)).getText().equals(" ")  ){
-	        							((TextField)temp.get(1).getChildren().get(tama)).setText(String.valueOf(rest));
-	        						}else{
-	        							rest=rest-(Float.parseFloat(((TextField)temp.get(1).getChildren().get(tama-1)).getText()));
-	        							((TextField)temp.get(1).getChildren().get(tama)).setText(String.valueOf(rest));
-	        						}
+	        						((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
 	        						
 	        					}catch(Exception ec){
 	        						System.out.println(ec.getMessage());
@@ -366,7 +356,7 @@ public class controladorInterfaz implements Initializable{
 	        				if(!grafica.getData().contains(s1)){
 	        					grafica.getData().add(s1); //porque es carga 1
 	        				}
-	        				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-3);
+	        				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
 	        				
 	        				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
 	        					try{
@@ -382,8 +372,8 @@ public class controladorInterfaz implements Initializable{
 	        					System.out.println(ec.getMessage());
 	        				}
 	        				});
-	        				
-	        				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-2);
+	        				//el tam de los nodos, tienen un elemento de mas, quien sabe porque :I
+	        				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-1);
 	        				def.textProperty().addListener((observable,lastValue,newValue)->{
 	        					try{
 	        					s1.getData().clear();
@@ -427,6 +417,11 @@ public class controladorInterfaz implements Initializable{
 	        		}
 	        		insertarCadena(temp.get(2),linea);
 	            }
+	            //para carga 2
+	            if(cont==9){
+	            	System.out.println("Pendiente");
+	            }
+	            
 	           cont++;
 			}
 
@@ -935,23 +930,19 @@ public void initialize() {
 	System.out.println(splitTemporal);
 	splitTemporal.autosize();
  }
-	
+ 
+	void auxAbrirCargas( TitledPane carga, XYChart.Series s,Scanner scanner){
+		
+	}
 	void descargas(GridPane d, GridPane d2){
-		TextField c=(TextField)d.getChildren().get(17);
+		TextField c=(TextField)d.getChildren().get(15);
 		
 		c.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
 				((TextField)d2.getChildren().get(7)).setText(c.getText());
 				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
 				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
-				
-				if(((TextField)d.getChildren().get(17)).getText().equals("")|| ((TextField)d.getChildren().get(17)).getText().equals(" ")){
-					((TextField)d.getChildren().get(18)).setText(String.valueOf(res));
-				}else{
-					res=res-(Float.parseFloat(((TextField)d.getChildren().get(17)).getText()));
-					
-				}
-				
+				((TextField)d.getChildren().get(17)).setText(String.valueOf(res));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
