@@ -309,117 +309,12 @@ public class controladorInterfaz implements Initializable{
 	            }
 	            //Para cargas// Carga 1
 	            if(cont==8){
-	            	List<GridPane> temp = getCadenaCargas(this.carga1); //obtengo un List de GridPanes, de los elementos de cada carga
-	        		insertarCadena(temp.get(0),linea);
-	        		
-	        		textfile=scanner.nextLine();	        		
-	        		linea=textfile.split(";");
-	        		int tam=linea.length;
-	        	    
-	        		int tamactual=(temp.get(1).getChildren().size()-1)-6;
-	        		System.out.println(tamactual);
-	        		if (tam>6){
-	        			while (tamactual<tam){
-	        				int lastRow=temp.get(1).getChildren().size()/6;
-	        				lastRow+=1;
-	        				for (int i=0;i<6;i++){
-	        					temp.get(1).add(new TextField(), i, lastRow);	
-	        				}
-
-	        				TextField t=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-2);
-	        				
-	        				int tama=(temp.get(1).getChildren().size()-1);
-	        				t.textProperty().addListener((observable,lastValue,newValue)->{
-	        					try{
-	        						float ini=Float.parseFloat(((TextField)temp.get(1).getChildren().get(7)).getText());
-	        						
-	        						float rest=ini-(Float.parseFloat(t.getText()));
-	        						
-	        						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.valueOf(rest));
-	        						((TextField)temp.get(1).getChildren().get(tama-2)).setEditable(false);
-	        						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
-	        						
-	        						((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
-	        						
-	        					}catch(Exception ec){
-	        						System.out.println(ec.getMessage());
-	        					}
-	        					
-	        				});
-	        				temp.get(1).setGridLinesVisible(false);
-	        				temp.get(1).setGridLinesVisible(true);
-	        				
-	        				//aqui la parte de la grafica
-	        				SplitPane lder=(SplitPane)((SplitPane)this.carga1.getContent()).getItems().get(1);
-	        				LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
-	        				
-	        				if(!grafica.getData().contains(s1)){
-	        					grafica.getData().add(s1); //porque es carga 1
-	        				}
-	        				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
-	        				
-	        				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
-	        					try{
-	        					s1.getData().clear();
-	        					//int cantidad=((tam-16)/7)+1;
-	        					//System.out.println(cantidad);
-	        					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
-	        						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
-	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-	        						s1.getData().add(new XYChart.Data(m,df));
-	        					}
-	        				}catch(Exception ec){
-	        					System.out.println(ec.getMessage());
-	        				}
-	        				});
-	        				//el tam de los nodos, tienen un elemento de mas, quien sabe porque :I
-	        				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-1);
-	        				def.textProperty().addListener((observable,lastValue,newValue)->{
-	        					try{
-	        					s1.getData().clear();
-	        					//int cantidad=((tam-16)/7)+1;
-	        					//System.out.println(cantidad);
-	        					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
-	        						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
-	        						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-	        						s1.getData().add(new XYChart.Data(m,df));
-	        					}
-	        				}catch(Exception ec){
-	        					System.out.println(ec.getMessage());
-	        				}
-	        				});
-	        				
-	        				
-	        				tam-=6;
-	        			}
-	        		}
-	        		
-	        		insertarCadena(temp.get(1),linea);
-	        		
-	        		textfile=scanner.nextLine();	        		
-	        		linea=textfile.split(";");
-	        		tam=linea.length;
-	        		tamactual=(temp.get(2).getChildren().size()-1)-6;
-	        		System.out.println(tamactual);
-	        		if (tam>6){
-	        			while (tamactual<tam){
-	        					        				
-	        				int lastRow=temp.get(2).getChildren().size()/6;
-	        				lastRow+=1;
-	        				for (int i=0;i<6;i++){
-	        					temp.get(2).add(new TextField(), i, lastRow);	
-	        				}
-	        				temp.get(2).setGridLinesVisible(false);
-	        				temp.get(2).setGridLinesVisible(true);
-	        				
-	        				tam-=6;
-	        			}
-	        		}
-	        		insertarCadena(temp.get(2),linea);
+	            	auxAbrirCargas(this.carga1,this.s1,scanner,linea);
 	            }
 	            //para carga 2
 	            if(cont==9){
-	            	System.out.println("Pendiente");
+	            	auxAbrirCargas(this.carga2,this.s2,scanner,linea);
+	            	
 	            }
 	            
 	           cont++;
@@ -931,9 +826,117 @@ public void initialize() {
 	splitTemporal.autosize();
  }
  
-	void auxAbrirCargas( TitledPane carga, XYChart.Series s,Scanner scanner){
+	void auxAbrirCargas( TitledPane carga, XYChart.Series s,Scanner scanner,String []linea){
+		List<GridPane> temp = getCadenaCargas(carga); //obtengo un List de GridPanes, de los elementos de cada carga
+		insertarCadena(temp.get(0),linea);
+		String textfile=scanner.nextLine();
+        linea=textfile.split(";");
+        
+        
+		int tam=linea.length;
+	    
+		int tamactual=(temp.get(1).getChildren().size()-1)-6;
+		System.out.println(tamactual);
+		if (tam>6){
+			while (tamactual<tam){
+				int lastRow=temp.get(1).getChildren().size()/6;
+				lastRow+=1;
+				for (int i=0;i<6;i++){
+					temp.get(1).add(new TextField(), i, lastRow);	
+				}
+
+				TextField t=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-2);
+				
+				int tama=(temp.get(1).getChildren().size()-1);
+				t.textProperty().addListener((observable,lastValue,newValue)->{
+					try{
+						float ini=Float.parseFloat(((TextField)temp.get(1).getChildren().get(7)).getText());
+						
+						float rest=ini-(Float.parseFloat(t.getText()));
+						
+						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.valueOf(rest));
+						((TextField)temp.get(1).getChildren().get(tama-2)).setEditable(false);
+						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
+						
+						((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
+						
+					}catch(Exception ec){
+						System.out.println(ec.getMessage());
+					}
+					
+				});
+				temp.get(1).setGridLinesVisible(false);
+				temp.get(1).setGridLinesVisible(true);
+				
+				//aqui la parte de la grafica
+				SplitPane lder=(SplitPane)((SplitPane)carga.getContent()).getItems().get(1);
+				LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
+				
+				if(!grafica.getData().contains(s)){
+					grafica.getData().add(s); //porque es carga 1
+				}
+				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
+				
+				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
+					try{
+					s.getData().clear();
+					//int cantidad=((tam-16)/7)+1;
+					//System.out.println(cantidad);
+					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
+						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
+						s.getData().add(new XYChart.Data(m,df));
+					}
+				}catch(Exception ec){
+					System.out.println(ec.getMessage());
+				}
+				});
+				//el tam de los nodos, tienen un elemento de mas, quien sabe porque :I
+				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-1);
+				def.textProperty().addListener((observable,lastValue,newValue)->{
+					try{
+					s.getData().clear();
+					//int cantidad=((tam-16)/7)+1;
+					//System.out.println(cantidad);
+					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
+						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
+						s.getData().add(new XYChart.Data(m,df));
+					}
+				}catch(Exception ec){
+					System.out.println(ec.getMessage());
+				}
+				});
+				
+				
+				tam-=6;
+			}
+		}
 		
+		insertarCadena(temp.get(1),linea);
+		
+		textfile=scanner.nextLine();	        		
+		linea=textfile.split(";");
+		tam=linea.length;
+		tamactual=(temp.get(2).getChildren().size()-1)-6;
+		System.out.println(tamactual);
+		if (tam>6){
+			while (tamactual<tam){
+					        				
+				int lastRow=temp.get(2).getChildren().size()/6;
+				lastRow+=1;
+				for (int i=0;i<6;i++){
+					temp.get(2).add(new TextField(), i, lastRow);	
+				}
+				temp.get(2).setGridLinesVisible(false);
+				temp.get(2).setGridLinesVisible(true);
+				
+				tam-=6;
+			}
+		}
+		insertarCadena(temp.get(2),linea);
 	}
+	
 	void descargas(GridPane d, GridPane d2){
 		TextField c=(TextField)d.getChildren().get(15);
 		
