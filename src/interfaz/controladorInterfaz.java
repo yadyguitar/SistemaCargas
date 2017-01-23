@@ -1,23 +1,14 @@
 package interfaz;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import com.sun.javafx.scene.control.skin.SplitPaneSkin;
-import com.sun.javafx.scene.layout.region.Margins.Converter;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -31,7 +22,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 public class controladorInterfaz implements Initializable{
 
