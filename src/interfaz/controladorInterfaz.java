@@ -885,8 +885,8 @@ public void initialize() {
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
-						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
-						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
+						BigDecimal m = new BigDecimal(((TextField)temp.get(1).getChildren().get(i)).getText());
+						BigDecimal df= new BigDecimal(((TextField)temp.get(1).getChildren().get(i+3)).getText());
 						s.getData().add(new XYChart.Data(m,df));
 					}
 				}catch(Exception ec){
