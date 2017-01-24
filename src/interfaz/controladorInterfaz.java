@@ -23,7 +23,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 
 public class controladorInterfaz implements Initializable{
 
@@ -64,7 +63,6 @@ public class controladorInterfaz implements Initializable{
 	////////
 	final int NumeroCargas=8;
 	//List <Float>c1 = new ArrayList<Float>();
-	
 /////////////Métodos de FXML/////////////////////////////////////////
 	@FXML public void agregaFila(MouseEvent e){
 		Button b=(Button)e.getSource();
@@ -105,9 +103,8 @@ public class controladorInterfaz implements Initializable{
 		
 		mm.textProperty().addListener((observable,lastValue,newValue)->{
 			try{
-				float ini=Float.parseFloat(((TextField)tabla.getChildren().get(7)).getText());
-				System.out.println(ini);
-				float rest=ini-(Float.parseFloat(mm.getText()));
+				BigDecimal ini= new BigDecimal(((TextField)tabla.getChildren().get(7)).getText());
+				BigDecimal rest= ini.subtract(new BigDecimal(mm.getText()));
 				((TextField)tabla.getChildren().get(tam-2)).setText(String.valueOf(rest));
 				((TextField)tabla.getChildren().get(tam-2)).setEditable(false);
 				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
@@ -136,8 +133,9 @@ public class controladorInterfaz implements Initializable{
 				//int cantidad=((tam-16)/7)+1;
 				//System.out.println(cantidad);
 				for (int i=14; i<tabla.getChildren().size();i+=6){
-					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
-					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
+					//si hay algun error, puede estar aqui
+					BigDecimal m=new BigDecimal(((TextField)tabla.getChildren().get(i)).getText());
+					BigDecimal df= new BigDecimal(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
 						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
 						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
@@ -173,8 +171,8 @@ public class controladorInterfaz implements Initializable{
 				//int cantidad=((tam-16)/7)+1;
 				//System.out.println(cantidad);
 				for (int i=14; i<tabla.getChildren().size();i+=6){
-					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
-					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
+					BigDecimal m= new BigDecimal(((TextField)tabla.getChildren().get(i)).getText());
+					BigDecimal df=new BigDecimal(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
 						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
 						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
@@ -457,11 +455,11 @@ public class controladorInterfaz implements Initializable{
 				
 	}
 	
-	float []consta= new float[5]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo
-	float []humIni= new float[4]; //0>wm 1>ws 2>wf 3>wpercent
-	float [] antPrueba=new float[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
-	float [] despPrueba= new float[11];//0>pesomanillo 1>Wm 2>pesomseca 3>Ws 4>W% 5>Vm 6>Vs 7>Vv 8>e 9>G% 10>Ww 
-	final float PI=3.14159265f;
+	BigDecimal []consta= new BigDecimal[5]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo
+	BigDecimal []humIni= new BigDecimal[4]; //0>wm 1>ws 2>wf 3>wpercent
+	BigDecimal [] antPrueba=new BigDecimal[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
+	BigDecimal [] despPrueba= new BigDecimal[11];//0>pesomanillo 1>Wm 2>pesomseca 3>Ws 4>W% 5>Vm 6>Vs 7>Vv 8>e 9>G% 10>Ww 
+	final BigDecimal PI= new BigDecimal("3.14159265");
 	
 @FXML
 public void initialize() {
@@ -514,13 +512,17 @@ public void initialize() {
 		
 		Ss.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float ss=Float.parseFloat(((String)Ss.getText()));
-				antPrueba[4]=antPrueba[3]/ss;
-				volmnatural.setText(String.valueOf(antPrueba[4]));
+				BigDecimal ss = new BigDecimal(Ss.getText());
 				
-				despPrueba[6]=despPrueba[3]/ss;
+				//float ss=Float.parseFloat(((String)Ss.getText()));
+				
+				antPrueba[4]= antPrueba[3].divide(ss);
+				
+				volmnatural.setText(String.valueOf(antPrueba[4]));
+				despPrueba[6]=despPrueba[3].divide(ss);
+				
 				volsol.setText(String.valueOf(despPrueba[6]));
-				despPrueba[7]=despPrueba[5]-despPrueba[6];
+				despPrueba[7]=despPrueba[5].subtract(despPrueba[6]);
 				volva.setText(String.valueOf(despPrueba[7]));
 			}catch(Exception e){
 				
@@ -531,12 +533,13 @@ public void initialize() {
 		//para calcular las constantes de equipo/////////////////////////
 		diametro.textProperty().addListener((observable, oldValue, newValue) -> {
 		    try{
-		    	consta[0]=Float.parseFloat(((String)diametro.getText()));	
-		    	consta[2]=PI*consta[0]*consta[0]/4; 
-		    	consta[3]=consta[1]*consta[2];
+		    	consta[0]= new BigDecimal(diametro.getText());
+		    	consta[2]=PI.multiply((consta[0].pow(2)).divide(new BigDecimal("4")));//consta[2]=PI*consta[0]²/4
+		    	consta[3]=consta[1].multiply(consta[2]);
+		    	
 				area.setText(String.valueOf(consta[2]));
 				volumen.setText(String.valueOf(consta[3]));
-				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
+				gm.setText(String.valueOf(antPrueba[1].divide(consta[3])));
 				volVm.setText(String.valueOf(consta[3]));
 		    }catch (Exception e) {
 				// TODO: handle exception
@@ -547,11 +550,11 @@ public void initialize() {
 		
 		altura.textProperty().addListener((observable, oldValue, newValue) -> {
 			try{
-				consta[1]=Float.parseFloat(((String)altura.getText()));
-				consta[3]=consta[1]*consta[2];
+				consta[1]= new BigDecimal(altura.getText());
+				consta[3]=consta[1].multiply(consta[2]);
 				volumen.setText(String.valueOf(consta[3]));
 				volVm.setText(String.valueOf(consta[3]));
-				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
+				gm.setText(String.valueOf(antPrueba[1].divide(consta[3])));
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
@@ -561,10 +564,12 @@ public void initialize() {
 		
 		pesoAnillo.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
-				consta[4]=Float.parseFloat(((String)pesoAnillo.getText()));
-				wmnatural.setText( String.valueOf(antPrueba[0]-consta[4]));		
-				despPrueba[1]=despPrueba[0]-consta[4];
-				despPrueba[2]=consta[4]+antPrueba[3];
+				consta[4]= new BigDecimal(pesoAnillo.getText());
+				
+				wmnatural.setText( String.valueOf(antPrueba[0].subtract(consta[4])));	
+				despPrueba[1]=despPrueba[0].subtract(consta[4]);
+				despPrueba[2]=consta[4].add(antPrueba[3]);
+									
 				wmsat.setText(String.valueOf(despPrueba[1]));
 				wmsanillo.setText(String.valueOf(despPrueba[2]));
 			}catch (Exception e) {
@@ -579,8 +584,9 @@ public void initialize() {
 	///Para calcular la humedad inicial
 		wm.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
-				humIni[0]=Float.parseFloat(((String)wm.getText()));
-				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
+				humIni[0]= new BigDecimal(wm.getText());
+				humIni[3]=((humIni[0].subtract(humIni[1])).divide((humIni[1].subtract(humIni[2])))).multiply(new BigDecimal("100")); //((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
+				
 				wpercent.setText(String.valueOf(humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -590,8 +596,8 @@ public void initialize() {
 		
 		ws.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
-				humIni[1]=Float.parseFloat(((String)ws.getText()));
-				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
+				humIni[1]=new BigDecimal(ws.getText());
+				humIni[3]=((humIni[0].subtract(humIni[1])).divide((humIni[1].subtract(humIni[2])))).multiply(new BigDecimal("100")); //((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
 				wpercent.setText(String.valueOf(humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -600,8 +606,8 @@ public void initialize() {
 		
 		wf.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
-				humIni[2]=Float.parseFloat(((String)wf.getText()));
-				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
+				humIni[2]= new BigDecimal(wf.getText());
+				humIni[3]=((humIni[0].subtract(humIni[1])).divide((humIni[1].subtract(humIni[2])))).multiply(new BigDecimal("100")); //((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
 				wpercent.setText(String.valueOf(humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -612,16 +618,14 @@ public void initialize() {
 		//excepción
 		wpercent.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				antPrueba[2]=Float.parseFloat((String)wpercent.getText());
+				antPrueba[2] = new BigDecimal(wpercent.getText());
 				hum.setText(wpercent.getText());
-				
-				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
+				antPrueba[3]= antPrueba[1].divide( (antPrueba[2].add(new BigDecimal("1"))).divide(new BigDecimal("100"))  ); //antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
 				wmnaturals.setText(String.valueOf(antPrueba[3]));
-				float ss=Float.parseFloat(((String)Ss.getText()));
-				antPrueba[4]=antPrueba[3]/ss;
+				BigDecimal ss= new BigDecimal(Ss.getText());
+				antPrueba[4]=antPrueba[3].divide(ss);
 				volmnatural.setText(String.valueOf(antPrueba[4]));
-				antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
-				
+				antPrueba[5]= (antPrueba[3].multiply(antPrueba[2])).divide(new BigDecimal("100"));//antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -630,31 +634,34 @@ public void initialize() {
 		/////////////////////ANTES DE LA PRUEBA////////////////////////////
 		wma.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
-				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
-				antPrueba[1]=antPrueba[0]-consta[4];
+				antPrueba[0]= new BigDecimal(wma.getText());
+				antPrueba[1]= antPrueba[0].subtract(consta[4]);
+				
 				wmnatural.setText( String.valueOf(antPrueba[1]));
 				
 				
-				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
+				antPrueba[3]= antPrueba[1].divide( (antPrueba[2].add(new BigDecimal("1"))).divide(new BigDecimal("100"))  ); //antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
 				wmnaturals.setText(String.valueOf(antPrueba[3]));
 				
-				gm.setText(String.valueOf(antPrueba[1]/consta[3]));//modifica valor en clasificacion 
+				gm.setText(String.valueOf(antPrueba[1].divide(consta[3])));//modifica valor en clasificacion 
 				
-				float ss=Float.parseFloat(((String)Ss.getText()));
-				antPrueba[4]=antPrueba[3]/ss;
+				BigDecimal ss= new BigDecimal(Ss.getText());
+				
+				antPrueba[4]=antPrueba[3].divide(ss);
 				volmnatural.setText(String.valueOf(antPrueba[4]));
-				antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
+				antPrueba[5]= (antPrueba[3].multiply(antPrueba[2])).divide(new BigDecimal("100"));//antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
 				pesoWw.setText(String.valueOf(antPrueba[5]));
 				antPrueba[6]=consta[3];
-				antPrueba[7]=antPrueba[6]-antPrueba[4];
+				antPrueba[7]=antPrueba[6].subtract(antPrueba[4]);
 				volVv.setText(String.valueOf(antPrueba[7]));
-				antPrueba[8]=antPrueba[7]/antPrueba[4];
+				antPrueba[8]=antPrueba[7].divide(antPrueba[4]);
+			
 				vacios.setText(String.valueOf(antPrueba[8]));
-				antPrueba[9]=(antPrueba[5]/antPrueba[7])*100;
+				antPrueba[9]=(antPrueba[5].divide(antPrueba[7])).multiply(new BigDecimal("100"));
 				gsat.setText(String.valueOf(antPrueba[9]));
 				volVm.setText(String.valueOf(consta[3]));
+				despPrueba[2]=consta[4].add(antPrueba[3]);
 				
-				despPrueba[2]=consta[4]+antPrueba[3];
 				wmsanillo.setText(String.valueOf(despPrueba[2]));
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -664,17 +671,18 @@ public void initialize() {
 		//////////////DESPUES DE LA PRUEBA////////////////////////////////
 		wmsa.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
-				despPrueba[0]=Float.parseFloat(((String)wmsa.getText()));
-				despPrueba[1]=despPrueba[0]-consta[4];
-				despPrueba[2]=consta[4]+antPrueba[3];
+				despPrueba[0] = new BigDecimal(wmsa.getText());
+				despPrueba[1]= despPrueba[0].subtract(consta[4]);
+				despPrueba[2]=consta[4].add(antPrueba[3]);
 				despPrueba[3]=antPrueba[3];
-				despPrueba[4]=((despPrueba[1]-despPrueba[3])/despPrueba[3])*100;
-				despPrueba[5]=consta[2]*1;//falta vincularlo con resultados
-				despPrueba[6]=despPrueba[3]/Float.parseFloat(((String)Ss.getText()));
-				despPrueba[7]=despPrueba[5]-despPrueba[6];
-				despPrueba[8]=1;//datos de resultados
-				despPrueba[10]=despPrueba[0]-despPrueba[2];
-				despPrueba[9]=(despPrueba[10]/despPrueba[7])*100;
+				despPrueba[4]=((despPrueba[1].subtract(despPrueba[3])).divide(despPrueba[3])).multiply(new BigDecimal("100"));//despPrueba[4]=((despPrueba[1]-despPrueba[3])/despPrueba[3])*100;
+				despPrueba[5]= consta[2].multiply( new BigDecimal("1"));//falta vincularlo con resultados
+				despPrueba[6]=despPrueba[3].divide(new BigDecimal(Ss.getText()));
+				despPrueba[7]=despPrueba[5].subtract(despPrueba[6]);
+				despPrueba[8]= new BigDecimal("1");//datos de resultados
+				despPrueba[10]=despPrueba[0].subtract(despPrueba[2]);
+				despPrueba[9]=(despPrueba[10].divide(despPrueba[7])).multiply(new BigDecimal("100"));//despPrueba[9]=(despPrueba[10]/despPrueba[7])*100;
+				
 				
 				wmsat.setText(String.valueOf(despPrueba[1]));
 				wmsanillo.setText(String.valueOf(despPrueba[2]));
@@ -721,8 +729,9 @@ public void initialize() {
 		});
 		i2.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float c=Float.parseFloat(((TextField)in1.getChildren().get(5)).getText());
-				float sum=c+(Float.parseFloat(i2.getText()));
+				BigDecimal c = new BigDecimal(((TextField)in1.getChildren().get(5)).getText());
+				BigDecimal sum=c.add(new BigDecimal(i2.getText()));
+				
 				((TextField)in2.getChildren().get(5)).setText(String.valueOf(sum));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -731,8 +740,9 @@ public void initialize() {
 		
 		i3.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float c=Float.parseFloat(((TextField)in2.getChildren().get(5)).getText());
-				float sum=c+(Float.parseFloat(i3.getText()));
+				BigDecimal c = new BigDecimal(((TextField)in2.getChildren().get(5)).getText());
+				BigDecimal sum=c.add(new BigDecimal(i3.getText()));
+				
 				((TextField)in3.getChildren().get(5)).setText(String.valueOf(sum));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -741,8 +751,8 @@ public void initialize() {
 		
 		i4.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float c=Float.parseFloat(((TextField)in3.getChildren().get(5)).getText());
-				float sum=c+(Float.parseFloat(i4.getText()));
+				BigDecimal c = new BigDecimal(((TextField)in3.getChildren().get(5)).getText());
+				BigDecimal sum=c.add(new BigDecimal(i4.getText())); 
 				((TextField)in4.getChildren().get(5)).setText(String.valueOf(sum));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -751,8 +761,8 @@ public void initialize() {
 		
 		i5.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float c=Float.parseFloat(((TextField)in4.getChildren().get(5)).getText());
-				float sum=c+(Float.parseFloat(i5.getText()));
+				BigDecimal c = new BigDecimal(((TextField)in4.getChildren().get(5)).getText());
+				BigDecimal sum=c.add(new BigDecimal(i5.getText()));
 				((TextField)in5.getChildren().get(5)).setText(String.valueOf(sum));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -760,8 +770,8 @@ public void initialize() {
 		});
 		i6.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float c=Float.parseFloat(((TextField)in5.getChildren().get(5)).getText());
-				float sum=c+(Float.parseFloat(i6.getText()));
+				BigDecimal c = new BigDecimal(((TextField)in5.getChildren().get(5)).getText());
+				BigDecimal sum=c.add(new BigDecimal(i6.getText()));
 				((TextField)in6.getChildren().get(5)).setText(String.valueOf(sum));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -770,8 +780,8 @@ public void initialize() {
 		
 		i7.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float c=Float.parseFloat(((TextField)in6.getChildren().get(5)).getText());
-				float sum=c+(Float.parseFloat(i7.getText()));
+				BigDecimal c = new BigDecimal(((TextField)in6.getChildren().get(5)).getText());
+				BigDecimal sum=c.add(new BigDecimal(i7.getText()));
 				((TextField)in7.getChildren().get(5)).setText(String.valueOf(sum));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -780,8 +790,8 @@ public void initialize() {
 		
 		i8.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float c=Float.parseFloat(((TextField)in7.getChildren().get(5)).getText());
-				float sum=c+(Float.parseFloat(i8.getText()));
+				BigDecimal c = new BigDecimal(((TextField)in7.getChildren().get(5)).getText());
+				BigDecimal sum=c.add(new BigDecimal(i8.getText()));
 				((TextField)in8.getChildren().get(5)).setText(String.valueOf(sum));
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -842,9 +852,9 @@ public void initialize() {
 				int tama=(temp.get(1).getChildren().size()-1);
 				t.textProperty().addListener((observable,lastValue,newValue)->{
 					try{
-						float ini=Float.parseFloat(((TextField)temp.get(1).getChildren().get(7)).getText());
 						
-						float rest=ini-(Float.parseFloat(t.getText()));
+						BigDecimal ini = new BigDecimal(((TextField)temp.get(1).getChildren().get(7)).getText());
+						BigDecimal rest= ini.subtract(new BigDecimal(t.getText()));
 						
 						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.valueOf(rest));
 						((TextField)temp.get(1).getChildren().get(tama-2)).setEditable(false);
@@ -891,8 +901,8 @@ public void initialize() {
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
-						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
-						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
+						BigDecimal m = new BigDecimal(((TextField)temp.get(1).getChildren().get(i)).getText());
+						BigDecimal df= new BigDecimal(((TextField)temp.get(1).getChildren().get(i+3)).getText());
 						s.getData().add(new XYChart.Data(m,df));
 					}
 				}catch(Exception ec){
@@ -935,7 +945,7 @@ public void initialize() {
 		c.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
 				((TextField)d2.getChildren().get(7)).setText(c.getText());
-				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
+				BigDecimal res= (new BigDecimal(c.getText())).subtract(new BigDecimal(((TextField)d.getChildren().get(7)).getText()));
 				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
 				((TextField)d.getChildren().get(17)).setText(String.valueOf(res));
 			}catch(Exception e){
