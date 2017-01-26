@@ -474,6 +474,8 @@ public class controladorInterfaz implements Initializable{
 				
 				TextField deltaQ=((TextField)descarga.getChildren().get(9));
 				TextField sigmaQ=((TextField)descarga.getChildren().get(10));
+				TextField deltaE=((TextField)descarga.getChildren().get(16));
+				
 				sigmaQ.setText("0.01");
 				
 				deltaQ.textProperty().addListener((observable, oldValue, newValue)->{
@@ -497,9 +499,20 @@ public class controladorInterfaz implements Initializable{
 					}
 				});
 				
+				
 				((TextField)descarga.getChildren().get(12)).setText("0.00");
 				((TextField)descarga.getChildren().get(13)).setText("0.00");
-				((TextField)descarga.getChildren().get(16)).setText("0.00");
+				deltaE.setText("0.00");
+				deltaE.textProperty().addListener((observable, oldValue, newValue)->{
+					try{
+						//delta e de la tabla de resultados
+						TextField e=(TextField)descarga.getChildren().get(15);
+						TextField deltaEcuacion=(TextField)descarga.getChildren().get(17);
+						deltaEcuacion.setText(String.valueOf ((Float.parseFloat(deltaE.getText()))/(1+(Float.parseFloat(e.getText()))) *100) );
+					}catch(Exception ec){
+						System.out.println("Error en función generaFilasResultados(deltaE): "+ ec.getMessage());
+					}
+				});
 				/////////////////////////////
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
@@ -605,7 +618,6 @@ public void initialize() {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
 			}
-		    System.out.println(consta[0]);
 		});
 		
 		altura.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -736,6 +748,19 @@ public void initialize() {
 				
 				//infoResultados
 				vs.setText(String.valueOf(antPrueba[4]));
+				
+				//Vv de la tabla de resultados
+				TextField Vv = (TextField)descarga.getChildren().get(14);
+				Vv.setText(String.valueOf(antPrueba[7]));
+				//e de la tabla de resultados
+				TextField e=(TextField)descarga.getChildren().get(15);
+				e.setText(String.valueOf(antPrueba[7]/antPrueba[4]));
+				//delta e de la tabla de resultados
+				TextField deltaE=(TextField)descarga.getChildren().get(16);
+				TextField deltaEcuacion=(TextField)descarga.getChildren().get(17);
+				deltaEcuacion.setText(String.valueOf ((Float.parseFloat(deltaE.getText()))/(1+(Float.parseFloat(e.getText()))) *100) );
+				
+				
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
