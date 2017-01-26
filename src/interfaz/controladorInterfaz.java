@@ -53,6 +53,9 @@ public class controladorInterfaz implements Initializable{
 	@FXML TitledPane carga8;
 	@FXML BorderPane border;
 	
+	@FXML GridPane infoResultados;
+	@FXML GridPane descarga;
+	
 	static XYChart.Series s1 = new XYChart.Series<>();
 	static XYChart.Series s2 = new XYChart.Series<>();
 	static XYChart.Series s3 = new XYChart.Series<>();
@@ -201,18 +204,7 @@ public class controladorInterfaz implements Initializable{
 	
 
 	
-	@FXML public void agregaFilaR(MouseEvent e){
-		Button b=(Button)e.getSource();
-		GridPane grid=(GridPane)b.parentProperty().getValue();
-		GridPane tabla = (GridPane) grid.getChildren().get(1);
-		int lastRow=tabla.getChildren().size()/7;
-		lastRow+=1;
-		for (int i=0;i<10;i++){
-			tabla.add(new TextField(), i, lastRow);	
-		}
-		tabla.setGridLinesVisible(false);
-		tabla.setGridLinesVisible(true);
-	}
+	
 	@FXML public void guardar(MouseEvent e){
 		String nombre=this.nombre.getText();
 		String ubicacion=this.ubicacion.getText();
@@ -450,11 +442,36 @@ public class controladorInterfaz implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try{
+			generaFilasResultados();
 			initialize();				
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
 				
+	}
+	
+	void generaFilasResultados(){ //genera los TextFields de la tabla de resultados (descargas)
+		try{
+			for(int row=1; row<17;row++){
+				descarga.setGridLinesVisible(false);
+				descarga.setGridLinesVisible(true);
+				for (int column=0; column<9; column++){
+					descarga.add(new TextField(), column, row);
+				}
+			}
+				//////condiciones/////////
+				//valores iniciales
+				((TextField)descarga.getChildren().get(9)).setText("0.01");
+				((TextField)descarga.getChildren().get(10)).setText("0.01");
+				((TextField)descarga.getChildren().get(12)).setText("0.00");
+				((TextField)descarga.getChildren().get(13)).setText("0.00");
+				((TextField)descarga.getChildren().get(16)).setText("0.00");
+				/////////////////////////////
+		}catch(Exception  e){
+			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
+		}
+		
+		
 	}
 	
 	float []consta= new float[5]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo
@@ -502,6 +519,10 @@ public void initialize() {
 		TextField va=(TextField)this.despuesDeConsolidar.getChildren().get(17);
 		TextField gpercent=(TextField)this.despuesDeConsolidar.getChildren().get(19);
 		TextField wamuestrasat=(TextField)this.despuesDeConsolidar.getChildren().get(21);
+		//---------------------------------
+		TextField areaAnillo = (TextField)this.infoResultados.getChildren().get(1);
+		TextField alturaInicial=(TextField)this.infoResultados.getChildren().get(3);
+		TextField vs=(TextField)this.infoResultados.getChildren().get(7);
 		
 		//Los listener se aplican a los input, al cambiar alguno, modificaran los cálculos
 		//Listener Ss en clasificación
@@ -538,6 +559,9 @@ public void initialize() {
 				volumen.setText(String.valueOf(consta[3]));
 				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
 				volVm.setText(String.valueOf(consta[3]));
+				//infoResultados
+				areaAnillo.setText(String.valueOf(consta[2]));
+				
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
@@ -552,6 +576,8 @@ public void initialize() {
 				volumen.setText(String.valueOf(consta[3]));
 				volVm.setText(String.valueOf(consta[3]));
 				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
+				//infoResultados
+				alturaInicial.setText(String.valueOf(consta[1]));
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
@@ -656,6 +682,9 @@ public void initialize() {
 				
 				despPrueba[2]=consta[4]+antPrueba[3];
 				wmsanillo.setText(String.valueOf(despPrueba[2]));
+				
+				//infoResultados
+				vs.setText(String.valueOf(antPrueba[4]));
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
