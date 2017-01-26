@@ -68,6 +68,15 @@ public class controladorInterfaz implements Initializable{
 	final int NumeroCargas=8;
 	//List <Float>c1 = new ArrayList<Float>();
 	
+	
+	
+	//////variables iniciales para cálculos copn listenners
+	float []consta= new float[6]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo 5>constanteEquipo
+	float []humIni= new float[4]; //0>wm 1>ws 2>wf 3>wpercent
+	float [] antPrueba=new float[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
+	float [] despPrueba= new float[11];//0>pesomanillo 1>Wm 2>pesomseca 3>Ws 4>W% 5>Vm 6>Vs 7>Vv 8>e 9>G% 10>Ww 
+	final float PI=3.14159265f;
+	////////
 /////////////Métodos de FXML/////////////////////////////////////////
 	@FXML public void agregaFila(MouseEvent e){
 		Button b=(Button)e.getSource();
@@ -462,7 +471,32 @@ public class controladorInterfaz implements Initializable{
 				//////condiciones/////////
 				//valores iniciales
 				((TextField)descarga.getChildren().get(9)).setText("0.01");
-				((TextField)descarga.getChildren().get(10)).setText("0.01");
+				
+				TextField deltaQ=((TextField)descarga.getChildren().get(9));
+				TextField sigmaQ=((TextField)descarga.getChildren().get(10));
+				sigmaQ.setText("0.01");
+				
+				deltaQ.textProperty().addListener((observable, oldValue, newValue)->{
+					try{
+						sigmaQ.setText(deltaQ.getText());
+					}catch(Exception e){
+						System.out.println("en funcion gteneraFilasResultados: "+e.getMessage() );
+					}
+				});
+				
+				sigmaQ.textProperty().addListener((observable,oldValue, newValue)->{
+					try{
+						TextField sigmaMenor =(TextField)descarga.getChildren().get(11);
+						float a=Float.parseFloat(sigmaQ.getText());
+						float b=consta[5]; //constante del aparato
+						float c=consta[2];//area de la parte de constantes del equipo
+						float res=a*b/c;
+						sigmaMenor.setText(String.valueOf(res));
+					}catch(Exception e){
+						
+					}
+				});
+				
 				((TextField)descarga.getChildren().get(12)).setText("0.00");
 				((TextField)descarga.getChildren().get(13)).setText("0.00");
 				((TextField)descarga.getChildren().get(16)).setText("0.00");
@@ -474,11 +508,7 @@ public class controladorInterfaz implements Initializable{
 		
 	}
 	
-	float []consta= new float[5]; //0>diam 1>alt 2>ar 3>vol 4>pesoAnillo
-	float []humIni= new float[4]; //0>wm 1>ws 2>wf 3>wpercent
-	float [] antPrueba=new float[10];//0>wma 1>wmnatural 2>humedad 3>wmnaturals 4>volmnatural 5>wamnatural 6>voltmnatural 7>volvnatural 8>vacios 9>gradSat
-	float [] despPrueba= new float[11];//0>pesomanillo 1>Wm 2>pesomseca 3>Ws 4>W% 5>Vm 6>Vs 7>Vv 8>e 9>G% 10>Ww 
-	final float PI=3.14159265f;
+	
 	
 @FXML
 public void initialize() {
@@ -490,6 +520,7 @@ public void initialize() {
 		TextField area=(TextField)this.constantes.getChildren().get(5);
 		TextField volumen=(TextField)this.constantes.getChildren().get(7);
 		TextField pesoAnillo=(TextField)this.constantes.getChildren().get(9);
+		TextField constanteAparato=(TextField)this.constantes.getChildren().get(11);
 		
 		//--------------------
 		TextField wm=(TextField)this.humedadInicial.getChildren().get(3);
@@ -522,7 +553,7 @@ public void initialize() {
 		//---------------------------------
 		TextField areaAnillo = (TextField)this.infoResultados.getChildren().get(1);
 		TextField alturaInicial=(TextField)this.infoResultados.getChildren().get(3);
-		TextField vs=(TextField)this.infoResultados.getChildren().get(7);
+		TextField vs=(TextField)this.infoResultados.getChildren().get(9);
 		
 		//Los listener se aplican a los input, al cambiar alguno, modificaran los cálculos
 		//Listener Ss en clasificación
@@ -562,6 +593,14 @@ public void initialize() {
 				//infoResultados
 				areaAnillo.setText(String.valueOf(consta[2]));
 				
+				//parte de sigmaMenor en resultados... se necesita en el calculo el area, por lo tanto, para no agregar un listenner al area, desde el mismo calculo de esta agrego nuevos calculos
+				TextField sigmaMenor =(TextField)descarga.getChildren().get(11);
+				float a=Float.parseFloat(((TextField)descarga.getChildren().get(10)).getText());
+				float b=consta[5]; //constante del aparato
+				float c=consta[2];//area de la parte de constantes del equipo
+				float res=a*b/c;
+				sigmaMenor.setText(String.valueOf(res));
+				
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
@@ -599,7 +638,19 @@ public void initialize() {
 			}
 		});
 		
-		
+		constanteAparato.textProperty().addListener((observable, oldValue,newValue)->{
+			try{
+				consta[5]=Float.parseFloat((String)constanteAparato.getText());
+				TextField sigmaMenor =(TextField)descarga.getChildren().get(11);
+				float a=Float.parseFloat(((TextField)descarga.getChildren().get(10)).getText());
+				float b=consta[5]; //constante del aparato
+				float c=consta[2];//area de la parte de constantes del equipo
+				float res=a*b/c;
+				sigmaMenor.setText(String.valueOf(res));
+			}catch(Exception e){
+				
+			}
+		});
 		//////////////////////////////////////////////////////////////////////////////
 		
 	///Para calcular la humedad inicial
