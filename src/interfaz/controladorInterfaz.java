@@ -614,6 +614,8 @@ public void initialize() {
 				float res=a*b/c;
 				sigmaMenor.setText(String.valueOf(res));
 				
+				//Función que crea listenners en campos repetidos variando el campo anterior de este
+				
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
@@ -923,6 +925,9 @@ public void initialize() {
 	splitTemporal.autosize();
  }
  
+ 	void auxSigmaMenor(){
+ 		
+ 	}
 	void auxAbrirCargas( TitledPane carga, XYChart.Series s,Scanner scanner,String []linea){
 		List<GridPane> temp = getCadenaCargas(carga); //obtengo un List de GridPanes, de los elementos de cada carga
 		insertarCadena(temp.get(0),linea);
