@@ -212,20 +212,12 @@ public class controladorInterfaz implements Initializable{
 					}
 					
 				}
-				switch(carga.getId()){
-				case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
-				case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
-				case "carga3":	s3.getData().add(new XYChart.Data(m,df));break;
-				case "carga4":  s4.getData().add(new XYChart.Data(m,df));break;
-				case "carga5":	s5.getData().add(new XYChart.Data(m,df));break;
-				case "carga6":	s6.getData().add(new XYChart.Data(m,df));break;
-				case "carga7":	s7.getData().add(new XYChart.Data(m,df));break;
-				case "carga8":	s8.getData().add(new XYChart.Data(m,df));break;
-				default:break;
-			}
+				
+				prueba();
+				
 				
 			}catch(Exception ec){
-				System.out.println(ec.getMessage());
+				System.out.println("error en función agregaFila: "+ec.getMessage());
 			}
 		});
 		
@@ -233,7 +225,11 @@ public class controladorInterfaz implements Initializable{
 		tabla.setGridLinesVisible(true);
 	}
 	
-
+void prueba(){
+	System.out.println("Antes");
+	System.out.println(this.descarga);
+	System.out.println("Despues");
+}
 	
 	
 	@FXML public void guardar(MouseEvent e){
