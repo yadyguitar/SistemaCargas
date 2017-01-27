@@ -452,7 +452,8 @@ public class controladorInterfaz implements Initializable{
 		// TODO Auto-generated method stub
 		try{
 			generaFilasResultados();
-			initialize();				
+			initialize();
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -514,13 +515,33 @@ public class controladorInterfaz implements Initializable{
 					}
 				});
 				/////////////////////////////
+				
+				
+				
+				///valores iniciales a partir de los valores dados (Cálculos)
+				
+				//pon un try si hay algun problem
+				
+				
+				
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
 		}
 		
 		
 	}
-	
+	 void auxSumaDeltaSigma(){
+		 try{
+		 for (int i=19;i<descarga.getChildren().size();i+=9){
+				TextField res= (TextField)descarga.getChildren().get(i);
+				TextField a=(TextField)descarga.getChildren().get(i-1);
+				TextField b=(TextField)descarga.getChildren().get(i-9);
+				res.setText(String.valueOf( (Float.parseFloat(a.getText()))+(Float.parseFloat(b.getText()))  ) );
+			}
+		 }catch(Exception e){
+			 System.out.println("Error en función auxSumaDeltaSigma: "+e.getMessage());
+		 }
+	 }
 	
 	
 @FXML
@@ -588,7 +609,7 @@ public void initialize() {
 				despPrueba[7]=despPrueba[5]-despPrueba[6];
 				volva.setText(String.valueOf(despPrueba[7]));
 			}catch(Exception e){
-				
+				System.out.println("error en la función initialize (Ss)"+e.getMessage());
 			}
 			
 		});
@@ -607,14 +628,12 @@ public void initialize() {
 				areaAnillo.setText(String.valueOf(consta[2]));
 				
 				//parte de sigmaMenor en resultados... se necesita en el calculo el area, por lo tanto, para no agregar un listenner al area, desde el mismo calculo de esta agrego nuevos calculos
-				TextField sigmaMenor =(TextField)descarga.getChildren().get(11);
-				float a=Float.parseFloat(((TextField)descarga.getChildren().get(10)).getText());
-				float b=consta[5]; //constante del aparato
-				float c=consta[2];//area de la parte de constantes del equipo
-				float res=a*b/c;
-				sigmaMenor.setText(String.valueOf(res));
-				
 				//Función que crea listenners en campos repetidos variando el campo anterior de este
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
+								
+				
 				
 		    }catch (Exception e) {
 				// TODO: handle exception
@@ -655,12 +674,11 @@ public void initialize() {
 		constanteAparato.textProperty().addListener((observable, oldValue,newValue)->{
 			try{
 				consta[5]=Float.parseFloat((String)constanteAparato.getText());
-				TextField sigmaMenor =(TextField)descarga.getChildren().get(11);
-				float a=Float.parseFloat(((TextField)descarga.getChildren().get(10)).getText());
-				float b=consta[5]; //constante del aparato
-				float c=consta[2];//area de la parte de constantes del equipo
-				float res=a*b/c;
-				sigmaMenor.setText(String.valueOf(res));
+				//funcion que realiza calculos repetitivos del campo de sigmaMenor de la tabla de resultados
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
+				
 			}catch(Exception e){
 				
 			}
@@ -762,6 +780,9 @@ public void initialize() {
 				TextField deltaEcuacion=(TextField)descarga.getChildren().get(17);
 				deltaEcuacion.setText(String.valueOf ((Float.parseFloat(deltaE.getText()))/(1+(Float.parseFloat(e.getText()))) *100) );
 				
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 				
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -810,7 +831,7 @@ public void initialize() {
 		GridPane in7=(GridPane)((GridPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
 		GridPane in8=(GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(0)).getItems().get(0)).getChildren().get(0);  //Datos
 		
-		TextField i1=(TextField)in1.getChildren().get(1);
+		TextField i1=(TextField)in1.getChildren().get(1); //incremento de la carga (carga1)
 		TextField i2=(TextField)in2.getChildren().get(1);
 		TextField i3=(TextField)in3.getChildren().get(1);
 		TextField i4=(TextField)in4.getChildren().get(1);
@@ -822,6 +843,12 @@ public void initialize() {
 		i1.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
 				((TextField)in1.getChildren().get(5)).setText(i1.getText());
+				((TextField)descarga.getChildren().get(18)).setText(i1.getText());
+				auxSumaDeltaSigma();
+				
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -831,6 +858,11 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in1.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i2.getText()));
 				((TextField)in2.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)descarga.getChildren().get(27)).setText(i2.getText());
+				auxSumaDeltaSigma();
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -841,6 +873,11 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in2.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i3.getText()));
 				((TextField)in3.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)descarga.getChildren().get(36)).setText(i3.getText());
+				auxSumaDeltaSigma();
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -851,6 +888,11 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in3.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i4.getText()));
 				((TextField)in4.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)descarga.getChildren().get(45)).setText(i4.getText());
+				auxSumaDeltaSigma();
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -861,6 +903,11 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in4.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i5.getText()));
 				((TextField)in5.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)descarga.getChildren().get(54)).setText(i5.getText());
+				auxSumaDeltaSigma();
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -870,6 +917,11 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in5.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i6.getText()));
 				((TextField)in6.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)descarga.getChildren().get(63)).setText(i6.getText());
+				auxSumaDeltaSigma();
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -880,6 +932,11 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in6.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i7.getText()));
 				((TextField)in7.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)descarga.getChildren().get(72)).setText(i7.getText());
+				auxSumaDeltaSigma();
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -890,6 +947,12 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in7.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i8.getText()));
 				((TextField)in8.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)descarga.getChildren().get(81)).setText(i8.getText());
+				auxSumaDeltaSigma();
+				
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -925,8 +988,17 @@ public void initialize() {
 	splitTemporal.autosize();
  }
  
- 	void auxSigmaMenor(){
- 		
+ 	void auxSigmaMenor(int indice){
+ 		try{
+		TextField sigmaMenor =(TextField)descarga.getChildren().get(indice);
+		float a=Float.parseFloat(((TextField)descarga.getChildren().get(indice-1)).getText());
+		float b=consta[5]; //constante del aparato
+		float c=consta[2];//area de la parte de constantes del equipo
+		float res=a*b/c;
+		sigmaMenor.setText(String.valueOf(res));
+		}catch(Exception e){
+			System.out.println("error en auxSigmaMenor");
+		}
  	}
 	void auxAbrirCargas( TitledPane carga, XYChart.Series s,Scanner scanner,String []linea){
 		List<GridPane> temp = getCadenaCargas(carga); //obtengo un List de GridPanes, de los elementos de cada carga
