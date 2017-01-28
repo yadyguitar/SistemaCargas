@@ -10,16 +10,21 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.math.BigDecimal;
@@ -78,7 +83,7 @@ public class controladorInterfaz implements Initializable{
 	final float PI=3.14159265f;
 	////////
 /////////////Métodos de FXML/////////////////////////////////////////
-	@FXML public void agregaFila(MouseEvent e){
+@FXML public void agregaFila(MouseEvent e){
 		Button b=(Button)e.getSource();
 		GridPane grid=(GridPane)b.parentProperty().getValue();
 		GridPane tabla = (GridPane) grid.getChildren().get(1);
@@ -204,33 +209,57 @@ public class controladorInterfaz implements Initializable{
 			}
 				
 				float maximo = Float.parseFloat(((TextField)tabla.getChildren().get(11)).getText());
-				
+				float minimo =Float.parseFloat(((TextField)tabla.getChildren().get(11)).getText());
 				for (int i=11;i<tabla.getChildren().size();i+=6){
 					float temp=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
-					if (maximo<temp){
-						maximo=temp;
+					if(carga.getId().equals("carga2")){
+						if(minimo>temp){
+							minimo=temp;
+						}
+					}else{
+						if (maximo<temp){
+							maximo=temp;
+						}	
 					}
+					
 					
 				}
 				
-				prueba();
+				//no puedo no se porque rayos obtener la variable global descarga, asi que lo que hago a continuación es adquirirla mediante padres
+				TabPane tabpane=(TabPane)returnElement(grid,12);
+				Tab resultados=(Tab)tabpane.getTabs().get(4);
+				TitledPane tablaCalculos=(TitledPane)((VBox)((ScrollPane)resultados.getContent()).getContent()).getChildren().get(0);
+				GridPane tablaResultados=(GridPane)((GridPane)((SplitPane)tablaCalculos.getContent()).getItems().get(1)).getChildren().get(0);
 				
+				switch(carga.getId()){
+					case "carga1":	((TextField)tablaResultados.getChildren().get(21)).setText(String.valueOf(maximo)); break;
+					case "carga2":	((TextField)tablaResultados.getChildren().get(30)).setText(String.valueOf(minimo));break;
+					case "carga3":	((TextField)tablaResultados.getChildren().get(39)).setText(String.valueOf(maximo));break;
+					case "carga4":  ((TextField)tablaResultados.getChildren().get(48)).setText(String.valueOf(maximo));break;
+					case "carga5":	((TextField)tablaResultados.getChildren().get(57)).setText(String.valueOf(maximo));break;
+					case "carga6":	((TextField)tablaResultados.getChildren().get(66)).setText(String.valueOf(maximo));break;
+					case "carga7":	((TextField)tablaResultados.getChildren().get(75)).setText(String.valueOf(maximo));break;
+					case "carga8":	((TextField)tablaResultados.getChildren().get(84)).setText(String.valueOf(maximo));break;
+					default:break;
+				}
 				
 			}catch(Exception ec){
 				System.out.println("error en función agregaFila: "+ec.getMessage());
 			}
 		});
+		//System.out.println(grid.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent());
+	
 		
 		tabla.setGridLinesVisible(false);
 		tabla.setGridLinesVisible(true);
 	}
-	
-void prueba(){
-	System.out.println("Antes");
-	System.out.println(this.descarga);
-	System.out.println("Despues");
-}
-	
+
+//Función recursiva que me regresa el elemento padre (TabPane) para poder acceder a otros datos
+	Node returnElement(Node elemento,int cont){
+		if (cont<=0)
+			return elemento;
+		return returnElement(elemento.getParent(),--cont);
+	}
 	
 	@FXML public void guardar(MouseEvent e){
 		String nombre=this.nombre.getText();
@@ -469,6 +498,7 @@ void prueba(){
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try{
+			
 			generaFilasResultados();
 			initialize();
 			
@@ -986,13 +1016,14 @@ public void initialize() {
 		GridPane d7= (GridPane)((GridPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
 		GridPane d8= (GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1);
 		
-		descargas(d8,d7);
-		descargas(d7,d6);
-		descargas(d6,d5);
-		descargas(d5,d4);
-		descargas(d4,d3);
-		descargas(d3,d2);
-		descargas(d2,d1);
+		descargas(d8,d7,10);
+		descargas(d7,d6,11);
+		descargas(d6,d5,12);
+		descargas(d5,d4,13);
+		descargas(d4,d3,14);
+		descargas(d3,d2,15);
+		descargas(d2,d1,16);
+		
 			
 		
 		///////////////////////////////////////////////////////////////////
@@ -1129,7 +1160,7 @@ public void initialize() {
 		insertarCadena(temp.get(2),linea);
 	}
 	
-	void descargas(GridPane d, GridPane d2){
+	void descargas(GridPane d, GridPane d2,int indice){
 		TextField c=(TextField)d.getChildren().get(15);
 		
 		c.textProperty().addListener((observable, oldValue, newValue)->{
@@ -1138,6 +1169,9 @@ public void initialize() {
 				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
 				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
 				((TextField)d.getChildren().get(17)).setText(String.valueOf(res));
+				if(indice!=-1)
+				((TextField)descarga.getChildren().get((indice*9)+3)).setText(((TextField)d.getChildren().get(17)).getText());
+				
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
