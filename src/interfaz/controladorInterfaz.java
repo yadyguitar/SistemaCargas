@@ -516,6 +516,8 @@ public class controladorInterfaz implements Initializable{
 				for (int column=0; column<9; column++){
 					descarga.add(new TextField(), column, row);
 				}
+				descarga.setGridLinesVisible(false);
+				descarga.setGridLinesVisible(true);
 			}
 				//////condiciones/////////
 				//valores iniciales
@@ -586,6 +588,7 @@ public class controladorInterfaz implements Initializable{
 				TextField b=(TextField)descarga.getChildren().get(i-9);
 				res.setText(String.valueOf( (Float.parseFloat(a.getText()))+(Float.parseFloat(b.getText()))  ) );
 			}
+		
 		 }catch(Exception e){
 			 System.out.println("Error en función auxSumaDeltaSigma: "+e.getMessage());
 		 }
@@ -891,6 +894,7 @@ public void initialize() {
 		i1.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
 				((TextField)in1.getChildren().get(5)).setText(i1.getText());
+				
 				((TextField)descarga.getChildren().get(18)).setText(i1.getText());
 				auxSumaDeltaSigma();
 				
@@ -907,6 +911,8 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i2.getText()));
 				((TextField)in2.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(27)).setText(i2.getText());
+				
+				((TextField)descarga.getChildren().get(144)).setText(String.valueOf(Float.parseFloat(i2.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -922,6 +928,7 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i3.getText()));
 				((TextField)in3.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(36)).setText(i3.getText());
+				((TextField)descarga.getChildren().get(135)).setText(String.valueOf(Float.parseFloat(i3.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -937,6 +944,7 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i4.getText()));
 				((TextField)in4.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(45)).setText(i4.getText());
+				((TextField)descarga.getChildren().get(126)).setText(String.valueOf(Float.parseFloat(i4.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -952,6 +960,7 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i5.getText()));
 				((TextField)in5.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(54)).setText(i5.getText());
+				((TextField)descarga.getChildren().get(117)).setText(String.valueOf(Float.parseFloat(i5.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -966,6 +975,7 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i6.getText()));
 				((TextField)in6.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(63)).setText(i6.getText());
+				((TextField)descarga.getChildren().get(72)).setText(String.valueOf(Float.parseFloat(i6.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -981,6 +991,7 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i7.getText()));
 				((TextField)in7.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(72)).setText(i7.getText());
+				((TextField)descarga.getChildren().get(99)).setText(String.valueOf(Float.parseFloat(i7.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -996,6 +1007,7 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i8.getText()));
 				((TextField)in8.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(81)).setText(i8.getText());
+				((TextField)descarga.getChildren().get(90)).setText(String.valueOf(Float.parseFloat(i8.getText())*-1));
 				auxSumaDeltaSigma();
 				
 				for(int i=11;i<descarga.getChildren().size();i+=9){
@@ -1022,8 +1034,8 @@ public void initialize() {
 		descargas(d5,d4,13);
 		descargas(d4,d3,14);
 		descargas(d3,d2,15);
-		descargas(d2,d1,16);
-		
+		descargas(d2,d1,-1);
+		descargas(d1,null,16);
 			
 		
 		///////////////////////////////////////////////////////////////////
@@ -1165,6 +1177,7 @@ public void initialize() {
 		
 		c.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
+				if (d2!=null)
 				((TextField)d2.getChildren().get(7)).setText(c.getText());
 				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
 				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
