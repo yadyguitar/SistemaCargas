@@ -279,10 +279,7 @@ public class controladorInterfaz implements Initializable{
 		String antesDeLaPrueba=cadena(this.antesDeLaPrueba);
 		String despuesDeConsolidar=cadena(this.despuesDeConsolidar);
 		
-		
 		String cargas=cadenaCargas();
-
-		
 		
 		/////FILE/////////////////////////////////////
 		FileChooser fileChooser = new FileChooser();
@@ -302,7 +299,6 @@ public class controladorInterfaz implements Initializable{
 	@FXML public void nuevo() throws IOException{
 		Interfaz i= new Interfaz();
 		i.start(new Stage());
-			
 	}
 	@FXML public void abrir(){
 		try (Scanner scanner = new Scanner(new FileChooser().showOpenDialog(new Stage()) )) {
@@ -354,12 +350,9 @@ public class controladorInterfaz implements Initializable{
 	            //para carga 2
 	            if(cont==9){
 	            	auxAbrirCargas(this.carga2,this.s2,scanner,linea);
-	            	
 	            }
-	            
 	           cont++;
 			}
-
 	    } catch (Exception e) {
 	        System.out.println(e.getMessage());
 	    }
@@ -975,7 +968,7 @@ public void initialize() {
 				float sum=c+(Float.parseFloat(i6.getText()));
 				((TextField)in6.getChildren().get(5)).setText(String.valueOf(sum));
 				((TextField)descarga.getChildren().get(63)).setText(i6.getText());
-				((TextField)descarga.getChildren().get(72)).setText(String.valueOf(Float.parseFloat(i6.getText())*-1));
+				((TextField)descarga.getChildren().get(108)).setText(String.valueOf(Float.parseFloat(i6.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -1137,6 +1130,36 @@ public void initialize() {
 						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
 						s.getData().add(new XYChart.Data(m,df));
+					}
+					
+					float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
+					float minimo =Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
+					for (int i=11;i<temp.get(1).getChildren().size();i+=6){
+						float temp1=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+						if(carga.getId().equals("carga2")){
+							if(minimo>temp1){
+								minimo=temp1;
+							}
+						}else{
+							if (maximo<temp1){
+								maximo=temp1;
+							}	
+						}
+						
+						
+					}			
+
+					//agregar elementos 
+					switch(carga.getId()){
+						case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.valueOf(maximo)); break;
+						case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.valueOf(minimo));break;
+						case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.valueOf(maximo));break;
+						case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.valueOf(maximo));break;
+						case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.valueOf(maximo));break;
+						case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.valueOf(maximo));break;
+						case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.valueOf(maximo));break;
+						case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.valueOf(maximo));break;
+						default:break;
 					}
 				}catch(Exception ec){
 					System.out.println(ec.getMessage());
