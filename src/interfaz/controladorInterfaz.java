@@ -676,8 +676,10 @@ public void initialize() {
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
-								
-				
+				//parte de Vv
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
+				}
 				
 		    }catch (Exception e) {
 				// TODO: handle exception
@@ -824,10 +826,13 @@ public void initialize() {
 				TextField deltaEcuacion=(TextField)descarga.getChildren().get(17);
 				deltaEcuacion.setText(String.valueOf ((Float.parseFloat(deltaE.getText()))/(1+(Float.parseFloat(e.getText()))) *100) );
 				
+				
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
-				
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
+				}
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -894,6 +899,9 @@ public void initialize() {
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -909,6 +917,9 @@ public void initialize() {
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
+				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
 				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -926,6 +937,9 @@ public void initialize() {
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -941,6 +955,9 @@ public void initialize() {
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
+				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
 				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -958,6 +975,9 @@ public void initialize() {
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -972,6 +992,9 @@ public void initialize() {
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
+				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
 				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -989,6 +1012,9 @@ public void initialize() {
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1005,6 +1031,9 @@ public void initialize() {
 				
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
+				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
 				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
@@ -1151,14 +1180,22 @@ public void initialize() {
 
 					//agregar elementos 
 					switch(carga.getId()){
-						case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.valueOf(maximo)); break;
-						case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.valueOf(minimo));break;
-						case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.valueOf(maximo));break;
-						case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.valueOf(maximo));break;
-						case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.valueOf(maximo));break;
-						case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.valueOf(maximo));break;
-						case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.valueOf(maximo));break;
-						case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.valueOf(maximo));break;
+						case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.valueOf(maximo)); 
+										((TextField)descarga.getChildren().get(22)).setText(String.valueOf(maximo));break;
+						case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.valueOf(minimo));
+										((TextField)descarga.getChildren().get(31)).setText(String.valueOf(minimo));break;
+						case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.valueOf(maximo));
+										((TextField)descarga.getChildren().get(40)).setText(String.valueOf(maximo));break;
+						case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.valueOf(maximo));
+										((TextField)descarga.getChildren().get(49)).setText(String.valueOf(maximo));break;
+						case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.valueOf(maximo));
+										((TextField)descarga.getChildren().get(58)).setText(String.valueOf(maximo));break;
+						case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.valueOf(maximo));
+										((TextField)descarga.getChildren().get(67)).setText(String.valueOf(maximo));break;
+						case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.valueOf(maximo));
+										((TextField)descarga.getChildren().get(76)).setText(String.valueOf(maximo));break;
+						case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.valueOf(maximo));
+										((TextField)descarga.getChildren().get(85)).setText(String.valueOf(maximo));break;
 						default:break;
 					}
 				}catch(Exception ec){
@@ -1195,6 +1232,13 @@ public void initialize() {
 		insertarCadena(temp.get(2),linea);
 	}
 	
+	void auxVv(int indice){
+		float constante=Float.parseFloat((String)((TextField)descarga.getChildren().get(14)).getText());
+		float deltah=Float.parseFloat((String)((TextField)descarga.getChildren().get(indice-1)).getText());
+		float res=constante-(deltah/(10*consta[2]));
+		((TextField)descarga.getChildren().get(indice-1)).setText( String.valueOf(res));
+	}
+	
 	void descargas(GridPane d, GridPane d2,int indice){
 		TextField c=(TextField)d.getChildren().get(15);
 		
@@ -1205,9 +1249,13 @@ public void initialize() {
 				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
 				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
 				((TextField)d.getChildren().get(17)).setText(String.valueOf(res));
-				if(indice!=-1)
+				if(indice!=-1){
 				((TextField)descarga.getChildren().get((indice*9)+3)).setText(((TextField)d.getChildren().get(17)).getText());
-				
+				((TextField)descarga.getChildren().get((indice*9)+4)).setText(((TextField)d.getChildren().get(17)).getText());
+				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i);
+				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
