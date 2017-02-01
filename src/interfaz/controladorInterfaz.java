@@ -232,14 +232,22 @@ public class controladorInterfaz implements Initializable{
 				GridPane tablaResultados=(GridPane)((GridPane)((SplitPane)tablaCalculos.getContent()).getItems().get(1)).getChildren().get(0);
 				
 				switch(carga.getId()){
-					case "carga1":	((TextField)tablaResultados.getChildren().get(21)).setText(String.valueOf(maximo)); break;
-					case "carga2":	((TextField)tablaResultados.getChildren().get(30)).setText(String.valueOf(minimo));break;
-					case "carga3":	((TextField)tablaResultados.getChildren().get(39)).setText(String.valueOf(maximo));break;
-					case "carga4":  ((TextField)tablaResultados.getChildren().get(48)).setText(String.valueOf(maximo));break;
-					case "carga5":	((TextField)tablaResultados.getChildren().get(57)).setText(String.valueOf(maximo));break;
-					case "carga6":	((TextField)tablaResultados.getChildren().get(66)).setText(String.valueOf(maximo));break;
-					case "carga7":	((TextField)tablaResultados.getChildren().get(75)).setText(String.valueOf(maximo));break;
-					case "carga8":	((TextField)tablaResultados.getChildren().get(84)).setText(String.valueOf(maximo));break;
+						case "carga1":	((TextField)tablaResultados.getChildren().get(21)).setText(String.valueOf(maximo)); 
+						((TextField)tablaResultados.getChildren().get(22)).setText(String.valueOf(maximo));break;
+						case "carga2":	((TextField)tablaResultados.getChildren().get(30)).setText(String.valueOf(minimo));
+						((TextField)tablaResultados.getChildren().get(31)).setText(String.valueOf(maximo));break;
+						case "carga3":	((TextField)tablaResultados.getChildren().get(39)).setText(String.valueOf(maximo));
+						((TextField)tablaResultados.getChildren().get(40)).setText(String.valueOf(maximo));break;
+						case "carga4":  ((TextField)tablaResultados.getChildren().get(48)).setText(String.valueOf(maximo));
+						((TextField)tablaResultados.getChildren().get(49)).setText(String.valueOf(maximo));break;
+						case "carga5":	((TextField)tablaResultados.getChildren().get(57)).setText(String.valueOf(maximo));
+						((TextField)tablaResultados.getChildren().get(58)).setText(String.valueOf(maximo));break;
+						case "carga6":	((TextField)tablaResultados.getChildren().get(66)).setText(String.valueOf(maximo));
+						((TextField)tablaResultados.getChildren().get(67)).setText(String.valueOf(maximo));break;
+						case "carga7":	((TextField)tablaResultados.getChildren().get(75)).setText(String.valueOf(maximo));
+						((TextField)tablaResultados.getChildren().get(76)).setText(String.valueOf(maximo));break;
+						case "carga8":	((TextField)tablaResultados.getChildren().get(84)).setText(String.valueOf(maximo));
+						((TextField)tablaResultados.getChildren().get(85)).setText(String.valueOf(maximo));break;
 					default:break;
 				}
 				
@@ -1137,11 +1145,16 @@ public void initialize() {
 	}
 
 void auxCargaTotal(GridPane in){
+	
 	TextField cargaTotal=(TextField)in.getChildren().get(5);
 	cargaTotal.textProperty().addListener(( observable,oldValue,newValue)->{
+		try{
 		TextField presTemp=(TextField)in.getChildren().get(7); 
 		float res=(Float.parseFloat(cargaTotal.getText())*(consta[5]/consta[2]));
 		presTemp.setText(String.valueOf(res));
+		}catch(Exception e){
+			System.out.println("Error en función auxCargaTotal:" +e.getMessage());
+		}
 	});
 }
  @FXML void actualiza(MouseEvent e){
