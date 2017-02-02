@@ -251,6 +251,19 @@ public class controladorInterfaz implements Initializable{
 					default:break;
 				}
 				
+				float sum1=0;
+				float sum2=0;
+				for (int i=13;i<=100;i+=9){
+					if(i>85)
+						sum2+=(Float.parseFloat(((TextField)tablaResultados.getChildren().get(i)).getText()));
+					else
+						sum1+=(Float.parseFloat(((TextField)tablaResultados.getChildren().get(i)).getText()));
+				}
+				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
+				float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
+				float resultado=alturaInicial-sum1/10+sum2/10;
+				alturaFinal.setText(String.valueOf(resultado));
+				
 			}catch(Exception ec){
 				System.out.println("error en función agregaFila: "+ec.getMessage());
 			}
@@ -566,7 +579,6 @@ public class controladorInterfaz implements Initializable{
 					}
 				});
 				
-				
 				((TextField)descarga.getChildren().get(12)).setText("0.00");
 				((TextField)descarga.getChildren().get(13)).setText("0.00");
 				deltaE.setText("0.00");
@@ -582,19 +594,44 @@ public class controladorInterfaz implements Initializable{
 				});
 				/////////////////////////////
 				
-				
-				
-				///valores iniciales a partir de los valores dados (Cálculos)
-				
-				//pon un try si hay algun problem
-				
-				
+				for (int i=14;i<152;i+=9){
+					auxE(i);
+				}
 				
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
 		}
 		
 		
+	}
+	void auxE(int indice){
+		TextField vv=(TextField)descarga.getChildren().get(indice);
+		vv.textProperty().addListener((observable,oldValue,newValue)->{
+			try{TextField e=(TextField)descarga.getChildren().get(indice+1);
+			float temp=Float.parseFloat(vv.getText());
+			e.setText(String.valueOf(temp/antPrueba[4]));
+			
+			TextField deltaE=(TextField)descarga.getChildren().get(16);
+			for (int i=25;i<descarga.getChildren().size();i+=9){
+				TextField e1=(TextField)descarga.getChildren().get(i);
+				float a=Float.parseFloat(((TextField)descarga.getChildren().get(i-10)).getText());
+				float b=Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText());
+				float temp1;
+				if(i>=97)
+					temp1=Math.abs(a-b);
+				else
+					temp1=a-b;
+				e1.setText(String.valueOf(temp1));
+			}
+			
+			//delta ecuación 
+			for (int i=17;i<descarga.getChildren().size();i+=9){
+				TextField deltaEcuacion=(TextField)descarga.getChildren().get(i);
+				float deltae=(Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText()));
+				float e1=(Float.parseFloat(((TextField)descarga.getChildren().get(15)).getText()));
+				deltaEcuacion.setText(String.valueOf (deltae/(1+ e1) ));
+			}}catch(Exception e){}
+		});
 	}
 	 void auxSumaDeltaSigma(){
 		 try{
@@ -732,6 +769,20 @@ public void initialize() {
 				auxCargaTotal(in6,cargaTotal6);
 				auxCargaTotal(in7,cargaTotal7);
 				auxCargaTotal(in8,cargaTotal8);
+				
+				float sum1=0;
+				float sum2=0;
+				for (int i=13;i<=100;i+=9){
+					if(i>85)
+						sum2+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
+					else
+						sum1+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
+				}
+				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
+				float alturaIni=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
+				float resultado=alturaIni-sum1/10+sum2/10;
+				alturaFinal.setText(String.valueOf(resultado));
+				
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
@@ -1300,6 +1351,19 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 										break;
 						default:break;
 					}
+					
+					float sum1=0;
+					float sum2=0;
+					for (int k=13;k<=100;k+=9){
+						if(k>85)
+							sum2+=(Float.parseFloat(((TextField)descarga.getChildren().get(k)).getText()));
+						else
+							sum1+=(Float.parseFloat(((TextField)descarga.getChildren().get(k)).getText()));
+					}
+					TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
+					float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
+					float resultado=alturaInicial-sum1/10+sum2/10;
+					alturaFinal.setText(String.valueOf(resultado));
 				}catch(Exception ec){
 					System.out.println(ec.getMessage());
 				}
