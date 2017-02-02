@@ -253,7 +253,7 @@ public class controladorInterfaz implements Initializable{
 				
 				float sum1=0;
 				float sum2=0;
-				for (int i=13;i<=100;i+=9){
+				for (int i=13;i<=154;i+=9){
 					if(i>85)
 						sum2+=(Float.parseFloat(((TextField)tablaResultados.getChildren().get(i)).getText()));
 					else
@@ -299,7 +299,7 @@ public class controladorInterfaz implements Initializable{
 		String humedadInicial=cadena(this.humedadInicial);
 		String antesDeLaPrueba=cadena(this.antesDeLaPrueba);
 		String despuesDeConsolidar=cadena(this.despuesDeConsolidar);
-		
+		String infoResultadosString=cadena(this.infoResultados);
 		
 		String cargas=cadenaCargas();
 		
@@ -315,7 +315,7 @@ public class controladorInterfaz implements Initializable{
         	if(!file.getName().contains(".")) {
         		  file = new File(file.getAbsolutePath() + ".txt");
     		}
-        	SaveFile(""+info+granulometria+limites+clasificacion+constantes+humedadInicial+antesDeLaPrueba+despuesDeConsolidar+cargas,file);
+        	SaveFile(""+info+granulometria+limites+clasificacion+constantes+humedadInicial+antesDeLaPrueba+despuesDeConsolidar+cargas+infoResultadosString,file);
         }
 	}
 	@FXML public void nuevo() throws IOException{
@@ -384,6 +384,9 @@ public class controladorInterfaz implements Initializable{
 		            case 15://PARA carga 8
 		            	auxAbrirCargas(this.carga8,this.s8,scanner,linea);
 		            	break;
+		            case 16://PARA carga 8
+		            	insertarCadena(this.infoResultados,linea);
+		            	break;
 		            default : break;
 	            }
 	            
@@ -450,7 +453,6 @@ public class controladorInterfaz implements Initializable{
 		cad+=cadena(temp.get(0));
 		cad+=cadena(temp.get(1));
 		cad+=cadena(temp.get(2));
-		
 		
 		temp = getCadenaCargas(this.carga2);
 		cad+=cadena(temp.get(0));
@@ -598,6 +600,29 @@ public class controladorInterfaz implements Initializable{
 					auxE(i);
 				}
 				
+				//agregar listenners 
+				TextField segundoCampoe=(TextField)descarga.getChildren().get(24);
+				TextField tercerCampoe=(TextField)descarga.getChildren().get(33);
+				segundoCampoe.textProperty().addListener((observable,oldValue,newValue)->{
+					try{
+						float camp2=Float.parseFloat(segundoCampoe.getText());
+						float camp3=Float.parseFloat(tercerCampoe.getText());
+						((TextField)this.infoResultados.getChildren().get(11)).setText(String.valueOf(((camp3-camp2)/(1+camp2))*100));
+						
+					}catch(Exception e){
+						System.out.println("Error en segundoCampoe:"+e.getMessage());
+					}
+				});
+				tercerCampoe.textProperty().addListener((observable,oldValue,newValue)->{
+					try{
+						float camp2=Float.parseFloat(segundoCampoe.getText());
+						float camp3=Float.parseFloat(tercerCampoe.getText());
+						((TextField)this.infoResultados.getChildren().get(11)).setText(String.valueOf(((camp3-camp2)/(1+camp2))*100));
+					}catch(Exception e){
+						System.out.println("Error en tercerCampoe:"+e.getMessage());
+					}
+				});
+				reactiva((TextField)this.despuesDeConsolidar.getChildren().get(1));
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
 		}
@@ -772,7 +797,7 @@ public void initialize() {
 				
 				float sum1=0;
 				float sum2=0;
-				for (int i=13;i<=100;i+=9){
+				for (int i=13;i<=154;i+=9){
 					if(i>85)
 						sum2+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
 					else
@@ -970,10 +995,17 @@ public void initialize() {
 				despPrueba[2]=consta[4]+antPrueba[3];
 				despPrueba[3]=antPrueba[3];
 				despPrueba[4]=((despPrueba[1]-despPrueba[3])/despPrueba[3])*100;
-				despPrueba[5]=consta[2]*1;//falta vincularlo con resultados
+				despPrueba[5]=consta[2]*(Float.parseFloat(((TextField)infoResultados.getChildren().get(5)).getText()));//vinculo con resultados
 				despPrueba[6]=despPrueba[3]/Float.parseFloat(((String)Ss.getText()));
 				despPrueba[7]=despPrueba[5]-despPrueba[6];
-				despPrueba[8]=1;//datos de resultados
+				
+				float maximo=Float.parseFloat(((TextField)descarga.getChildren().get(96)).getText());
+				for (int i=105;i<152;i+=9){
+					if (maximo<Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText())){
+						maximo=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
+					}
+				}
+				despPrueba[8]=maximo;//datos de resultados
 				despPrueba[10]=despPrueba[0]-despPrueba[2];
 				despPrueba[9]=(despPrueba[10]/despPrueba[7])*100;
 				
@@ -1170,7 +1202,6 @@ public void initialize() {
 					auxSigmaMenor(i);
 				}
 				for (int i=23;i<descarga.getChildren().size();i+=9){
-					
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
 			}catch(Exception e){
@@ -1202,6 +1233,9 @@ public void initialize() {
 
 	}
 
+void reactiva(TextField t){
+t.setText(t.getText());
+}
 void auxCargaTotal(GridPane in,TextField cargaTotal){
 		TextField presTemp=(TextField)in.getChildren().get(7); 
 		float res=(Float.parseFloat(cargaTotal.getText())*(consta[5]/consta[2]));
@@ -1354,11 +1388,11 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					
 					float sum1=0;
 					float sum2=0;
-					for (int k=13;k<=100;k+=9){
-						if(k>85)
-							sum2+=(Float.parseFloat(((TextField)descarga.getChildren().get(k)).getText()));
-						else
-							sum1+=(Float.parseFloat(((TextField)descarga.getChildren().get(k)).getText()));
+					for (int i=13;i<=154;i+=9){
+						if(i>85){							
+							sum2+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
+						}else{
+							sum1+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));}
 					}
 					TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
 					float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
@@ -1430,6 +1464,20 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+
+				float sum1=0;
+				float sum2=0;
+				for (int i=13;i<=154;i+=9){
+					if(i>85)
+						sum2+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
+					else
+						sum1+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
+				}
+				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
+				float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
+				float resultado=alturaInicial-sum1/10+sum2/10;
+				alturaFinal.setText(String.valueOf(resultado));
+				
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
