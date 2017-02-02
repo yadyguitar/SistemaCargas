@@ -27,8 +27,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 
 public class controladorInterfaz implements Initializable{
 
@@ -60,6 +58,7 @@ public class controladorInterfaz implements Initializable{
 	
 	@FXML GridPane infoResultados;
 	@FXML GridPane descarga;
+	@FXML LineChart<Number,Number> curvaCompresibilidad;
 	
 	static XYChart.Series s1 = new XYChart.Series<>();
 	static XYChart.Series s2 = new XYChart.Series<>();
@@ -69,6 +68,8 @@ public class controladorInterfaz implements Initializable{
 	static XYChart.Series s6 = new XYChart.Series<>();
 	static XYChart.Series s7 = new XYChart.Series<>();
 	static XYChart.Series s8 = new XYChart.Series<>();
+	static XYChart.Series resCarga = new XYChart.Series<>();
+	static XYChart.Series resDescarga = new XYChart.Series<>();
 	////////
 	final int NumeroCargas=8;
 	//List <Float>c1 = new ArrayList<Float>();
@@ -282,6 +283,21 @@ public class controladorInterfaz implements Initializable{
 		return returnElement(elemento.getParent(),--cont);
 	}
 	
+	void graficaResultados(){
+		this.resCarga.getData().clear();
+		this.resDescarga.getData().clear();
+		for(int i=11;i<147;i+=9){
+			if (i>=92){
+				float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
+				float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
+				resDescarga.getData().add(new XYChart.Data(descargaX,descargaY));
+			}else{
+				float cargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
+				float cargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
+				resCarga.getData().add(new XYChart.Data(cargaX,cargaY));
+			}
+		}
+	}
 	@FXML public void guardar(MouseEvent e){
 		String nombre=this.nombre.getText();
 		String ubicacion=this.ubicacion.getText();
@@ -623,6 +639,9 @@ public class controladorInterfaz implements Initializable{
 					}
 				});
 				reactiva((TextField)this.despuesDeConsolidar.getChildren().get(1));
+				this.curvaCompresibilidad.getData().add(resCarga);
+				this.curvaCompresibilidad.getData().add(resDescarga);
+				
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
 		}
@@ -655,6 +674,7 @@ public class controladorInterfaz implements Initializable{
 				float deltae=(Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText()));
 				float e1=(Float.parseFloat(((TextField)descarga.getChildren().get(15)).getText()));
 				deltaEcuacion.setText(String.valueOf (deltae/(1+ e1) ));
+				graficaResultados();
 			}}catch(Exception e){}
 		});
 	}
@@ -807,7 +827,7 @@ public void initialize() {
 				float alturaIni=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 				float resultado=alturaIni-sum1/10+sum2/10;
 				alturaFinal.setText(String.valueOf(resultado));
-				
+				graficaResultados();
 		    }catch (Exception e) {
 				// TODO: handle exception
 		    	System.out.println("error, letras");
@@ -859,7 +879,7 @@ public void initialize() {
 				auxCargaTotal(in6,cargaTotal6);
 				auxCargaTotal(in7,cargaTotal7);
 				auxCargaTotal(in8,cargaTotal8);
-			
+				graficaResultados();
 			}catch(Exception e){
 				
 			}
@@ -982,6 +1002,8 @@ public void initialize() {
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
+				
+				graficaResultados();
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -1068,9 +1090,13 @@ public void initialize() {
 					auxSigmaMenor(i);
 				}
 				for (int i=23;i<descarga.getChildren().size();i+=9){
-					
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				
+				//Gráfica de resultados//
+				graficaResultados();
+				////////////////////////////
+				
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1090,6 +1116,7 @@ public void initialize() {
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1109,6 +1136,7 @@ public void initialize() {
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1128,6 +1156,7 @@ public void initialize() {
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1147,6 +1176,7 @@ public void initialize() {
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1165,6 +1195,7 @@ public void initialize() {
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1184,6 +1215,7 @@ public void initialize() {
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1204,6 +1236,7 @@ public void initialize() {
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1425,7 +1458,6 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				}
 				temp.get(2).setGridLinesVisible(false);
 				temp.get(2).setGridLinesVisible(true);
-				
 				tam-=6;
 			}
 		}
@@ -1477,7 +1509,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 				float resultado=alturaInicial-sum1/10+sum2/10;
 				alturaFinal.setText(String.valueOf(resultado));
-				
+				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
