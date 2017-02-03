@@ -647,7 +647,10 @@ public class controladorInterfaz implements Initializable{
 		}
 		
 		
+		
 	}
+	
+	
 	void auxE(int indice){
 		TextField vv=(TextField)descarga.getChildren().get(indice);
 		vv.textProperty().addListener((observable,oldValue,newValue)->{
@@ -684,7 +687,8 @@ public class controladorInterfaz implements Initializable{
 				TextField res= (TextField)descarga.getChildren().get(i);
 				TextField a=(TextField)descarga.getChildren().get(i-1);
 				TextField b=(TextField)descarga.getChildren().get(i-9);
-				res.setText(String.valueOf( (Float.parseFloat(a.getText()))+(Float.parseFloat(b.getText()))  ) );
+				if (!(a.getText().isEmpty()||b.getText().isEmpty()))
+					res.setText(String.valueOf( (Float.parseFloat(a.getText()))+(Float.parseFloat(b.getText()))  ) );
 			}
 		
 		 }catch(Exception e){
@@ -770,14 +774,8 @@ public void initialize() {
 		
 		Ss.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				float ss=Float.parseFloat(((String)Ss.getText()));
-				antPrueba[4]=antPrueba[3]/ss;
-				volmnatural.setText(String.valueOf(antPrueba[4]));
-				
-				despPrueba[6]=despPrueba[3]/ss;
-				volsol.setText(String.valueOf(despPrueba[6]));
-				despPrueba[7]=despPrueba[5]-despPrueba[6];
-				volva.setText(String.valueOf(despPrueba[7]));
+				reactiva(wma);
+				reactiva(wmsa);
 			}catch(Exception e){
 				System.out.println("error en la función initialize (Ss)"+e.getMessage());
 			}
@@ -789,11 +787,8 @@ public void initialize() {
 		    try{
 		    	consta[0]=Float.parseFloat(((String)diametro.getText()));	
 		    	consta[2]=PI*consta[0]*consta[0]/4; 
-		    	consta[3]=consta[1]*consta[2];
 				area.setText(String.valueOf(consta[2]));
-				volumen.setText(String.valueOf(consta[3]));
-				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
-				volVm.setText(String.valueOf(consta[3]));
+				reactiva(altura); //calcula el volumen con el area nueva, gm(clasificación), volVm
 				//infoResultados
 				areaAnillo.setText(String.valueOf(consta[2]));
 				
@@ -853,14 +848,10 @@ public void initialize() {
 		pesoAnillo.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
 				consta[4]=Float.parseFloat(((String)pesoAnillo.getText()));
-				wmnatural.setText( String.valueOf(antPrueba[0]-consta[4]));		
-				despPrueba[1]=despPrueba[0]-consta[4];
-				despPrueba[2]=consta[4]+antPrueba[3];
-				wmsat.setText(String.valueOf(despPrueba[1]));
-				wmsanillo.setText(String.valueOf(despPrueba[2]));
+				reactiva(wma);
+				reactiva(wmsa);
 			}catch (Exception e) {
-				// TODO: handle exception
-				System.out.println("error, letras");
+				System.out.println("error, peso anillo"+e.getMessage());
 			}
 		});
 		
@@ -924,14 +915,8 @@ public void initialize() {
 			try{
 				antPrueba[2]=Float.parseFloat((String)wpercent.getText());
 				hum.setText(wpercent.getText());
-				
-				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
-				wmnaturals.setText(String.valueOf(antPrueba[3]));
-				float ss=Float.parseFloat(((String)Ss.getText()));
-				antPrueba[4]=antPrueba[3]/ss;
-				volmnatural.setText(String.valueOf(antPrueba[4]));
-				antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
-				
+				reactiva(wm);
+				reactiva(Ss);
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -1014,13 +999,21 @@ public void initialize() {
 			try{
 				despPrueba[0]=Float.parseFloat(((String)wmsa.getText()));
 				despPrueba[1]=despPrueba[0]-consta[4];
+				wmsat.setText(String.valueOf(despPrueba[1]));
 				despPrueba[2]=consta[4]+antPrueba[3];
+				wmsanillo.setText(String.valueOf(despPrueba[2]));
+				despPrueba[10]=despPrueba[0]-despPrueba[2];
+				wamuestrasat.setText(String.valueOf(despPrueba[10]));
 				despPrueba[3]=antPrueba[3];
+				wms.setText(String.valueOf(despPrueba[3]));
 				despPrueba[4]=((despPrueba[1]-despPrueba[3])/despPrueba[3])*100;
-				despPrueba[5]=consta[2]*(Float.parseFloat(((TextField)infoResultados.getChildren().get(5)).getText()));//vinculo con resultados
+				wper.setText(String.valueOf(despPrueba[4]));
 				despPrueba[6]=despPrueba[3]/Float.parseFloat(((String)Ss.getText()));
+				volsol.setText(String.valueOf(despPrueba[6]));
+				despPrueba[5]=consta[2]*(Float.parseFloat(((TextField)infoResultados.getChildren().get(5)).getText()));//vinculo con resultados
+				voltotmsat.setText(String.valueOf(despPrueba[5]));
 				despPrueba[7]=despPrueba[5]-despPrueba[6];
-				
+				volva.setText(String.valueOf(despPrueba[7]));
 				float maximo=Float.parseFloat(((TextField)descarga.getChildren().get(96)).getText());
 				for (int i=105;i<152;i+=9){
 					if (maximo<Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText())){
@@ -1028,21 +1021,11 @@ public void initialize() {
 					}
 				}
 				despPrueba[8]=maximo;//datos de resultados
-				despPrueba[10]=despPrueba[0]-despPrueba[2];
 				despPrueba[9]=(despPrueba[10]/despPrueba[7])*100;
-				
-				wmsat.setText(String.valueOf(despPrueba[1]));
-				wmsanillo.setText(String.valueOf(despPrueba[2]));
-				wms.setText(String.valueOf(despPrueba[3]));
-				wper.setText(String.valueOf(despPrueba[4]));
-				voltotmsat.setText(String.valueOf(despPrueba[5]));
-				volsol.setText(String.valueOf(despPrueba[6]));
-				volva.setText(String.valueOf(despPrueba[7]));
 				va.setText(String.valueOf(despPrueba[8]));
 				gpercent.setText(String.valueOf(despPrueba[9]));
-				wamuestrasat.setText(String.valueOf(despPrueba[10]));
 			}catch(Exception e){
-				
+				System.out.println("Error en wmsa: "+e.getMessage());
 			}
 		});
 		
@@ -1080,23 +1063,19 @@ public void initialize() {
 	
 		i1.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
-				
 				((TextField)in1.getChildren().get(5)).setText(i1.getText());
-				
+				reactiva(i2);reactiva(i3);reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(18)).setText(i1.getText());
 				auxSumaDeltaSigma();
-				
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
-				
 				//Gráfica de resultados//
 				graficaResultados();
 				////////////////////////////
-				
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -1106,6 +1085,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in1.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i2.getText()));
 				((TextField)in2.getChildren().get(5)).setText(String.valueOf(sum));
+				reactiva(i3);reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(27)).setText(i2.getText());
 				
 				((TextField)descarga.getChildren().get(144)).setText(String.valueOf(Float.parseFloat(i2.getText())*-1));
@@ -1127,6 +1107,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in2.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i3.getText()));
 				((TextField)in3.getChildren().get(5)).setText(String.valueOf(sum));
+				reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(36)).setText(i3.getText());
 				((TextField)descarga.getChildren().get(135)).setText(String.valueOf(Float.parseFloat(i3.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1147,6 +1128,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in3.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i4.getText()));
 				((TextField)in4.getChildren().get(5)).setText(String.valueOf(sum));
+				reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(45)).setText(i4.getText());
 				((TextField)descarga.getChildren().get(126)).setText(String.valueOf(Float.parseFloat(i4.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1167,6 +1149,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in4.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i5.getText()));
 				((TextField)in5.getChildren().get(5)).setText(String.valueOf(sum));
+				reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(54)).setText(i5.getText());
 				((TextField)descarga.getChildren().get(117)).setText(String.valueOf(Float.parseFloat(i5.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1186,6 +1169,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in5.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i6.getText()));
 				((TextField)in6.getChildren().get(5)).setText(String.valueOf(sum));
+				reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(63)).setText(i6.getText());
 				((TextField)descarga.getChildren().get(108)).setText(String.valueOf(Float.parseFloat(i6.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1206,6 +1190,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in6.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i7.getText()));
 				((TextField)in7.getChildren().get(5)).setText(String.valueOf(sum));
+				reactiva(i8);
 				((TextField)descarga.getChildren().get(72)).setText(i7.getText());
 				((TextField)descarga.getChildren().get(99)).setText(String.valueOf(Float.parseFloat(i7.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1267,7 +1252,10 @@ public void initialize() {
 	}
 
 void reactiva(TextField t){
-t.setText(t.getText());
+	if(!(t.getText().equals(" ")|| t.getText().isEmpty())){
+		t.setText(t.getText()+" ");
+		t.setText(String.valueOf(Float.parseFloat(t.getText())));
+	}
 }
 void auxCargaTotal(GridPane in,TextField cargaTotal){
 		TextField presTemp=(TextField)in.getChildren().get(7); 
