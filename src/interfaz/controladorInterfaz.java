@@ -209,6 +209,7 @@ public class controladorInterfaz implements Initializable{
 				System.out.println(ec.getMessage());
 			}
 				
+								
 				float maximo = Float.parseFloat(((TextField)tabla.getChildren().get(11)).getText());
 				float minimo =Float.parseFloat(((TextField)tabla.getChildren().get(11)).getText());
 				for (int i=11;i<tabla.getChildren().size();i+=6){
@@ -251,6 +252,11 @@ public class controladorInterfaz implements Initializable{
 						((TextField)tablaResultados.getChildren().get(85)).setText(String.valueOf(maximo));break;
 					default:break;
 				}
+				//
+				try{
+				for (int i=23;i<tablaResultados.getChildren().size();i+=9){
+					auxVv(i,Float.parseFloat((String)((TextField)tablaResultados.getChildren().get(i-1)).getText()));
+				}}catch(Exception ec){}
 				
 				float sum1=0;
 				float sum2=0;
@@ -599,7 +605,7 @@ public class controladorInterfaz implements Initializable{
 				
 				((TextField)descarga.getChildren().get(12)).setText("0.00");
 				((TextField)descarga.getChildren().get(13)).setText("0.00");
-				deltaE.setText("0.00");
+				
 				deltaE.textProperty().addListener((observable, oldValue, newValue)->{
 					try{
 						//delta e de la tabla de resultados
@@ -610,6 +616,7 @@ public class controladorInterfaz implements Initializable{
 						System.out.println("Error en función generaFilasResultados(deltaE): "+ ec.getMessage());
 					}
 				});
+				deltaE.setText("0.00");
 				/////////////////////////////
 				
 				for (int i=14;i<152;i+=9){
@@ -638,6 +645,11 @@ public class controladorInterfaz implements Initializable{
 						System.out.println("Error en tercerCampoe:"+e.getMessage());
 					}
 				});
+				
+				for(int i=12;i<152;i+=9){
+					listennersLectMicro(i);
+				}
+				
 				reactiva((TextField)this.despuesDeConsolidar.getChildren().get(1));
 				this.curvaCompresibilidad.getData().add(resCarga);
 				this.curvaCompresibilidad.getData().add(resDescarga);
@@ -650,7 +662,44 @@ public class controladorInterfaz implements Initializable{
 		
 	}
 	
-	
+	void listennersLectMicro(int indice){
+		TextField lect=(TextField)descarga.getChildren().get(indice);
+		lect.textProperty().addListener((observable,oldValue,newValue)->{
+			try{
+				if(indice!=12)
+				auxVv(indice+2,Float.parseFloat((String)((TextField)descarga.getChildren().get(indice)).getText()));
+				//e de la tabla de resultados
+				TextField e=(TextField)descarga.getChildren().get(indice+3);
+				float temp=Float.parseFloat(((TextField)descarga.getChildren().get(indice+2)).getText());
+				e.setText(String.valueOf(temp/antPrueba[4]));
+				//delta e de la tabla de resultados
+				TextField deltaE=(TextField)descarga.getChildren().get(16);
+				if(indice!=12){
+					TextField e1=(TextField)descarga.getChildren().get(indice+4);
+					float a=Float.parseFloat(((TextField)descarga.getChildren().get((indice+4)-10)).getText());
+					float b=Float.parseFloat(((TextField)descarga.getChildren().get((indice+4)-1)).getText());
+					float temp1=Math.abs(a-b);
+					e1.setText(String.valueOf(temp1));
+				}
+				TextField deltaEcuacion=(TextField)descarga.getChildren().get(indice+5);
+				float deltae=(Float.parseFloat(((TextField)descarga.getChildren().get((indice+5)-1)).getText()));
+				float e2=(Float.parseFloat(((TextField)descarga.getChildren().get((indice+5)-2)).getText()));
+				deltaEcuacion.setText(String.valueOf (deltae/(1+ e2 )));	
+				
+				try{ 
+				if((indice+9)<152){
+					if(!((TextField)descarga.getChildren().get(indice)).getText().isEmpty())
+						reactiva((TextField)descarga.getChildren().get(indice+9));
+				}
+				}catch(Exception excep){}
+				
+				
+				graficaResultados();
+			}catch(Exception e){
+				System.out.println("Error en función listennersLectMicro");
+			}
+		});
+	}
 	void auxE(int indice){
 		TextField vv=(TextField)descarga.getChildren().get(indice);
 		vv.textProperty().addListener((observable,oldValue,newValue)->{
@@ -659,10 +708,13 @@ public class controladorInterfaz implements Initializable{
 			e.setText(String.valueOf(temp/antPrueba[4]));
 			
 			TextField deltaE=(TextField)descarga.getChildren().get(16);
+			try{
 			for (int i=25;i<descarga.getChildren().size();i+=9){
+				
 				TextField e1=(TextField)descarga.getChildren().get(i);
 				float a=Float.parseFloat(((TextField)descarga.getChildren().get(i-10)).getText());
 				float b=Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText());
+						
 				float temp1;
 				if(i>=97)
 					temp1=Math.abs(a-b);
@@ -670,15 +722,19 @@ public class controladorInterfaz implements Initializable{
 					temp1=a-b;
 				e1.setText(String.valueOf(temp1));
 			}
+			}catch(Exception exception){}
 			
-			//delta ecuación 
+			//delta ecuación
+			try{
 			for (int i=17;i<descarga.getChildren().size();i+=9){
 				TextField deltaEcuacion=(TextField)descarga.getChildren().get(i);
 				float deltae=(Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText()));
 				float e1=(Float.parseFloat(((TextField)descarga.getChildren().get(15)).getText()));
 				deltaEcuacion.setText(String.valueOf (deltae/(1+ e1) ));
-				graficaResultados();
-			}}catch(Exception e){}
+				
+			}}catch(Exception exception){}
+			graficaResultados();
+			}catch(Exception e){}
 		});
 	}
 	 void auxSumaDeltaSigma(){
@@ -838,6 +894,8 @@ public void initialize() {
 				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
 				//infoResultados
 				alturaInicial.setText(String.valueOf(consta[1]));
+				reactiva(wma);
+				reactiva(wmsa);
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
@@ -862,6 +920,7 @@ public void initialize() {
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
+				
 				auxCargaTotal(in1,cargaTotal1);
 				auxCargaTotal(in2,cargaTotal2);
 				auxCargaTotal(in3,cargaTotal3);
@@ -870,6 +929,7 @@ public void initialize() {
 				auxCargaTotal(in6,cargaTotal6);
 				auxCargaTotal(in7,cargaTotal7);
 				auxCargaTotal(in8,cargaTotal8);
+				
 				graficaResultados();
 			}catch(Exception e){
 				
@@ -952,6 +1012,9 @@ public void initialize() {
 				//infoResultados
 				vs.setText(String.valueOf(antPrueba[4]));
 				
+				for(int i=11;i<descarga.getChildren().size();i+=9){
+					auxSigmaMenor(i);
+				}
 				//Vv de la tabla de resultados
 				TextField Vv = (TextField)descarga.getChildren().get(14);
 				Vv.setText(String.valueOf(antPrueba[7]));
@@ -967,7 +1030,7 @@ public void initialize() {
 				}
 				//delta e de la tabla de resultados
 				TextField deltaE=(TextField)descarga.getChildren().get(16);
-				
+				try{
 				for (int i=25;i<descarga.getChildren().size();i+=9){
 					TextField e=(TextField)descarga.getChildren().get(i);
 					float a=Float.parseFloat(((TextField)descarga.getChildren().get(i-10)).getText());
@@ -975,18 +1038,17 @@ public void initialize() {
 					float temp=Math.abs(a-b);
 					e.setText(String.valueOf(temp));
 				}
+				}catch(Exception exception){}
 				
 				//delta ecuación 
+				try{
 				for (int i=17;i<descarga.getChildren().size();i+=9){
 					TextField deltaEcuacion=(TextField)descarga.getChildren().get(i);
 					float deltae=(Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText()));
 					float e=(Float.parseFloat(((TextField)descarga.getChildren().get(i-2)).getText()));
-					deltaEcuacion.setText(String.valueOf (deltae/(1+ (e*100)) ));
+					deltaEcuacion.setText(String.valueOf (deltae/(1+ e )));
 				}
-				
-				for(int i=11;i<descarga.getChildren().size();i+=9){
-					auxSigmaMenor(i);
-				}
+				}catch(Exception exception){}
 				
 				graficaResultados();
 			}catch (Exception e) {
@@ -1020,6 +1082,7 @@ public void initialize() {
 						maximo=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 					}
 				}
+				
 				despPrueba[8]=maximo;//datos de resultados
 				despPrueba[9]=(despPrueba[10]/despPrueba[7])*100;
 				va.setText(String.valueOf(despPrueba[8]));
@@ -1069,6 +1132,9 @@ public void initialize() {
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
+				}
+				for (int i=23;i<descarga.getChildren().size();i+=9){
+					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
@@ -1274,6 +1340,8 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
  	void auxSigmaMenor(int indice){
  		try{
 		TextField sigmaMenor =(TextField)descarga.getChildren().get(indice);
+		if(((TextField)descarga.getChildren().get(indice-1)).getText().isEmpty())
+			return;
 		float a=Float.parseFloat(((TextField)descarga.getChildren().get(indice-1)).getText());
 		float b=consta[5]; //constante del aparato
 		float c=consta[2];//area de la parte de constantes del equipo
@@ -1407,6 +1475,11 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 						default:break;
 					}
 					
+					try{
+						for (int i=23;i<descarga.getChildren().size();i+=9){
+							auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
+						}}catch(Exception ec){}
+					
 					float sum1=0;
 					float sum2=0;
 					for (int i=13;i<=154;i+=9){
@@ -1472,15 +1545,16 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 		
 		c.textProperty().addListener((observable, oldValue, newValue)->{
 			try{
+				if(indice!=-1){
+					((TextField)descarga.getChildren().get((indice*9)+3)).setText(((TextField)d.getChildren().get(17)).getText());
+					((TextField)descarga.getChildren().get((indice*9)+4)).setText(((TextField)d.getChildren().get(17)).getText());
+				}
 				if (d2!=null)
-				((TextField)d2.getChildren().get(7)).setText(c.getText());
+					((TextField)d2.getChildren().get(7)).setText(c.getText());
 				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
 				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
 				((TextField)d.getChildren().get(17)).setText(String.valueOf(res));
-				if(indice!=-1){
-				((TextField)descarga.getChildren().get((indice*9)+3)).setText(((TextField)d.getChildren().get(17)).getText());
-				((TextField)descarga.getChildren().get((indice*9)+4)).setText(((TextField)d.getChildren().get(17)).getText());
-				}
+				
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
