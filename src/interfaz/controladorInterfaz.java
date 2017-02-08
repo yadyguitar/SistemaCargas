@@ -126,11 +126,11 @@ public class controladorInterfaz implements Initializable{
 				float ini=Float.parseFloat(((TextField)tabla.getChildren().get(7)).getText());
 				System.out.println(ini);
 				float rest=ini-(Float.parseFloat(mm.getText()));
-				((TextField)tabla.getChildren().get(tam-2)).setText(String.valueOf(rest));
+				((TextField)tabla.getChildren().get(tam-2)).setText(String.format("%.3f",rest));
 				((TextField)tabla.getChildren().get(tam-2)).setEditable(false);
 				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
 				
-				((TextField)tabla.getChildren().get(tam-1)).setText(String.valueOf(rest)); //faltaría condición de si no es "mm" multiplicarlo por 25.3
+				((TextField)tabla.getChildren().get(tam-1)).setText(String.format("%.3f",rest)); //faltaría condición de si no es "mm" multiplicarlo por 25.3
 				
 			}catch(Exception ec){
 				System.out.println(ec.getMessage());
@@ -235,22 +235,22 @@ public class controladorInterfaz implements Initializable{
 				GridPane tablaResultados=(GridPane)((GridPane)((SplitPane)tablaCalculos.getContent()).getItems().get(1)).getChildren().get(0);
 				
 				switch(carga.getId()){
-						case "carga1":	((TextField)tablaResultados.getChildren().get(21)).setText(String.valueOf(maximo)); 
-						((TextField)tablaResultados.getChildren().get(22)).setText(String.valueOf(maximo));break;
-						case "carga2":	((TextField)tablaResultados.getChildren().get(30)).setText(String.valueOf(minimo));
-						((TextField)tablaResultados.getChildren().get(31)).setText(String.valueOf(minimo));break;
-						case "carga3":	((TextField)tablaResultados.getChildren().get(39)).setText(String.valueOf(maximo));
-						((TextField)tablaResultados.getChildren().get(40)).setText(String.valueOf(maximo));break;
-						case "carga4":  ((TextField)tablaResultados.getChildren().get(48)).setText(String.valueOf(maximo));
-						((TextField)tablaResultados.getChildren().get(49)).setText(String.valueOf(maximo));break;
-						case "carga5":	((TextField)tablaResultados.getChildren().get(57)).setText(String.valueOf(maximo));
-						((TextField)tablaResultados.getChildren().get(58)).setText(String.valueOf(maximo));break;
-						case "carga6":	((TextField)tablaResultados.getChildren().get(66)).setText(String.valueOf(maximo));
-						((TextField)tablaResultados.getChildren().get(67)).setText(String.valueOf(maximo));break;
-						case "carga7":	((TextField)tablaResultados.getChildren().get(75)).setText(String.valueOf(maximo));
-						((TextField)tablaResultados.getChildren().get(76)).setText(String.valueOf(maximo));break;
-						case "carga8":	((TextField)tablaResultados.getChildren().get(84)).setText(String.valueOf(maximo));
-						((TextField)tablaResultados.getChildren().get(85)).setText(String.valueOf(maximo));break;
+						case "carga1":	((TextField)tablaResultados.getChildren().get(21)).setText(String.format("%.3f",maximo)); 
+						((TextField)tablaResultados.getChildren().get(22)).setText(String.format("%.3f",maximo));break;
+						case "carga2":	((TextField)tablaResultados.getChildren().get(30)).setText(String.format("%.3f",minimo));
+						((TextField)tablaResultados.getChildren().get(31)).setText(String.format("%.3f",minimo));break;
+						case "carga3":	((TextField)tablaResultados.getChildren().get(39)).setText(String.format("%.3f",maximo));
+						((TextField)tablaResultados.getChildren().get(40)).setText(String.format("%.3f",maximo));break;
+						case "carga4":  ((TextField)tablaResultados.getChildren().get(48)).setText(String.format("%.3f",maximo));
+						((TextField)tablaResultados.getChildren().get(49)).setText(String.format("%.3f",maximo));break;
+						case "carga5":	((TextField)tablaResultados.getChildren().get(57)).setText(String.format("%.3f",maximo));
+						((TextField)tablaResultados.getChildren().get(58)).setText(String.format("%.3f",maximo));break;
+						case "carga6":	((TextField)tablaResultados.getChildren().get(66)).setText(String.format("%.3f",maximo));
+						((TextField)tablaResultados.getChildren().get(67)).setText(String.format("%.3f",maximo));break;
+						case "carga7":	((TextField)tablaResultados.getChildren().get(75)).setText(String.format("%.3f",maximo));
+						((TextField)tablaResultados.getChildren().get(76)).setText(String.format("%.3f",maximo));break;
+						case "carga8":	((TextField)tablaResultados.getChildren().get(84)).setText(String.format("%.3f",maximo));
+						((TextField)tablaResultados.getChildren().get(85)).setText(String.format("%.3f",maximo));break;
 					default:break;
 				}
 				//
@@ -270,7 +270,7 @@ public class controladorInterfaz implements Initializable{
 				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
 				float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 				float resultado=alturaInicial-sum1/10+sum2/10;
-				alturaFinal.setText(String.valueOf(resultado));
+				alturaFinal.setText(String.format("%.3f",resultado));
 				
 			}catch(Exception ec){
 				System.out.println("error en función agregaFila: "+ec.getMessage());
@@ -598,7 +598,7 @@ public class controladorInterfaz implements Initializable{
 						float b=consta[5]; //constante del aparato
 						float c=consta[2];//area de la parte de constantes del equipo
 						float res=a*b/c;
-						sigmaMenor.setText(String.valueOf(res));
+						sigmaMenor.setText(String.format("%.3f",res));
 					}catch(Exception e){
 						
 					}
@@ -631,7 +631,7 @@ public class controladorInterfaz implements Initializable{
 					try{
 						float camp2=Float.parseFloat(segundoCampoe.getText());
 						float camp3=Float.parseFloat(tercerCampoe.getText());
-						((TextField)this.infoResultados.getChildren().get(11)).setText(String.valueOf(((camp3-camp2)/(1+camp2))*100));
+						((TextField)this.infoResultados.getChildren().get(11)).setText(String.format("%.3f",((camp3-camp2)/(1+camp2))*100));
 						
 					}catch(Exception e){
 						System.out.println("Error en segundoCampoe:"+e.getMessage());
@@ -641,7 +641,7 @@ public class controladorInterfaz implements Initializable{
 					try{
 						float camp2=Float.parseFloat(segundoCampoe.getText());
 						float camp3=Float.parseFloat(tercerCampoe.getText());
-						((TextField)this.infoResultados.getChildren().get(11)).setText(String.valueOf(((camp3-camp2)/(1+camp2))*100));
+						((TextField)this.infoResultados.getChildren().get(11)).setText(String.format("%.3f",((camp3-camp2)/(1+camp2))*100));
 					}catch(Exception e){
 						System.out.println("Error en tercerCampoe:"+e.getMessage());
 					}
@@ -672,7 +672,7 @@ public class controladorInterfaz implements Initializable{
 				//e de la tabla de resultados
 				TextField e=(TextField)descarga.getChildren().get(indice+3);
 				float temp=Float.parseFloat(((TextField)descarga.getChildren().get(indice+2)).getText());
-				e.setText(String.valueOf(temp/antPrueba[4]));
+				e.setText(String.format("%.3f",temp/antPrueba[4]));
 				//delta e de la tabla de resultados
 				TextField deltaE=(TextField)descarga.getChildren().get(16);
 				if(indice!=12){
@@ -680,7 +680,7 @@ public class controladorInterfaz implements Initializable{
 					float a=Float.parseFloat(((TextField)descarga.getChildren().get((indice+4)-10)).getText());
 					float b=Float.parseFloat(((TextField)descarga.getChildren().get((indice+4)-1)).getText());
 					float temp1=Math.abs(a-b);
-					e1.setText(String.valueOf(temp1));
+					e1.setText(String.format("%.3f",temp1));
 				}
 				TextField deltaEcuacion=(TextField)descarga.getChildren().get(indice+5);
 				float deltae=(Float.parseFloat(((TextField)descarga.getChildren().get((indice+5)-1)).getText()));
@@ -706,7 +706,7 @@ public class controladorInterfaz implements Initializable{
 		vv.textProperty().addListener((observable,oldValue,newValue)->{
 			try{TextField e=(TextField)descarga.getChildren().get(indice+1);
 			float temp=Float.parseFloat(vv.getText());
-			e.setText(String.valueOf(temp/antPrueba[4]));
+			e.setText(String.format("%.3f",temp/antPrueba[4]));
 			
 			TextField deltaE=(TextField)descarga.getChildren().get(16);
 			try{
@@ -721,7 +721,7 @@ public class controladorInterfaz implements Initializable{
 					temp1=Math.abs(a-b);
 				else
 					temp1=a-b;
-				e1.setText(String.valueOf(temp1));
+				e1.setText(String.format("%.3f",temp1));
 			}
 			}catch(Exception exception){}
 			
@@ -745,7 +745,7 @@ public class controladorInterfaz implements Initializable{
 				TextField a=(TextField)descarga.getChildren().get(i-1);
 				TextField b=(TextField)descarga.getChildren().get(i-9);
 				if (!(a.getText().isEmpty()||b.getText().isEmpty()))
-					res.setText(String.valueOf( (Float.parseFloat(a.getText()))+(Float.parseFloat(b.getText()))  ) );
+					res.setText(String.format("%.3f", (Float.parseFloat(a.getText()))+(Float.parseFloat(b.getText()))  ) );
 			}
 		
 		 }catch(Exception e){
@@ -844,10 +844,10 @@ public void initialize() {
 		    try{
 		    	consta[0]=Float.parseFloat(((String)diametro.getText()));	
 		    	consta[2]=PI*consta[0]*consta[0]/4; 
-				area.setText(String.valueOf(consta[2]));
+				area.setText(String.format("%.3f",consta[2]));
 				reactiva(altura); //calcula el volumen con el area nueva, gm(clasificación), volVm
 				//infoResultados
-				areaAnillo.setText(String.valueOf(consta[2]));
+				areaAnillo.setText(String.format("%.3f",consta[2]));
 				
 				//parte de sigmaMenor en resultados... se necesita en el calculo el area, por lo tanto, para no agregar un listenner al area, desde el mismo calculo de esta agrego nuevos calculos
 				//Función que crea listenners en campos repetidos variando el campo anterior de este
@@ -878,7 +878,7 @@ public void initialize() {
 				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
 				float alturaIni=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 				float resultado=alturaIni-sum1/10+sum2/10;
-				alturaFinal.setText(String.valueOf(resultado));
+				alturaFinal.setText(String.format("%.3f",resultado));
 				graficaResultados();
 		    }catch (Exception e) {
 				// TODO: handle exception
@@ -890,11 +890,11 @@ public void initialize() {
 			try{
 				consta[1]=Float.parseFloat(((String)altura.getText()));
 				consta[3]=consta[1]*consta[2];
-				volumen.setText(String.valueOf(consta[3]));
-				volVm.setText(String.valueOf(consta[3]));
-				gm.setText(String.valueOf(antPrueba[1]/consta[3]));
+				volumen.setText(String.format("%.3f",consta[3]));
+				volVm.setText(String.format("%.3f",consta[3]));
+				gm.setText(String.format("%.3f",antPrueba[1]/consta[3]));
 				//infoResultados
-				alturaInicial.setText(String.valueOf(consta[1]));
+				alturaInicial.setText(String.format("%.3f",consta[1]));
 				reactiva(wma);
 				reactiva(wmsa);
 			}catch (Exception e) {
@@ -943,7 +943,7 @@ public void initialize() {
 			try{
 				humIni[0]=Float.parseFloat(((String)wm.getText()));
 				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
-				wpercent.setText(String.valueOf(humIni[3]));
+				wpercent.setText(String.format("%.3f",humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
@@ -954,7 +954,7 @@ public void initialize() {
 			try{
 				humIni[1]=Float.parseFloat(((String)ws.getText()));
 				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
-				wpercent.setText(String.valueOf(humIni[3]));
+				wpercent.setText(String.format("%.3f",humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -964,7 +964,7 @@ public void initialize() {
 			try{
 				humIni[2]=Float.parseFloat(((String)wf.getText()));
 				humIni[3]=((humIni[0]-humIni[1])/(humIni[1]-humIni[2]))*100;
-				wpercent.setText(String.valueOf(humIni[3]));
+				wpercent.setText(String.format("%.3f",humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("error, letras");
@@ -988,37 +988,37 @@ public void initialize() {
 			try{
 				antPrueba[0]=Float.parseFloat(((String)wma.getText()));
 				antPrueba[1]=antPrueba[0]-consta[4];
-				wmnatural.setText( String.valueOf(antPrueba[1]));
+				wmnatural.setText( String.format("%.3f",antPrueba[1]));
 				antPrueba[3]=antPrueba[1]/(1+antPrueba[2]/100);
-				wmnaturals.setText(String.valueOf(antPrueba[3]));
-				gm.setText(String.valueOf(antPrueba[1]/consta[3]));//modifica valor en clasificacion 
+				wmnaturals.setText(String.format("%.3f",antPrueba[3]));
+				gm.setText(String.format("%.3f",antPrueba[1]/consta[3]));//modifica valor en clasificacion 
 				
 				float ss=Float.parseFloat(((String)Ss.getText()));
 				antPrueba[4]=antPrueba[3]/ss;
-				volmnatural.setText(String.valueOf(antPrueba[4]));
+				volmnatural.setText(String.format("%.3f",antPrueba[4]));
 				antPrueba[5]=antPrueba[3]*antPrueba[2]/100;//Peso(Ww)
-				pesoWw.setText(String.valueOf(antPrueba[5]));
+				pesoWw.setText(String.format("%.3f",antPrueba[5]));
 				antPrueba[6]=consta[3];
 				antPrueba[7]=antPrueba[6]-antPrueba[4];
-				volVv.setText(String.valueOf(antPrueba[7]));
+				volVv.setText(String.format("%.3f",antPrueba[7]));
 				antPrueba[8]=antPrueba[7]/antPrueba[4];
-				vacios.setText(String.valueOf(antPrueba[8]));
+				vacios.setText(String.format("%.3f",antPrueba[8]));
 				antPrueba[9]=(antPrueba[5]/antPrueba[7])*100;
-				gsat.setText(String.valueOf(antPrueba[9]));
-				volVm.setText(String.valueOf(consta[3]));
+				gsat.setText(String.format("%.3f",antPrueba[9]));
+				volVm.setText(String.format("%.3f",consta[3]));
 				
 				despPrueba[2]=consta[4]+antPrueba[3];
-				wmsanillo.setText(String.valueOf(despPrueba[2]));
+				wmsanillo.setText(String.format("%.3f",despPrueba[2]));
 				
 				//infoResultados
-				vs.setText(String.valueOf(antPrueba[4]));
+				vs.setText(String.format("%.3f",antPrueba[4]));
 				
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
 				}
 				//Vv de la tabla de resultados
 				TextField Vv = (TextField)descarga.getChildren().get(14);
-				Vv.setText(String.valueOf(antPrueba[7]));
+				Vv.setText(String.format("%.3f",antPrueba[7]));
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
 				}
@@ -1027,7 +1027,7 @@ public void initialize() {
 				for (int i=15;i<descarga.getChildren().size();i+=9){
 					TextField e=(TextField)descarga.getChildren().get(i);
 					float temp=Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText());
-					e.setText(String.valueOf(temp/antPrueba[4]));
+					e.setText(String.format("%.3f",temp/antPrueba[4]));
 				}
 				//delta e de la tabla de resultados
 				TextField deltaE=(TextField)descarga.getChildren().get(16);
@@ -1037,7 +1037,7 @@ public void initialize() {
 					float a=Float.parseFloat(((TextField)descarga.getChildren().get(i-10)).getText());
 					float b=Float.parseFloat(((TextField)descarga.getChildren().get(i-1)).getText());
 					float temp=Math.abs(a-b);
-					e.setText(String.valueOf(temp));
+					e.setText(String.format("%.3f",temp));
 				}
 				}catch(Exception exception){}
 				
@@ -1062,21 +1062,21 @@ public void initialize() {
 			try{
 				despPrueba[0]=Float.parseFloat(((String)wmsa.getText()));
 				despPrueba[1]=despPrueba[0]-consta[4];
-				wmsat.setText(String.valueOf(despPrueba[1]));
+				wmsat.setText(String.format("%.3f",despPrueba[1]));
 				despPrueba[2]=consta[4]+antPrueba[3];
-				wmsanillo.setText(String.valueOf(despPrueba[2]));
+				wmsanillo.setText(String.format("%.3f",despPrueba[2]));
 				despPrueba[10]=despPrueba[0]-despPrueba[2];
-				wamuestrasat.setText(String.valueOf(despPrueba[10]));
+				wamuestrasat.setText(String.format("%.3f",despPrueba[10]));
 				despPrueba[3]=antPrueba[3];
-				wms.setText(String.valueOf(despPrueba[3]));
+				wms.setText(String.format("%.3f",despPrueba[3]));
 				despPrueba[4]=((despPrueba[1]-despPrueba[3])/despPrueba[3])*100;
-				wper.setText(String.valueOf(despPrueba[4]));
+				wper.setText(String.format("%.3f",despPrueba[4]));
 				despPrueba[6]=despPrueba[3]/Float.parseFloat(((String)Ss.getText()));
-				volsol.setText(String.valueOf(despPrueba[6]));
+				volsol.setText(String.format("%.3f",despPrueba[6]));
 				despPrueba[5]=consta[2]*(Float.parseFloat(((TextField)infoResultados.getChildren().get(5)).getText()));//vinculo con resultados
-				voltotmsat.setText(String.valueOf(despPrueba[5]));
+				voltotmsat.setText(String.format("%.3f",despPrueba[5]));
 				despPrueba[7]=despPrueba[5]-despPrueba[6];
-				volva.setText(String.valueOf(despPrueba[7]));
+				volva.setText(String.format("%.3f",despPrueba[7]));
 				float maximo=Float.parseFloat(((TextField)descarga.getChildren().get(96)).getText());
 				for (int i=105;i<152;i+=9){
 					if (maximo<Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText())){
@@ -1086,8 +1086,8 @@ public void initialize() {
 				
 				despPrueba[8]=maximo;//datos de resultados
 				despPrueba[9]=(despPrueba[10]/despPrueba[7])*100;
-				va.setText(String.valueOf(despPrueba[8]));
-				gpercent.setText(String.valueOf(despPrueba[9]));
+				va.setText(String.format("%.3f",despPrueba[8]));
+				gpercent.setText(String.format("%.3f",despPrueba[9]));
 			}catch(Exception e){
 				System.out.println("Error en wmsa: "+e.getMessage());
 			}
@@ -1151,11 +1151,11 @@ public void initialize() {
 			try{
 				float c=Float.parseFloat(((TextField)in1.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i2.getText()));
-				((TextField)in2.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)in2.getChildren().get(5)).setText(String.format("%.3f",sum));
 				reactiva(i3);reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(27)).setText(i2.getText());
 				
-				((TextField)descarga.getChildren().get(144)).setText(String.valueOf(Float.parseFloat(i2.getText())*-1));
+				((TextField)descarga.getChildren().get(144)).setText(String.format("%.3f",Float.parseFloat(i2.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -1173,10 +1173,10 @@ public void initialize() {
 			try{
 				float c=Float.parseFloat(((TextField)in2.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i3.getText()));
-				((TextField)in3.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)in3.getChildren().get(5)).setText(String.format("%.3f",sum));
 				reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(36)).setText(i3.getText());
-				((TextField)descarga.getChildren().get(135)).setText(String.valueOf(Float.parseFloat(i3.getText())*-1));
+				((TextField)descarga.getChildren().get(135)).setText(String.format("%.3f",Float.parseFloat(i3.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -1194,10 +1194,10 @@ public void initialize() {
 			try{
 				float c=Float.parseFloat(((TextField)in3.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i4.getText()));
-				((TextField)in4.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)in4.getChildren().get(5)).setText(String.format("%.3f",sum));
 				reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(45)).setText(i4.getText());
-				((TextField)descarga.getChildren().get(126)).setText(String.valueOf(Float.parseFloat(i4.getText())*-1));
+				((TextField)descarga.getChildren().get(126)).setText(String.format("%.3f",Float.parseFloat(i4.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -1215,10 +1215,10 @@ public void initialize() {
 			try{
 				float c=Float.parseFloat(((TextField)in4.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i5.getText()));
-				((TextField)in5.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)in5.getChildren().get(5)).setText(String.format("%.3f",sum));
 				reactiva(i6);reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(54)).setText(i5.getText());
-				((TextField)descarga.getChildren().get(117)).setText(String.valueOf(Float.parseFloat(i5.getText())*-1));
+				((TextField)descarga.getChildren().get(117)).setText(String.format("%.3f",Float.parseFloat(i5.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -1235,10 +1235,10 @@ public void initialize() {
 			try{
 				float c=Float.parseFloat(((TextField)in5.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i6.getText()));
-				((TextField)in6.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)in6.getChildren().get(5)).setText(String.format("%.3f",sum));
 				reactiva(i7);reactiva(i8);
 				((TextField)descarga.getChildren().get(63)).setText(i6.getText());
-				((TextField)descarga.getChildren().get(108)).setText(String.valueOf(Float.parseFloat(i6.getText())*-1));
+				((TextField)descarga.getChildren().get(108)).setText(String.format("%.3f",Float.parseFloat(i6.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -1256,10 +1256,10 @@ public void initialize() {
 			try{
 				float c=Float.parseFloat(((TextField)in6.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i7.getText()));
-				((TextField)in7.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)in7.getChildren().get(5)).setText(String.format("%.3f",sum));
 				reactiva(i8);
 				((TextField)descarga.getChildren().get(72)).setText(i7.getText());
-				((TextField)descarga.getChildren().get(99)).setText(String.valueOf(Float.parseFloat(i7.getText())*-1));
+				((TextField)descarga.getChildren().get(99)).setText(String.format("%.3f",Float.parseFloat(i7.getText())*-1));
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
 					auxSigmaMenor(i);
@@ -1277,9 +1277,9 @@ public void initialize() {
 			try{
 				float c=Float.parseFloat(((TextField)in7.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i8.getText()));
-				((TextField)in8.getChildren().get(5)).setText(String.valueOf(sum));
+				((TextField)in8.getChildren().get(5)).setText(String.format("%.3f",sum));
 				((TextField)descarga.getChildren().get(81)).setText(i8.getText());
-				((TextField)descarga.getChildren().get(90)).setText(String.valueOf(Float.parseFloat(i8.getText())*-1));
+				((TextField)descarga.getChildren().get(90)).setText(String.format("%.3f",Float.parseFloat(i8.getText())*-1));
 				auxSumaDeltaSigma();
 				
 				for(int i=11;i<descarga.getChildren().size();i+=9){
@@ -1321,13 +1321,13 @@ public void initialize() {
 void reactiva(TextField t){
 	if(!(t.getText().equals(" ")|| t.getText().isEmpty())){
 		t.setText(t.getText()+" ");
-		t.setText(String.valueOf(Float.parseFloat(t.getText())));
+		t.setText(String.format("%.3f",Float.parseFloat(t.getText())));
 	}
 }
 void auxCargaTotal(GridPane in,TextField cargaTotal){
 		TextField presTemp=(TextField)in.getChildren().get(7); 
 		float res=(Float.parseFloat(cargaTotal.getText())*(consta[5]/consta[2]));
-		presTemp.setText(String.valueOf(res));
+		presTemp.setText(String.format("%.3f",res));
 }
 
  @FXML void actualiza(MouseEvent e){
@@ -1347,7 +1347,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 		float b=consta[5]; //constante del aparato
 		float c=consta[2];//area de la parte de constantes del equipo
 		float res=a*b/c;
-		sigmaMenor.setText(String.valueOf(res));
+		sigmaMenor.setText(String.format("%.3f",res));
 		}catch(Exception e){
 			System.out.println("error en auxSigmaMenor");
 		}
@@ -1380,11 +1380,11 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 						
 						float rest=ini-(Float.parseFloat(t.getText()));
 						
-						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.valueOf(rest));
+						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.format("%.3f",rest));
 						((TextField)temp.get(1).getChildren().get(tama-2)).setEditable(false);
 						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
 						
-						((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.valueOf(rest));
+						((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.format("%.3f",rest));
 						
 					}catch(Exception ec){
 						System.out.println(ec.getMessage());
@@ -1450,29 +1450,29 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 
 					//agregar elementos 
 					switch(carga.getId()){
-						case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.valueOf(maximo)); 
-										((TextField)descarga.getChildren().get(22)).setText(String.valueOf(maximo));
+						case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.format("%.3f",maximo)); 
+										((TextField)descarga.getChildren().get(22)).setText(String.format("%.3f",maximo));
 										break;
-						case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.valueOf(minimo));
-										((TextField)descarga.getChildren().get(31)).setText(String.valueOf(minimo));
+						case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.format("%.3f",minimo));
+										((TextField)descarga.getChildren().get(31)).setText(String.format("%.3f",minimo));
 										break;
-						case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.valueOf(maximo));
-										((TextField)descarga.getChildren().get(40)).setText(String.valueOf(maximo));
+						case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.format("%.3f",maximo));
+										((TextField)descarga.getChildren().get(40)).setText(String.format("%.3f",maximo));
 										break;
-						case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.valueOf(maximo));
-										((TextField)descarga.getChildren().get(49)).setText(String.valueOf(maximo));
+						case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.format("%.3f",maximo));
+										((TextField)descarga.getChildren().get(49)).setText(String.format("%.3f",maximo));
 										break;
-						case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.valueOf(maximo));
-										((TextField)descarga.getChildren().get(58)).setText(String.valueOf(maximo));
+						case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.format("%.3f",maximo));
+										((TextField)descarga.getChildren().get(58)).setText(String.format("%.3f",maximo));
 										break;
-						case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.valueOf(maximo));
-										((TextField)descarga.getChildren().get(67)).setText(String.valueOf(maximo));
+						case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.format("%.3f",maximo));
+										((TextField)descarga.getChildren().get(67)).setText(String.format("%.3f",maximo));
 										break;
-						case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.valueOf(maximo));
-										((TextField)descarga.getChildren().get(76)).setText(String.valueOf(maximo));
+						case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.format("%.3f",maximo));
+										((TextField)descarga.getChildren().get(76)).setText(String.format("%.3f",maximo));
 										break;
-						case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.valueOf(maximo));
-										((TextField)descarga.getChildren().get(85)).setText(String.valueOf(maximo));
+						case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.format("%.3f",maximo));
+										((TextField)descarga.getChildren().get(85)).setText(String.format("%.3f",maximo));
 										break;
 						default:break;
 					}
@@ -1493,7 +1493,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
 					float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 					float resultado=alturaInicial-sum1/10+sum2/10;
-					alturaFinal.setText(String.valueOf(resultado));
+					alturaFinal.setText(String.format("%.3f",resultado));
 				}catch(Exception ec){
 					System.out.println("Error en funcion abrir: "+ec.getMessage());
 				}
@@ -1536,7 +1536,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 			else
 				res=arriba-((deltah/10)*consta[2]);
 			
-			((TextField)descarga.getChildren().get(indice)).setText(String.valueOf(res));
+			((TextField)descarga.getChildren().get(indice)).setText(String.format("%.3f",res));
 		}catch(Exception e){
 			System.out.println("error en funcion auxVv: "+e.getMessage());
 		}}
@@ -1554,8 +1554,8 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				if (d2!=null)
 					((TextField)d2.getChildren().get(7)).setText(c.getText());
 				float res = - Float.parseFloat( ((TextField)d.getChildren().get(7)).getText() ) + Float.parseFloat(c.getText());
-				((TextField)d.getChildren().get(16)).setText(String.valueOf(res));
-				((TextField)d.getChildren().get(17)).setText(String.valueOf(res));
+				((TextField)d.getChildren().get(16)).setText(String.format("%.3f",res));
+				((TextField)d.getChildren().get(17)).setText(String.format("%.3f",res));
 				
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
@@ -1572,7 +1572,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
 				float alturaInicial=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 				float resultado=alturaInicial-sum1/10+sum2/10;
-				alturaFinal.setText(String.valueOf(resultado));
+				alturaFinal.setText(String.format("%.3f",resultado));
 				graficaResultados();
 			}catch(Exception e){
 				System.out.println(e.getMessage());
