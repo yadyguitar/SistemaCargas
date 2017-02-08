@@ -415,8 +415,17 @@ public class controladorInterfaz implements Initializable{
 		            default : break;
 	            }
 	            
-	           cont++;
+	            
+	            cont++;
 			}
+			reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga1.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga2.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga3.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga4.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga5.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga6.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
 	    } catch (Exception e) {
 	        System.out.println("Error en función abrir: "+e.getMessage());
 	    }
@@ -877,6 +886,7 @@ public void initialize() {
 				auxCargaTotal(in7,cargaTotal7);
 				auxCargaTotal(in8,cargaTotal8);
 				
+				
 				float sum1=0;
 				float sum2=0;
 				for (int i=13;i<=154;i+=9){
@@ -885,6 +895,7 @@ public void initialize() {
 					else
 						sum1+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
 				}
+				System.out.println("aqui");
 				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
 				float alturaIni=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 				float resultado=alturaIni-sum1/10+sum2/10;
@@ -1573,9 +1584,10 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				((TextField)d.getChildren().get(16)).setText(String.format("%.3f",res));
 				((TextField)d.getChildren().get(17)).setText(String.format("%.3f",res));
 				
+				try{
 				for (int i=23;i<descarga.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
-				}
+				}}catch(Exception e){}
 
 				float sum1=0;
 				float sum2=0;
@@ -1590,6 +1602,8 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				float resultado=alturaInicial-sum1/10+sum2/10;
 				alturaFinal.setText(String.format("%.3f",resultado));
 				graficaResultados();
+				
+				
 			}catch(Exception e){
 				System.out.println("Error en función descargas: "+e.getMessage());
 			}
