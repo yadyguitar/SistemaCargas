@@ -212,6 +212,7 @@ public class controladorInterfaz implements Initializable{
 				float maximo = Float.parseFloat(((TextField)tabla.getChildren().get(11)).getText());
 				float minimo =Float.parseFloat(((TextField)tabla.getChildren().get(11)).getText());
 				for (int i=11;i<tabla.getChildren().size();i+=6){
+					if(!((TextField)tabla.getChildren().get(i)).getText().isEmpty()){
 					float temp=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
 					if(carga.getId().equals("carga2")){
 						if(minimo>temp){
@@ -222,7 +223,7 @@ public class controladorInterfaz implements Initializable{
 							maximo=temp;
 						}	
 					}
-					
+					}
 					
 				}
 				
@@ -915,7 +916,7 @@ public void initialize() {
 			try{
 				antPrueba[2]=Float.parseFloat((String)wpercent.getText());
 				hum.setText(wpercent.getText());
-				reactiva(wm);
+				reactiva(wma);
 				reactiva(Ss);
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -1364,6 +1365,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
 					float minimo =Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
 					for (int i=11;i<temp.get(1).getChildren().size();i+=6){
+						if(!((TextField)temp.get(1).getChildren().get(i)).getText().isEmpty()){
 						float temp1=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						if(carga.getId().equals("carga2")){
 							if(minimo>temp1){
@@ -1374,7 +1376,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 								maximo=temp1;
 							}	
 						}
-						
+						}
 						
 					}			
 
@@ -1420,7 +1422,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					float resultado=alturaInicial-sum1/10+sum2/10;
 					alturaFinal.setText(String.valueOf(resultado));
 				}catch(Exception ec){
-					System.out.println(ec.getMessage());
+					System.out.println("Error en funcion abrir: "+ec.getMessage());
 				}
 				});
 				
