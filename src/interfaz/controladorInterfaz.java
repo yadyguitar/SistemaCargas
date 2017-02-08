@@ -133,7 +133,7 @@ public class controladorInterfaz implements Initializable{
 				((TextField)tabla.getChildren().get(tam-1)).setText(String.format("%.3f",rest)); //faltaría condición de si no es "mm" multiplicarlo por 25.3
 				
 			}catch(Exception ec){
-				System.out.println(ec.getMessage());
+				System.out.println("Error en función agregaFila (mm): "+ec.getMessage());
 			}
 		});
 		
@@ -169,7 +169,7 @@ public class controladorInterfaz implements Initializable{
 					}
 				}
 			}catch(Exception ec){
-				System.out.println(ec.getMessage());
+				System.out.println("Error en función agregaFila (min): "+ec.getMessage());
 			}
 		});
 		
@@ -206,7 +206,7 @@ public class controladorInterfaz implements Initializable{
 					}
 				}
 			}catch(Exception ec){
-				System.out.println(ec.getMessage());
+				System.out.println("Error en agregaFila (def): "+ec.getMessage());
 			}
 				
 								
@@ -257,7 +257,9 @@ public class controladorInterfaz implements Initializable{
 				try{
 				for (int i=23;i<tablaResultados.getChildren().size();i+=9){
 					auxVv(i,Float.parseFloat((String)((TextField)tablaResultados.getChildren().get(i-1)).getText()));
-				}}catch(Exception ec){}
+				}}catch(Exception ec){
+					System.out.println("Error en función agregaFila (for->auxVv)"+ec.getMessage());
+				}
 				
 				float sum1=0;
 				float sum2=0;
@@ -416,7 +418,7 @@ public class controladorInterfaz implements Initializable{
 	           cont++;
 			}
 	    } catch (Exception e) {
-	        System.out.println(e.getMessage());
+	        System.out.println("Error en función abrir: "+e.getMessage());
 	    }
 	 }
 	
@@ -542,7 +544,7 @@ public class controladorInterfaz implements Initializable{
             
             fileWriter.close();
         } catch (IOException ex) {
-            System.out.println("errorcito");
+            System.out.println("Error en función SaveFile: "+ex.getMessage());
         }
          
     }
@@ -552,10 +554,8 @@ public class controladorInterfaz implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try{
-			
 			generaFilasResultados();
 			initialize();
-			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -587,7 +587,7 @@ public class controladorInterfaz implements Initializable{
 					try{
 						sigmaQ.setText(deltaQ.getText());
 					}catch(Exception e){
-						System.out.println("en funcion gteneraFilasResultados: "+e.getMessage() );
+						System.out.println("error en funcion generaFilasResultados (deltaQ): "+e.getMessage() );
 					}
 				});
 				
@@ -600,7 +600,7 @@ public class controladorInterfaz implements Initializable{
 						float res=a*b/c;
 						sigmaMenor.setText(String.format("%.3f",res));
 					}catch(Exception e){
-						
+						System.out.println("error en funcion generaFilasResultados (sigmaQ) : "+e.getMessage() );
 					}
 				});
 				
@@ -692,12 +692,14 @@ public class controladorInterfaz implements Initializable{
 					if(!((TextField)descarga.getChildren().get(indice)).getText().isEmpty())
 						reactiva((TextField)descarga.getChildren().get(indice+9));
 				}
-				}catch(Exception excep){}
+				}catch(Exception excep){
+					System.out.println("Error en listennersLectMicro (indice+9<152): "+excep.getMessage());
+				}
 				
 				
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println("Error en función listennersLectMicro");
+				System.out.println("Error en función listennersLectMicro"+e.getMessage());
 			}
 		});
 	}
@@ -723,7 +725,9 @@ public class controladorInterfaz implements Initializable{
 					temp1=a-b;
 				e1.setText(String.format("%.3f",temp1));
 			}
-			}catch(Exception exception){}
+			}catch(Exception exception){
+				System.out.println("Error en función auxE (deltaE)"+exception.getMessage());
+			}
 			
 			//delta ecuación
 			try{
@@ -733,9 +737,13 @@ public class controladorInterfaz implements Initializable{
 				float e1=(Float.parseFloat(((TextField)descarga.getChildren().get(15)).getText()));
 				deltaEcuacion.setText(String.valueOf (deltae/(1+ e1) ));
 				
-			}}catch(Exception exception){}
+			}}catch(Exception exception){
+				System.out.println("Error en función auxE (deltaE): "+exception.getMessage());
+			}
 			graficaResultados();
-			}catch(Exception e){}
+			}catch(Exception e){
+				System.out.println("Error en función auxE: "+e.getMessage());
+			}
 		});
 	}
 	 void auxSumaDeltaSigma(){
@@ -825,7 +833,9 @@ public void initialize() {
 		nombre.textProperty().addListener((observable,oldValue,newValue)->{
 		try{
 			name.setText(nombre.getText());
-		}catch(Exception e){}	
+		}catch(Exception e){
+			System.out.println("Error en función initialize (nombre): "+e.getMessage());
+		}	
 			
 		});
 		
@@ -882,7 +892,7 @@ public void initialize() {
 				graficaResultados();
 		    }catch (Exception e) {
 				// TODO: handle exception
-		    	System.out.println("error, letras");
+		    	System.out.println("error en función initialize (diametro): "+e.getMessage());
 			}
 		});
 		
@@ -899,9 +909,8 @@ public void initialize() {
 				reactiva(wmsa);
 			}catch (Exception e) {
 				// TODO: handle exception
-				System.out.println("error, letras");
+				System.out.println("error en función initialize (altura): "+e.getMessage());
 			}
-			System.out.println(consta[1]);
 		});
 		
 		pesoAnillo.textProperty().addListener((observable, oldValue, newValue)->{
@@ -910,7 +919,7 @@ public void initialize() {
 				reactiva(wma);
 				reactiva(wmsa);
 			}catch (Exception e) {
-				System.out.println("error, peso anillo"+e.getMessage());
+				System.out.println("error en función initialize (pesoAnillo): "+e.getMessage());
 			}
 		});
 		
@@ -933,7 +942,7 @@ public void initialize() {
 				
 				graficaResultados();
 			}catch(Exception e){
-				
+				System.out.println("error en función initialize (pesoAnillo): "+e.getMessage());
 			}
 		});
 		//////////////////////////////////////////////////////////////////////////////
@@ -946,7 +955,7 @@ public void initialize() {
 				wpercent.setText(String.format("%.3f",humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
-				System.out.println("error, letras");
+				System.out.println("error en función initialize (wm): "+e.getMessage());
 			}
 		});
 		
@@ -957,6 +966,8 @@ public void initialize() {
 				wpercent.setText(String.format("%.3f",humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
+				System.out.println("error en función initialize (ws): "+e.getMessage());
+
 			}
 		});
 		
@@ -967,6 +978,7 @@ public void initialize() {
 				wpercent.setText(String.format("%.3f",humIni[3]));
 			}catch (Exception e) {
 				// TODO: handle exception
+				System.out.println("error en función initialize (wf): "+e.getMessage());
 				System.out.println("error, letras");
 			}
 		});
@@ -980,6 +992,7 @@ public void initialize() {
 				reactiva(Ss);
 			}catch (Exception e) {
 				// TODO: handle exception
+				System.out.println("error en función initialize (wpercent): "+e.getMessage());
 			}
 		});
 		////////////////////////////////////////////////////////////////////
@@ -1054,6 +1067,8 @@ public void initialize() {
 				graficaResultados();
 			}catch (Exception e) {
 				// TODO: handle exception
+				System.out.println("error en función initialize (wma): "+e.getMessage());
+
 			}
 		});
 	
@@ -1089,7 +1104,8 @@ public void initialize() {
 				va.setText(String.format("%.3f",despPrueba[8]));
 				gpercent.setText(String.format("%.3f",despPrueba[9]));
 			}catch(Exception e){
-				System.out.println("Error en wmsa: "+e.getMessage());
+				System.out.println("error en función initialize (wmsa): "+e.getMessage());
+				//System.out.println("Error en wmsa: "+e.getMessage());
 			}
 		});
 		
@@ -1116,14 +1132,14 @@ public void initialize() {
 		
 		
 		
-		cargaTotal1.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in1,cargaTotal1);	}catch(Exception e){}});
-		cargaTotal2.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in2,cargaTotal2);	}catch(Exception e){}});
-		cargaTotal3.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in3,cargaTotal3);	}catch(Exception e){}});
-		cargaTotal4.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in4,cargaTotal4);	}catch(Exception e){}});
-		cargaTotal5.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in5,cargaTotal5);	}catch(Exception e){}});
-		cargaTotal6.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in6,cargaTotal6);	}catch(Exception e){}});
-		cargaTotal7.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in7,cargaTotal7);	}catch(Exception e){}});
-		cargaTotal8.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in8,cargaTotal8);	}catch(Exception e){}});
+		cargaTotal1.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in1,cargaTotal1);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal1): "+e.getMessage());}});
+		cargaTotal2.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in2,cargaTotal2);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal2): "+e.getMessage());}});
+		cargaTotal3.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in3,cargaTotal3);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal3): "+e.getMessage());}});
+		cargaTotal4.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in4,cargaTotal4);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal4): "+e.getMessage());}});
+		cargaTotal5.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in5,cargaTotal5);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal5): "+e.getMessage());}});
+		cargaTotal6.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in6,cargaTotal6);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal6): "+e.getMessage());}});
+		cargaTotal7.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in7,cargaTotal7);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal7): "+e.getMessage());}});
+		cargaTotal8.textProperty().addListener((observable,oldValue,newValue)->{try{auxCargaTotal(in8,cargaTotal8);	}catch(Exception e){System.out.println("error en función initialize (cargaTotal8): "+e.getMessage());}});
 	
 		i1.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
@@ -1144,7 +1160,8 @@ public void initialize() {
 				graficaResultados();
 				////////////////////////////
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("error en función initialize (i1): "+e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 		});
 		i2.textProperty().addListener((observable,oldValue,newValue)->{
@@ -1165,7 +1182,8 @@ public void initialize() {
 				}
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("error en función initialize (i2): "+e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 		});
 		
@@ -1186,7 +1204,8 @@ public void initialize() {
 				}
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("error en función initialize (i3): "+e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 		});
 		
@@ -1207,7 +1226,8 @@ public void initialize() {
 				}
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("error en función initialize (i4): "+e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 		});
 		
@@ -1228,7 +1248,8 @@ public void initialize() {
 				}
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("error en función initialize (i5): "+e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 		});
 		i6.textProperty().addListener((observable,oldValue,newValue)->{
@@ -1248,7 +1269,8 @@ public void initialize() {
 				}
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("error en función initialize (i6): "+e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 		});
 		
@@ -1269,7 +1291,8 @@ public void initialize() {
 				}
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("error en función initialize (i7): "+e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 		});
 		
@@ -1290,6 +1313,7 @@ public void initialize() {
 				}
 				graficaResultados();
 			}catch(Exception e){
+				System.out.println("error en función initialize (i8): "+e.getMessage());
 				System.out.println(e.getMessage());
 			}
 		});
@@ -1334,7 +1358,6 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 
 	 TitledPane cargaTemporal=(TitledPane)e.getSource();
 	SplitPane splitTemporal=(SplitPane)cargaTemporal.getContent();
-	System.out.println(splitTemporal);
 	splitTemporal.autosize();
  }
  
@@ -1349,7 +1372,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 		float res=a*b/c;
 		sigmaMenor.setText(String.format("%.3f",res));
 		}catch(Exception e){
-			System.out.println("error en auxSigmaMenor");
+			System.out.println("error en función auxSigmaMenor: "+e.getMessage());
 		}
  	}
 	void auxAbrirCargas( TitledPane carga, XYChart.Series s,Scanner scanner,String []linea){
@@ -1357,10 +1380,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 		insertarCadena(temp.get(0),linea);
 		String textfile=scanner.nextLine();
         linea=textfile.split(";");
-        
-        
 		int tam=linea.length;
-	    
 		int tamactual=(temp.get(1).getChildren().size()-1)-6;
 		System.out.println(tamactual);
 		if (tam>6){
@@ -1377,17 +1397,13 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				t.textProperty().addListener((observable,lastValue,newValue)->{
 					try{
 						float ini=Float.parseFloat(((TextField)temp.get(1).getChildren().get(7)).getText());
-						
 						float rest=ini-(Float.parseFloat(t.getText()));
-						
 						((TextField)temp.get(1).getChildren().get(tama-2)).setText(String.format("%.3f",rest));
 						((TextField)temp.get(1).getChildren().get(tama-2)).setEditable(false);
 						((TextField)temp.get(1).getChildren().get(tama-1)).setEditable(false);
-						
 						((TextField)temp.get(1).getChildren().get(tama-1)).setText(String.format("%.3f",rest));
-						
 					}catch(Exception ec){
-						System.out.println(ec.getMessage());
+						System.out.println("error en función auxAbrirCargas (t): "+ec.getMessage());
 					}
 					
 				});
@@ -1414,7 +1430,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 						s.getData().add(new XYChart.Data(m,df));
 					}
 				}catch(Exception ec){
-					System.out.println(ec.getMessage());
+					System.out.println("error en función auxAbrirCargas (tiempo): "+ec.getMessage());
 				}
 				});
 				//el tam de los nodos, tienen un elemento de mas, quien sabe porque :I
@@ -1480,7 +1496,9 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					try{
 						for (int i=23;i<descarga.getChildren().size();i+=9){
 							auxVv(i,Float.parseFloat((String)((TextField)descarga.getChildren().get(i-1)).getText()));
-						}}catch(Exception ec){}
+						}}catch(Exception ec){
+							System.out.println("error en función auxAbrirCargas (for->auxVv): "+ec.getMessage());
+						}
 					
 					float sum1=0;
 					float sum2=0;
@@ -1495,11 +1513,9 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					float resultado=alturaInicial-sum1/10+sum2/10;
 					alturaFinal.setText(String.format("%.3f",resultado));
 				}catch(Exception ec){
-					System.out.println("Error en funcion abrir: "+ec.getMessage());
+					System.out.println("error en función auxAbrirCargas (def): "+ec.getMessage());
 				}
 				});
-				
-				
 				tam-=6;
 			}
 		}
@@ -1575,7 +1591,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				alturaFinal.setText(String.format("%.3f",resultado));
 				graficaResultados();
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				System.out.println("Error en función descargas: "+e.getMessage());
 			}
 			
 		});
