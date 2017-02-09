@@ -329,8 +329,8 @@
 	       					 </TitledPane>
 	       				<TitledPane  text="Curva de Compresibilidad"  >
            					<LineChart fx:id="curvaCompresibilidad" prefHeight="800" >
-			   					<xAxis><NumberAxis side="BOTTOM" /></xAxis>
-								<yAxis><NumberAxis   side="LEFT" /></yAxis>
+			   					<xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+								<yAxis><NumberAxis autoRanging="false" upperBound="1" lowerBound="0.8" tickUnit="0.02" side="LEFT" /></yAxis>
    							</LineChart>
        				</TitledPane>
 	                </VBox>

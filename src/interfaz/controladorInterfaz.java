@@ -60,7 +60,7 @@ public class controladorInterfaz implements Initializable{
 	
 	@FXML GridPane infoResultados;
 	@FXML GridPane descarga;
-	@FXML LineChart<Number,Number> curvaCompresibilidad;
+	@FXML LineChart<String,Number> curvaCompresibilidad;
 	
 	@FXML NumberAxis numberaxis; 
 	static XYChart.Series s1 = new XYChart.Series<>();
@@ -302,11 +302,11 @@ public class controladorInterfaz implements Initializable{
 			if (i>=92){
 				float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				resDescarga.getData().add(new XYChart.Data(descargaX,descargaY));
+				resDescarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),descargaY));
 			}else{
 				float cargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float cargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				resCarga.getData().add(new XYChart.Data(cargaX,cargaY));
+				resCarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),cargaY));
 			}
 		}
 	}
