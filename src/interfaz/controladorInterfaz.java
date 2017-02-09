@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.LineChart.SortingPolicy;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -60,6 +62,7 @@ public class controladorInterfaz implements Initializable{
 	@FXML GridPane descarga;
 	@FXML LineChart<Number,Number> curvaCompresibilidad;
 	
+	@FXML NumberAxis numberaxis; 
 	static XYChart.Series s1 = new XYChart.Series<>();
 	static XYChart.Series s2 = new XYChart.Series<>();
 	static XYChart.Series s3 = new XYChart.Series<>();
@@ -565,9 +568,11 @@ public class controladorInterfaz implements Initializable{
 		try{
 			generaFilasResultados();
 			initialize();
+	
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
+	
 				
 	}
 	
@@ -838,7 +843,10 @@ public void initialize() {
 		TextField cargaTotal8=(TextField)in8.getChildren().get(5);
 		/////////////////////////////////////
 		//Los listener se aplican a los input, al cambiar alguno, modificaran los cálculos
-		//Listener Ss en clasificación
+		//Listener Ss en clasificación...
+		
+		
+		
 		nombre.textProperty().addListener((observable,oldValue,newValue)->{
 		try{
 			name.setText(nombre.getText());

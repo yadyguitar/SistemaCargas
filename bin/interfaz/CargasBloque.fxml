@@ -75,7 +75,7 @@
         				</GridPane>
 				</GridPane>
 				<LineChart  >
-   					<xAxis><NumberAxis label="deform, mm"  TickUnit="100" lowerBound="0.01"   side="BOTTOM" /></xAxis>
+   					<xAxis><NumberAxis  label="deform, mm"  TickUnit="100" lowerBound="0.01"   side="BOTTOM" /></xAxis>
 					<yAxis><NumberAxis label="t, min"  lowerBound="0"   side="LEFT" /></yAxis>
    				</LineChart>
 	    </SplitPane>
