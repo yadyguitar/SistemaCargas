@@ -7,13 +7,11 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tab?>
-
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.XYChart?>
@@ -57,14 +55,14 @@
           		
           		</bottom>
           		</BorderPane>
-   				<!-- <ImageView
+   			<!--<ImageView
 	                fx:id="imageView"
 	                fitHeight="100"
 					fitWidth="150"
 	                pickOnBounds="false"
 	                preserveRatio="false">
 		            <image><Image url="@logo_uv.png" backgroundLoading="true"/></image>
-		        </ImageView> -->
+		         </ImageView> -->
 			</items>
   			</SplitPane>
             <TabPane prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" >
@@ -330,7 +328,7 @@
 	       				<TitledPane  text="Curva de Compresibilidad"  >
            					<LineChart fx:id="curvaCompresibilidad" prefHeight="800" >
 			   					<xAxis><CategoryAxis side="BOTTOM" /></xAxis>
-								<yAxis><NumberAxis autoRanging="false" upperBound="1" lowerBound="0.8" tickUnit="0.02" side="LEFT" /></yAxis>
+								<yAxis><NumberAxis autoRanging="false" upperBound="0.9" lowerBound="0.8" tickUnit="0.02" side="LEFT" /></yAxis>
    							</LineChart>
        				</TitledPane>
 	                </VBox>

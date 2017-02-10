@@ -304,6 +304,11 @@ public class controladorInterfaz implements Initializable{
 				float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
 				resDescarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),descargaY));
 			}else{
+				if(i==83){
+					float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
+					float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
+					resDescarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),descargaY));
+				}
 				float cargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float cargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
 				resCarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),cargaY));
