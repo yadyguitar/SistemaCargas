@@ -1168,7 +1168,7 @@ public void initialize() {
 		i1.textProperty().addListener((observable,oldValue,newValue)->{
 			try{
 				((TextField)in1.getChildren().get(5)).setText(i1.getText());
-				reactiva(i2);reactiva(i3);reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
+				reactiva(i2);
 				((TextField)descarga.getChildren().get(18)).setText(i1.getText());
 				auxSumaDeltaSigma();
 				for(int i=11;i<descarga.getChildren().size();i+=9){
@@ -1193,7 +1193,8 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in1.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i2.getText()));
 				((TextField)in2.getChildren().get(5)).setText(String.format("%.3f",sum));
-				reactiva(i3);reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
+				System.out.println("oldValue: "+oldValue+"newValue: "+newValue);
+				reactiva(i3);
 				((TextField)descarga.getChildren().get(27)).setText(i2.getText());
 				
 				((TextField)descarga.getChildren().get(144)).setText(String.format("%.3f",Float.parseFloat(i2.getText())*-1));
@@ -1216,7 +1217,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in2.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i3.getText()));
 				((TextField)in3.getChildren().get(5)).setText(String.format("%.3f",sum));
-				reactiva(i4);reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
+				reactiva(i4);
 				((TextField)descarga.getChildren().get(36)).setText(i3.getText());
 				((TextField)descarga.getChildren().get(135)).setText(String.format("%.3f",Float.parseFloat(i3.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1238,7 +1239,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in3.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i4.getText()));
 				((TextField)in4.getChildren().get(5)).setText(String.format("%.3f",sum));
-				reactiva(i5);reactiva(i6);reactiva(i7);reactiva(i8);
+				reactiva(i5);
 				((TextField)descarga.getChildren().get(45)).setText(i4.getText());
 				((TextField)descarga.getChildren().get(126)).setText(String.format("%.3f",Float.parseFloat(i4.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1260,7 +1261,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in4.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i5.getText()));
 				((TextField)in5.getChildren().get(5)).setText(String.format("%.3f",sum));
-				reactiva(i6);reactiva(i7);reactiva(i8);
+				reactiva(i6);
 				((TextField)descarga.getChildren().get(54)).setText(i5.getText());
 				((TextField)descarga.getChildren().get(117)).setText(String.format("%.3f",Float.parseFloat(i5.getText())*-1));
 				auxSumaDeltaSigma();
@@ -1281,7 +1282,7 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in5.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i6.getText()));
 				((TextField)in6.getChildren().get(5)).setText(String.format("%.3f",sum));
-				reactiva(i7);reactiva(i8);
+				reactiva(i7);
 				((TextField)descarga.getChildren().get(63)).setText(i6.getText());
 				((TextField)descarga.getChildren().get(108)).setText(String.format("%.3f",Float.parseFloat(i6.getText())*-1));
 				auxSumaDeltaSigma();
