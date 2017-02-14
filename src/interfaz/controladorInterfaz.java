@@ -26,9 +26,24 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import javafx.application.Application; 
+import javafx.embed.swing.SwingNode; 
+import javafx.scene.Scene; 
+import javafx.scene.chart.NumberAxis; 
+import javafx.scene.chart.XYChart; 
+import javafx.scene.control.SplitPane; 
+import javafx.stage.Stage; 
+import org.jfree.chart.ChartFactory; 
+import org.jfree.chart.ChartPanel; 
+import org.jfree.chart.JFreeChart; 
+import org.jfree.chart.plot.PlotOrientation; 
+import org.jfree.data.xy.XYSeries; 
+import org.jfree.data.xy.XYSeriesCollection; 
 
 public class controladorInterfaz implements Initializable{
 
@@ -60,19 +75,19 @@ public class controladorInterfaz implements Initializable{
 	
 	@FXML GridPane infoResultados;
 	@FXML GridPane descarga;
-	@FXML LineChart<String,Number> curvaCompresibilidad;
+	//@FXML LineChart<String,Number> curvaCompresibilidad;
+	@FXML StackPane graficaCompresibilidad;
 	
-	@FXML NumberAxis numberaxis; 
-	static XYChart.Series s1 = new XYChart.Series<>();
-	static XYChart.Series s2 = new XYChart.Series<>();
-	static XYChart.Series s3 = new XYChart.Series<>();
-	static XYChart.Series s4 = new XYChart.Series<>();
-	static XYChart.Series s5 = new XYChart.Series<>();
-	static XYChart.Series s6 = new XYChart.Series<>();
-	static XYChart.Series s7 = new XYChart.Series<>();
-	static XYChart.Series s8 = new XYChart.Series<>();
-	static XYChart.Series resCarga = new XYChart.Series<>();
-	static XYChart.Series resDescarga = new XYChart.Series<>();
+	static XYSeries s1 = new XYSeries("");
+	static XYSeries s2 = new XYSeries("");
+	static XYSeries s3 = new XYSeries("");
+	static XYSeries s4 = new XYSeries("");
+	static XYSeries s5 = new XYSeries("");
+	static XYSeries s6 = new XYSeries("");
+	static XYSeries s7 = new XYSeries("");
+	static XYSeries s8 = new XYSeries("");
+	static XYSeries resCarga = new XYSeries("");
+	static XYSeries resDescarga = new XYSeries("");
 	////////
 	final int NumeroCargas=8;
 	//List <Float>c1 = new ArrayList<Float>();
@@ -86,6 +101,24 @@ public class controladorInterfaz implements Initializable{
 	float [] despPrueba= new float[11];//0>pesomanillo 1>Wm 2>pesomseca 3>Ws 4>W% 5>Vm 6>Vs 7>Vv 8>e 9>G% 10>Ww 
 	final float PI=3.14159265f;
 	////////
+	///metodo para creación de graficas de JFreeChart
+	private SwingNode creaChart(){ 
+		 JFreeChart chart = ChartFactory.createXYLineChart( null, // chart title 
+		                                                   "X", // x axis label 
+		                                                   "Y", // y axis label 
+		                                                   null, // data 
+		                                                   PlotOrientation.VERTICAL, true, // include legend 
+		                                                   true, // tooltips 
+		                                                   false // urls 
+		 );
+		 ChartPanel chartPane = new ChartPanel(chart); 
+		 SwingNode sNode = new SwingNode(); 
+		 sNode.setContent(chartPane); 
+		 return sNode; 
+	 } 
+	
+	
+	
 /////////////Métodos de FXML/////////////////////////////////////////
 @FXML public void agregaFila(MouseEvent e){
 		Button b=(Button)e.getSource();
@@ -103,8 +136,14 @@ public class controladorInterfaz implements Initializable{
 		TitledPane carga = (TitledPane)general.getParent().getParent();
 		
 		SplitPane lder=(SplitPane)general.getItems().get(1);
-		LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
 		
+		StackPane contenedorGrafica = (StackPane)lder.getItems().get(1);
+		ChartPanel chartPane=(ChartPanel)((SwingNode)(contenedorGrafica.getChildren().get(0))).getContent();
+		JFreeChart chart = chartPane.getChart();
+		///System.out.println(chart);
+		///pendiente!!! te quedaste aqui ):
+		
+		/*
 		if(grafica.getData().isEmpty()){
 			switch(carga.getId()){
 			case "carga1":grafica.getData().add(s1);break;
@@ -119,7 +158,7 @@ public class controladorInterfaz implements Initializable{
 		}
 			
 		}
-	
+	*/
 		
 		//////////////////////////////////
 		TextField mm=(TextField)tabla.getChildren().get(tam-2);//18
@@ -144,14 +183,14 @@ public class controladorInterfaz implements Initializable{
 		min.textProperty().addListener((observable,lastValue,newValue)->{
 			try{
 					switch(carga.getId()){
-					case "carga1": s1.getData().clear();break;
-					case "carga2": s2.getData().clear();break;
-					case "carga3": s3.getData().clear();break;
-					case "carga4": s4.getData().clear();break;
-					case "carga5": s5.getData().clear();break;
-					case "carga6": s6.getData().clear();break;
-					case "carga7": s7.getData().clear();break;
-					case "carga8": s8.getData().clear();break;
+					case "carga1": s1.clear();break;
+					case "carga2": s2.clear();break;
+					case "carga3": s3.clear();break;
+					case "carga4": s4.clear();break;
+					case "carga5": s5.clear();break;
+					case "carga6": s6.clear();break;
+					case "carga7": s7.clear();break;
+					case "carga8": s8.clear();break;
 				}
 				
 				//int cantidad=((tam-16)/7)+1;
@@ -160,14 +199,14 @@ public class controladorInterfaz implements Initializable{
 					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
 					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
-						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
-						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
-						case "carga3":	s3.getData().add(new XYChart.Data(m,df));break;
-						case "carga4":  s4.getData().add(new XYChart.Data(m,df));break;
-						case "carga5":	s5.getData().add(new XYChart.Data(m,df));break;
-						case "carga6":	s6.getData().add(new XYChart.Data(m,df));break;
-						case "carga7":	s7.getData().add(new XYChart.Data(m,df));break;
-						case "carga8":	s8.getData().add(new XYChart.Data(m,df));break;
+						case "carga1":	s1.add(m,df);break;
+						case "carga2":	s2.add(m,df);break;
+						case "carga3":	s3.add(m,df);break;
+						case "carga4":  s4.add(m,df);break;
+						case "carga5":	s5.add(m,df);break;
+						case "carga6":	s6.add(m,df);break;
+						case "carga7":	s7.add(m,df);break;
+						case "carga8":	s8.add(m,df);break;
 						default:break;
 					}
 				}
@@ -181,14 +220,14 @@ public class controladorInterfaz implements Initializable{
 			try{
 				try{
 					switch(carga.getId()){
-					case "carga1": s1.getData().clear();break;
-					case "carga2": s2.getData().clear();break;
-					case "carga3": s3.getData().clear();break;
-					case "carga4": s4.getData().clear();break;
-					case "carga5": s5.getData().clear();break;
-					case "carga6": s6.getData().clear();break;
-					case "carga7": s7.getData().clear();break;
-					case "carga8": s8.getData().clear();break;
+					case "carga1": s1.clear();break;
+					case "carga2": s2.clear();break;
+					case "carga3": s3.clear();break;
+					case "carga4": s4.clear();break;
+					case "carga5": s5.clear();break;
+					case "carga6": s6.clear();break;
+					case "carga7": s7.clear();break;
+					case "carga8": s8.clear();break;
 				}
 				
 				//int cantidad=((tam-16)/7)+1;
@@ -197,14 +236,14 @@ public class controladorInterfaz implements Initializable{
 					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
 					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
-						case "carga1":	s1.getData().add(new XYChart.Data(m,df));break;
-						case "carga2":	s2.getData().add(new XYChart.Data(m,df));break;
-						case "carga3":	s3.getData().add(new XYChart.Data(m,df));break;
-						case "carga4":  s4.getData().add(new XYChart.Data(m,df));break;
-						case "carga5":	s5.getData().add(new XYChart.Data(m,df));break;
-						case "carga6":	s6.getData().add(new XYChart.Data(m,df));break;
-						case "carga7":	s7.getData().add(new XYChart.Data(m,df));break;
-						case "carga8":	s8.getData().add(new XYChart.Data(m,df));break;
+						case "carga1":	s1.add(m,df);break;
+						case "carga2":	s2.add(m,df);break;
+						case "carga3":	s3.add(m,df);break;
+						case "carga4":  s4.add(m,df);break;
+						case "carga5":	s5.add(m,df);break;
+						case "carga6":	s6.add(m,df);break;
+						case "carga7":	s7.add(m,df);break;
+						case "carga8":	s8.add(m,df);break;
 						default:break;
 					}
 				}
@@ -296,22 +335,22 @@ public class controladorInterfaz implements Initializable{
 	}
 	
 	void graficaResultados(){
-		this.resCarga.getData().clear();
-		this.resDescarga.getData().clear();
+	//	this.resCarga.getData().clear();
+		//this.resDescarga.getData().clear();
 		for(int i=11;i<147;i+=9){
 			if (i>=92){
 				float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				resDescarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),descargaY));
+				resDescarga.add(descargaX,descargaY);
 			}else{
 				if(i==83){
 					float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 					float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-					resDescarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),descargaY));
+					resDescarga.add(descargaX,descargaY);
 				}
 				float cargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float cargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				resCarga.getData().add(new XYChart.Data(((TextField)descarga.getChildren().get(i)).getText(),cargaY));
+				resCarga.add(cargaX,cargaY);
 			}
 		}
 	}
@@ -566,14 +605,37 @@ public class controladorInterfaz implements Initializable{
          
     }
 	
+	void generaGraficas(){
+		StackPane content1=((StackPane)((SplitPane)((SplitPane)carga1.getContent()).getItems().get(1)).getItems().get(1));
+		StackPane content2=((StackPane)((SplitPane)((SplitPane)carga2.getContent()).getItems().get(1)).getItems().get(1));
+		StackPane content3=((StackPane)((SplitPane)((SplitPane)carga3.getContent()).getItems().get(1)).getItems().get(1));
+		StackPane content4=((StackPane)((SplitPane)((SplitPane)carga4.getContent()).getItems().get(1)).getItems().get(1));
+		StackPane content5=((StackPane)((SplitPane)((SplitPane)carga5.getContent()).getItems().get(1)).getItems().get(1));
+		StackPane content6=((StackPane)((SplitPane)((SplitPane)carga6.getContent()).getItems().get(1)).getItems().get(1));
+		StackPane content7=((StackPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(1)).getItems().get(1));
+		StackPane content8=((StackPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(1));
+		
+		content1.getChildren().add(this.creaChart());
+		content2.getChildren().add(this.creaChart());
+		content3.getChildren().add(this.creaChart());
+		content4.getChildren().add(this.creaChart());
+		content5.getChildren().add(this.creaChart());
+		content6.getChildren().add(this.creaChart());
+		content7.getChildren().add(this.creaChart());
+		content8.getChildren().add(this.creaChart());
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try{
+			//graficaCompresibilidad.getChildren().add(this.creaChart());
+						
 			generaFilasResultados();
+			
 			initialize();
-	
+			generaGraficas();
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -671,8 +733,8 @@ public class controladorInterfaz implements Initializable{
 				}
 				
 				reactiva((TextField)this.despuesDeConsolidar.getChildren().get(1));
-				this.curvaCompresibilidad.getData().add(resCarga);
-				this.curvaCompresibilidad.getData().add(resDescarga);
+				//this.curvaCompresibilidad.getData().add(resCarga);
+				//this.curvaCompresibilidad.getData().add(resDescarga);
 				
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
@@ -1400,7 +1462,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 			System.out.println("error en función auxSigmaMenor: "+e.getMessage());
 		}
  	}
-	void auxAbrirCargas( TitledPane carga, XYChart.Series s,Scanner scanner,String []linea){
+	void auxAbrirCargas( TitledPane carga, XYSeries s,Scanner scanner,String []linea){
 		List<GridPane> temp = getCadenaCargas(carga); //obtengo un List de GridPanes, de los elementos de cada carga
 		insertarCadena(temp.get(0),linea);
 		String textfile=scanner.nextLine();
@@ -1438,21 +1500,21 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				//aqui la parte de la grafica
 				SplitPane lder=(SplitPane)((SplitPane)carga.getContent()).getItems().get(1);
 				LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
-				
+				/*
 				if(!grafica.getData().contains(s)){
 					grafica.getData().add(s); //porque es carga 1
-				}
+				}*/
 				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
 				
 				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
 					try{
-					s.getData().clear();
+					s.clear();
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
 						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-						s.getData().add(new XYChart.Data(m,df));
+						s.add(m,df);
 					}
 				}catch(Exception ec){
 					System.out.println("error en función auxAbrirCargas (tiempo): "+ec.getMessage());
@@ -1462,13 +1524,13 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-1);
 				def.textProperty().addListener((observable,lastValue,newValue)->{
 					try{
-					s.getData().clear();
+					s.clear();
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
 						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-						s.getData().add(new XYChart.Data(m,df));
+						s.add(m,df);
 					}
 					
 					float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());

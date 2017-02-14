@@ -8,6 +8,7 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.XYChart?>
+<?import javafx.scene.layout.StackPane?>
 
 
 
@@ -74,10 +75,8 @@
               				<TextField GridPane.columnIndex="5" GridPane.rowIndex="2" ></TextField>
         				</GridPane>
 				</GridPane>
-				<LineChart  >
-   					<xAxis><NumberAxis label="t, min"  TickUnit="100" lowerBound="0.01"   side="BOTTOM" /></xAxis>
-					<yAxis><NumberAxis label="deform, mm"   lowerBound="0"   side="LEFT" /></yAxis>
-   				</LineChart>
+				<StackPane fx:id="grafica">   					
+   				</StackPane>
 	    </SplitPane>
    	</items>
 </SplitPane>

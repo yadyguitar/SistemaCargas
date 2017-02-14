@@ -19,6 +19,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.layout.StackPane?>
 
 <BorderPane fx:id="border"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"   prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml" fx:controller="interfaz.controladorInterfaz" >
   <center>
@@ -326,10 +327,8 @@
 	           					</content>
 	       					 </TitledPane>
 	       				<TitledPane  text="Curva de Compresibilidad"  >
-           					<LineChart fx:id="curvaCompresibilidad" prefHeight="800" >
-			   					<xAxis><CategoryAxis side="BOTTOM" /></xAxis>
-								<yAxis><NumberAxis autoRanging="false" upperBound="0.9" lowerBound="0.8" tickUnit="0.02" side="LEFT" /></yAxis>
-   							</LineChart>
+           					<StackPane fx:id="graficaCompresibilidad">
+           					</StackPane> 
        				</TitledPane>
 	                </VBox>
 	                </ScrollPane>
