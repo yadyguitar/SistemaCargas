@@ -78,16 +78,17 @@ public class controladorInterfaz implements Initializable{
 	//@FXML LineChart<String,Number> curvaCompresibilidad;
 	@FXML StackPane graficaCompresibilidad;
 	
-	static XYSeries s1 = new XYSeries("");
-	static XYSeries s2 = new XYSeries("");
-	static XYSeries s3 = new XYSeries("");
-	static XYSeries s4 = new XYSeries("");
-	static XYSeries s5 = new XYSeries("");
-	static XYSeries s6 = new XYSeries("");
-	static XYSeries s7 = new XYSeries("");
-	static XYSeries s8 = new XYSeries("");
-	static XYSeries resCarga = new XYSeries("");
-	static XYSeries resDescarga = new XYSeries("");
+	static XYSeriesCollection s1 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection s2 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection s3 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection s4 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection s5 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection s6 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection s7 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection s8 = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection resCarga = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection resDescarga = new XYSeriesCollection(new XYSeries(""));
+	
 	////////
 	final int NumeroCargas=8;
 	//List <Float>c1 = new ArrayList<Float>();
@@ -140,25 +141,22 @@ public class controladorInterfaz implements Initializable{
 		StackPane contenedorGrafica = (StackPane)lder.getItems().get(1);
 		ChartPanel chartPane=(ChartPanel)((SwingNode)(contenedorGrafica.getChildren().get(0))).getContent();
 		JFreeChart chart = chartPane.getChart();
-		///System.out.println(chart);
-		///pendiente!!! te quedaste aqui ):
-		
-		/*
-		if(grafica.getData().isEmpty()){
+				
+		if(chart.getPlot().getDatasetGroup()==null){
 			switch(carga.getId()){
-			case "carga1":grafica.getData().add(s1);break;
-			case "carga2":grafica.getData().add(s2);break;
-			case "carga3":grafica.getData().add(s3);break;
-			case "carga4":grafica.getData().add(s4);break;
-			case "carga5":grafica.getData().add(s5);break;
-			case "carga6":grafica.getData().add(s6);break;
-			case "carga7":grafica.getData().add(s7);break;
-			case "carga8":grafica.getData().add(s8);break;
+			case "carga1":chart.getXYPlot().setDataset(s1);break;
+			case "carga2":chart.getXYPlot().setDataset(s2);break;
+			case "carga3":chart.getXYPlot().setDataset(s3);break;
+			case "carga4":chart.getXYPlot().setDataset(s4);break;
+			case "carga5":chart.getXYPlot().setDataset(s5);break;
+			case "carga6":chart.getXYPlot().setDataset(s6);break;
+			case "carga7":chart.getXYPlot().setDataset(s7);break;
+			case "carga8":chart.getXYPlot().setDataset(s8);break;
 			default:break;
 		}
 			
 		}
-	*/
+	
 		
 		//////////////////////////////////
 		TextField mm=(TextField)tabla.getChildren().get(tam-2);//18
@@ -171,26 +169,23 @@ public class controladorInterfaz implements Initializable{
 				((TextField)tabla.getChildren().get(tam-2)).setText(String.format("%.3f",rest));
 				((TextField)tabla.getChildren().get(tam-2)).setEditable(false);
 				((TextField)tabla.getChildren().get(tam-1)).setEditable(false);
-				
 				((TextField)tabla.getChildren().get(tam-1)).setText(String.format("%.3f",rest)); //faltaría condición de si no es "mm" multiplicarlo por 25.3
-				
 			}catch(Exception ec){
 				System.out.println("Error en función agregaFila (mm): "+ec.getMessage());
-			}
-		});
+			}});
 		
 		TextField min=(TextField)tabla.getChildren().get(tam-3);
 		min.textProperty().addListener((observable,lastValue,newValue)->{
 			try{
 					switch(carga.getId()){
-					case "carga1": s1.clear();break;
-					case "carga2": s2.clear();break;
-					case "carga3": s3.clear();break;
-					case "carga4": s4.clear();break;
-					case "carga5": s5.clear();break;
-					case "carga6": s6.clear();break;
-					case "carga7": s7.clear();break;
-					case "carga8": s8.clear();break;
+					case "carga1": ((XYSeries)s1.getSeries().get(0)).clear();break;
+					case "carga2": ((XYSeries)s2.getSeries().get(0)).clear();break;
+					case "carga3": ((XYSeries)s3.getSeries().get(0)).clear();break;
+					case "carga4": ((XYSeries)s4.getSeries().get(0)).clear();break;
+					case "carga5": ((XYSeries)s5.getSeries().get(0)).clear();break;
+					case "carga6": ((XYSeries)s6.getSeries().get(0)).clear();break;
+					case "carga7": ((XYSeries)s7.getSeries().get(0)).clear();break;
+					case "carga8": ((XYSeries)s8.getSeries().get(0)).clear();break;
 				}
 				
 				//int cantidad=((tam-16)/7)+1;
@@ -199,14 +194,14 @@ public class controladorInterfaz implements Initializable{
 					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
 					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
-						case "carga1":	s1.add(m,df);break;
-						case "carga2":	s2.add(m,df);break;
-						case "carga3":	s3.add(m,df);break;
-						case "carga4":  s4.add(m,df);break;
-						case "carga5":	s5.add(m,df);break;
-						case "carga6":	s6.add(m,df);break;
-						case "carga7":	s7.add(m,df);break;
-						case "carga8":	s8.add(m,df);break;
+						case "carga1":	((XYSeries)s1.getSeries().get(0)).add(m,df);break;
+						case "carga2":	((XYSeries)s2.getSeries().get(0)).add(m,df);break;
+						case "carga3":	((XYSeries)s3.getSeries().get(0)).add(m,df);break;
+						case "carga4":  ((XYSeries)s4.getSeries().get(0)).add(m,df);break;
+						case "carga5":	((XYSeries)s5.getSeries().get(0)).add(m,df);break;
+						case "carga6":	((XYSeries)s6.getSeries().get(0)).add(m,df);break;
+						case "carga7":	((XYSeries)s7.getSeries().get(0)).add(m,df);break;
+						case "carga8":	((XYSeries)s8.getSeries().get(0)).add(m,df);break;
 						default:break;
 					}
 				}
@@ -220,14 +215,14 @@ public class controladorInterfaz implements Initializable{
 			try{
 				try{
 					switch(carga.getId()){
-					case "carga1": s1.clear();break;
-					case "carga2": s2.clear();break;
-					case "carga3": s3.clear();break;
-					case "carga4": s4.clear();break;
-					case "carga5": s5.clear();break;
-					case "carga6": s6.clear();break;
-					case "carga7": s7.clear();break;
-					case "carga8": s8.clear();break;
+					case "carga1": ((XYSeries)s1.getSeries().get(0)).clear();break;
+					case "carga2": ((XYSeries)s2.getSeries().get(0)).clear();break;
+					case "carga3": ((XYSeries)s3.getSeries().get(0)).clear();break;
+					case "carga4": ((XYSeries)s4.getSeries().get(0)).clear();break;
+					case "carga5": ((XYSeries)s5.getSeries().get(0)).clear();break;
+					case "carga6": ((XYSeries)s6.getSeries().get(0)).clear();break;
+					case "carga7": ((XYSeries)s7.getSeries().get(0)).clear();break;
+					case "carga8": ((XYSeries)s8.getSeries().get(0)).clear();break;
 				}
 				
 				//int cantidad=((tam-16)/7)+1;
@@ -236,14 +231,14 @@ public class controladorInterfaz implements Initializable{
 					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
 					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
-						case "carga1":	s1.add(m,df);break;
-						case "carga2":	s2.add(m,df);break;
-						case "carga3":	s3.add(m,df);break;
-						case "carga4":  s4.add(m,df);break;
-						case "carga5":	s5.add(m,df);break;
-						case "carga6":	s6.add(m,df);break;
-						case "carga7":	s7.add(m,df);break;
-						case "carga8":	s8.add(m,df);break;
+					case "carga1":	((XYSeries)s1.getSeries().get(0)).add(m,df);break;
+					case "carga2":	((XYSeries)s2.getSeries().get(0)).add(m,df);break;
+					case "carga3":	((XYSeries)s3.getSeries().get(0)).add(m,df);break;
+					case "carga4":  ((XYSeries)s4.getSeries().get(0)).add(m,df);break;
+					case "carga5":	((XYSeries)s5.getSeries().get(0)).add(m,df);break;
+					case "carga6":	((XYSeries)s6.getSeries().get(0)).add(m,df);break;
+					case "carga7":	((XYSeries)s7.getSeries().get(0)).add(m,df);break;
+					case "carga8":	((XYSeries)s8.getSeries().get(0)).add(m,df);break;
 						default:break;
 					}
 				}
@@ -341,16 +336,16 @@ public class controladorInterfaz implements Initializable{
 			if (i>=92){
 				float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				resDescarga.add(descargaX,descargaY);
+				((XYSeries)resDescarga.getSeries().get(0)).add(descargaX,descargaY);
 			}else{
 				if(i==83){
 					float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 					float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-					resDescarga.add(descargaX,descargaY);
+					((XYSeries)resDescarga.getSeries().get(0)).add(descargaX,descargaY);
 				}
 				float cargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float cargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				resCarga.add(cargaX,cargaY);
+				((XYSeries)resCarga.getSeries().get(0)).add(cargaX,cargaY);
 			}
 		}
 	}
@@ -1462,7 +1457,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 			System.out.println("error en función auxSigmaMenor: "+e.getMessage());
 		}
  	}
-	void auxAbrirCargas( TitledPane carga, XYSeries s,Scanner scanner,String []linea){
+	void auxAbrirCargas( TitledPane carga, XYSeriesCollection s,Scanner scanner,String []linea){
 		List<GridPane> temp = getCadenaCargas(carga); //obtengo un List de GridPanes, de los elementos de cada carga
 		insertarCadena(temp.get(0),linea);
 		String textfile=scanner.nextLine();
@@ -1508,13 +1503,13 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				
 				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
 					try{
-					s.clear();
+					((XYSeries)s.getSeries().get(0)).clear();
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
 						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-						s.add(m,df);
+						((XYSeries)s.getSeries().get(0)).add(m,df);
 					}
 				}catch(Exception ec){
 					System.out.println("error en función auxAbrirCargas (tiempo): "+ec.getMessage());
@@ -1524,13 +1519,13 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-1);
 				def.textProperty().addListener((observable,lastValue,newValue)->{
 					try{
-					s.clear();
+						((XYSeries)s.getSeries().get(0)).clear();
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
 						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-						s.add(m,df);
+						((XYSeries)s.getSeries().get(0)).add(m,df);
 					}
 					
 					float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
