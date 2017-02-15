@@ -40,7 +40,8 @@ import javafx.scene.control.SplitPane;
 import javafx.stage.Stage; 
 import org.jfree.chart.ChartFactory; 
 import org.jfree.chart.ChartPanel; 
-import org.jfree.chart.JFreeChart; 
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.LogarithmicAxis;
 import org.jfree.chart.plot.PlotOrientation; 
 import org.jfree.data.xy.XYSeries; 
 import org.jfree.data.xy.XYSeriesCollection; 
@@ -87,6 +88,10 @@ public class controladorInterfaz implements Initializable{
 	static XYSeriesCollection s6 = new XYSeriesCollection(new XYSeries(""));
 	static XYSeriesCollection s7 = new XYSeriesCollection(new XYSeries(""));
 	static XYSeriesCollection s8 = new XYSeriesCollection(new XYSeries(""));
+	
+	static XYSeries resCarga=new XYSeries("Carga");
+	static XYSeries resDescarga=new XYSeries("Descarga");
+	
 	static XYSeriesCollection resultados=new XYSeriesCollection();
 	
 	
@@ -730,13 +735,16 @@ public class controladorInterfaz implements Initializable{
 				
 				reactiva((TextField)this.despuesDeConsolidar.getChildren().get(1));
 				
-				this.graficaCompresibilidad.getChildren().add(this.creaChart());
-				ChartPanel chartPane=(ChartPanel)((SwingNode)this.graficaCompresibilidad.getChildren().get(0)).getContent();
+				SwingNode nodechart=this.creaChart();
+				this.graficaCompresibilidad.getChildren().add(nodechart);
+				ChartPanel chartPane=(ChartPanel)nodechart.getContent();
 				this.grafica=chartPane.getChart();
+				this.resultados.addSeries(resCarga);//resCarga
+				this.resultados.addSeries(resDescarga);//resDescarga
 				this.grafica.getXYPlot().setDataset(this.resultados);
-				this.resultados.getSeries().add(new XYSeriesCollection(new XYSeries("")));//resCarga
-				this.resultados.getSeries().add(new XYSeriesCollection(new XYSeries("")));//resDescarga
-				this.grafica.getXYPlot().setDataset(this.resultados);
+				
+				this.grafica.getXYPlot().setDomainAxis(new LogarithmicAxis("Esfuerzo (kg/cm²"));
+				this.grafica.getXYPlot().setRangeAxis(new org.jfree.chart.axis.NumberAxis("Relación de vacíos, \"e\""));
 				
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
