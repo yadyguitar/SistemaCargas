@@ -78,6 +78,7 @@ public class controladorInterfaz implements Initializable{
 	//@FXML LineChart<String,Number> curvaCompresibilidad;
 	@FXML StackPane graficaCompresibilidad;
 	
+	JFreeChart grafica;
 	static XYSeriesCollection s1 = new XYSeriesCollection(new XYSeries(""));
 	static XYSeriesCollection s2 = new XYSeriesCollection(new XYSeries(""));
 	static XYSeriesCollection s3 = new XYSeriesCollection(new XYSeries(""));
@@ -86,8 +87,9 @@ public class controladorInterfaz implements Initializable{
 	static XYSeriesCollection s6 = new XYSeriesCollection(new XYSeries(""));
 	static XYSeriesCollection s7 = new XYSeriesCollection(new XYSeries(""));
 	static XYSeriesCollection s8 = new XYSeriesCollection(new XYSeries(""));
-	static XYSeriesCollection resCarga = new XYSeriesCollection(new XYSeries(""));
-	static XYSeriesCollection resDescarga = new XYSeriesCollection(new XYSeries(""));
+	static XYSeriesCollection resultados=new XYSeriesCollection();
+	
+	
 	
 	////////
 	final int NumeroCargas=8;
@@ -330,22 +332,23 @@ public class controladorInterfaz implements Initializable{
 	}
 	
 	void graficaResultados(){
-	//	this.resCarga.getData().clear();
-		//this.resDescarga.getData().clear();
+		((XYSeries)this.resultados.getSeries().get(0)).clear();
+		((XYSeries)this.resultados.getSeries().get(1)).clear();
+	
 		for(int i=11;i<147;i+=9){
 			if (i>=92){
 				float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				((XYSeries)resDescarga.getSeries().get(0)).add(descargaX,descargaY);
+				((XYSeries)this.resultados.getSeries().get(1)).add(descargaX,descargaY);
 			}else{
 				if(i==83){
 					float descargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 					float descargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-					((XYSeries)resDescarga.getSeries().get(0)).add(descargaX,descargaY);
+					((XYSeries)this.resultados.getSeries().get(1)).add(descargaX,descargaY);
 				}
 				float cargaX=Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText());
 				float cargaY=Float.parseFloat(((TextField)descarga.getChildren().get(i+4)).getText());
-				((XYSeries)resCarga.getSeries().get(0)).add(cargaX,cargaY);
+				((XYSeries)this.resultados.getSeries().get(0)).add(cargaX,cargaY);
 			}
 		}
 	}
@@ -624,10 +627,8 @@ public class controladorInterfaz implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try{
-			//graficaCompresibilidad.getChildren().add(this.creaChart());
-						
-			generaFilasResultados();
 			
+			generaFilasResultados();
 			initialize();
 			generaGraficas();
 			
@@ -728,8 +729,14 @@ public class controladorInterfaz implements Initializable{
 				}
 				
 				reactiva((TextField)this.despuesDeConsolidar.getChildren().get(1));
-				//this.curvaCompresibilidad.getData().add(resCarga);
-				//this.curvaCompresibilidad.getData().add(resDescarga);
+				
+				this.graficaCompresibilidad.getChildren().add(this.creaChart());
+				ChartPanel chartPane=(ChartPanel)((SwingNode)this.graficaCompresibilidad.getChildren().get(0)).getContent();
+				this.grafica=chartPane.getChart();
+				this.grafica.getXYPlot().setDataset(this.resultados);
+				this.resultados.getSeries().add(new XYSeriesCollection(new XYSeries("")));//resCarga
+				this.resultados.getSeries().add(new XYSeriesCollection(new XYSeries("")));//resDescarga
+				this.grafica.getXYPlot().setDataset(this.resultados);
 				
 		}catch(Exception  e){
 			System.out.println("Error en funcion generaFilasResultados: "+e.getMessage());
@@ -1494,11 +1501,15 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				
 				//aqui la parte de la grafica
 				SplitPane lder=(SplitPane)((SplitPane)carga.getContent()).getItems().get(1);
-				LineChart<Number,Number> grafica=(LineChart<Number,Number>)lder.getItems().get(1);
-				/*
-				if(!grafica.getData().contains(s)){
-					grafica.getData().add(s); //porque es carga 1
-				}*/
+				StackPane contenedorGrafica = (StackPane)lder.getItems().get(1);
+				ChartPanel chartPane=(ChartPanel)((SwingNode)(contenedorGrafica.getChildren().get(0))).getContent();
+				JFreeChart chart = chartPane.getChart();
+				
+				//if(!chart.getPlot().getDatasetGroup().equals(s)){
+					System.out.println("aqui");
+					chart.getXYPlot().setDataset(s);//porque es carga 1
+				//}
+				
 				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
 				
 				tiempo.textProperty().addListener((observable,lastValue,newValue)->{
