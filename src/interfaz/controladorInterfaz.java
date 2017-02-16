@@ -790,8 +790,6 @@ public class controladorInterfaz implements Initializable{
 				}catch(Exception excep){
 					System.out.println("Error en listennersLectMicro (indice+9<152): "+excep.getMessage());
 				}
-				
-				
 				graficaResultados();
 			}catch(Exception e){
 				System.out.println("Error en función listennersLectMicro"+e.getMessage());
@@ -1518,6 +1516,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				
 				
 				//aguas!
+				System.out.println(chart.getXYPlot().getDatasetCount());
 				chart.getXYPlot().setDataset(s);//porque es carga 1
 			
 				
