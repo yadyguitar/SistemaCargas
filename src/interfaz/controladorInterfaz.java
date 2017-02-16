@@ -119,6 +119,10 @@ public class controladorInterfaz implements Initializable{
 		                                                   true, // tooltips 
 		                                                   false // urls 
 		 );
+		 
+		 chart.getXYPlot().setDomainAxis(new LogarithmicAxis("t, min"));
+		 chart.getXYPlot().setRangeAxis(new org.jfree.chart.axis.NumberAxis("deform, mm"));
+		 chart.getXYPlot().getRangeAxis().setInverted(true);
 		 ChartPanel chartPane = new ChartPanel(chart); 
 		 SwingNode sNode = new SwingNode(); 
 		 sNode.setContent(chartPane); 
@@ -980,7 +984,6 @@ public void initialize() {
 					else
 						sum1+=(Float.parseFloat(((TextField)descarga.getChildren().get(i)).getText()));
 				}
-				System.out.println("aqui");
 				TextField alturaFinal=(TextField)this.infoResultados.getChildren().get(5);
 				float alturaIni=Float.parseFloat(((TextField)this.infoResultados.getChildren().get(3)).getText());
 				float resultado=alturaIni-sum1/10+sum2/10;
@@ -1513,10 +1516,10 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				ChartPanel chartPane=(ChartPanel)((SwingNode)(contenedorGrafica.getChildren().get(0))).getContent();
 				JFreeChart chart = chartPane.getChart();
 				
-				//if(!chart.getPlot().getDatasetGroup().equals(s)){
-					System.out.println("aqui");
-					chart.getXYPlot().setDataset(s);//porque es carga 1
-				//}
+				
+				//aguas!
+				chart.getXYPlot().setDataset(s);//porque es carga 1
+			
 				
 				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
 				
