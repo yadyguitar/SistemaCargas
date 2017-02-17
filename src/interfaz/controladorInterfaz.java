@@ -472,14 +472,14 @@ public class controladorInterfaz implements Initializable{
 	            
 	            cont++;
 			}
-			reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga1.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
-            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga2.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
-            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga3.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
-            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga4.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
-            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga5.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
-            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga6.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+			reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
             reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
-           // reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga6.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga5.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga4.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga3.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga2.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga1.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
 	    } catch (Exception e) {
 	        System.out.println("Error en función abrir: "+e.getMessage());
 	    }
@@ -1474,6 +1474,14 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 		}
  	}
 	void auxAbrirCargas( TitledPane carga, XYSeriesCollection s,Scanner scanner,String []linea){
+		//aqui la parte de la grafica
+		SplitPane lder=(SplitPane)((SplitPane)carga.getContent()).getItems().get(1);
+		StackPane contenedorGrafica = (StackPane)lder.getItems().get(1);
+		ChartPanel chartPane=(ChartPanel)((SwingNode)(contenedorGrafica.getChildren().get(0))).getContent();
+		JFreeChart chart = chartPane.getChart();
+		//aguas!
+		chart.getXYPlot().setDataset(s);//porque es carga 1
+		
 		List<GridPane> temp = getCadenaCargas(carga); //obtengo un List de GridPanes, de los elementos de cada carga
 		insertarCadena(temp.get(0),linea);
 		String textfile=scanner.nextLine();
@@ -1483,8 +1491,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 		System.out.println(tamactual);
 		if (tam>6){
 			while (tamactual<tam){
-				int lastRow=temp.get(1).getChildren().size()/6;
-				lastRow+=1;
+				int lastRow=(temp.get(1).getChildren().size()/6)+1;
 				for (int i=0;i<6;i++){
 					temp.get(1).add(new TextField(), i, lastRow);	
 				}
@@ -1508,16 +1515,6 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				temp.get(1).setGridLinesVisible(false);
 				temp.get(1).setGridLinesVisible(true);
 				
-				//aqui la parte de la grafica
-				SplitPane lder=(SplitPane)((SplitPane)carga.getContent()).getItems().get(1);
-				StackPane contenedorGrafica = (StackPane)lder.getItems().get(1);
-				ChartPanel chartPane=(ChartPanel)((SwingNode)(contenedorGrafica.getChildren().get(0))).getContent();
-				JFreeChart chart = chartPane.getChart();
-				
-				
-				//aguas!
-				chart.getXYPlot().setDataset(s);//porque es carga 1
-
 				
 				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
 				
