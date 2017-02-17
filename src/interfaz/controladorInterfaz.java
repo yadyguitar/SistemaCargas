@@ -479,7 +479,7 @@ public class controladorInterfaz implements Initializable{
             reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga5.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
             reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga6.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
             reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga7.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
-            reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
+           // reactiva((TextField)((GridPane)((GridPane)((SplitPane)((SplitPane)carga8.getContent()).getItems().get(1)).getItems().get(0)).getChildren().get(1)).getChildren().get(15));
 	    } catch (Exception e) {
 	        System.out.println("Error en función abrir: "+e.getMessage());
 	    }
@@ -1516,9 +1516,8 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				
 				
 				//aguas!
-				System.out.println(chart.getXYPlot().getDatasetCount());
 				chart.getXYPlot().setDataset(s);//porque es carga 1
-			
+
 				
 				TextField tiempo=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-4);
 				
@@ -1538,7 +1537,7 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 				});
 				//el tam de los nodos, tienen un elemento de mas, quien sabe porque :I
 				TextField def=(TextField)temp.get(1).getChildren().get((temp.get(1).getChildren().size()-1)-1);
-				def.textProperty().addListener((observable,lastValue,newValue)->{
+ 				def.textProperty().addListener((observable,lastValue,newValue)->{
 					try{
 						((XYSeries)s.getSeries().get(0)).clear();
 					//int cantidad=((tam-16)/7)+1;
