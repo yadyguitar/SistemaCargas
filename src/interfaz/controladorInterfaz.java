@@ -202,7 +202,7 @@ public class controladorInterfaz implements Initializable{
 				//int cantidad=((tam-16)/7)+1;
 				//System.out.println(cantidad);
 				for (int i=14; i<tabla.getChildren().size();i+=6){
-					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
+					try{float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
 					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
 						case "carga1":	((XYSeries)s1.getSeries().get(0)).add(m,df);break;
@@ -214,7 +214,7 @@ public class controladorInterfaz implements Initializable{
 						case "carga7":	((XYSeries)s7.getSeries().get(0)).add(m,df);break;
 						case "carga8":	((XYSeries)s8.getSeries().get(0)).add(m,df);break;
 						default:break;
-					}
+					}}catch(Exception ec){}
 				}
 			}catch(Exception ec){
 				System.out.println("Error en función agregaFila (min): "+ec.getMessage());
@@ -239,7 +239,7 @@ public class controladorInterfaz implements Initializable{
 				//int cantidad=((tam-16)/7)+1;
 				//System.out.println(cantidad);
 				for (int i=14; i<tabla.getChildren().size();i+=6){
-					float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
+					try{float m=Float.parseFloat(((TextField)tabla.getChildren().get(i)).getText());
 					float df=Float.parseFloat(((TextField)tabla.getChildren().get(i+3)).getText());
 					switch(carga.getId()){
 					case "carga1":	((XYSeries)s1.getSeries().get(0)).add(m,df);break;
@@ -251,7 +251,7 @@ public class controladorInterfaz implements Initializable{
 					case "carga7":	((XYSeries)s7.getSeries().get(0)).add(m,df);break;
 					case "carga8":	((XYSeries)s8.getSeries().get(0)).add(m,df);break;
 						default:break;
-					}
+					}}catch(Exception ec){}
 				}
 			}catch(Exception ec){
 				System.out.println("Error en agregaFila (def): "+ec.getMessage());
@@ -1524,9 +1524,9 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
-						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+						try{float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-						((XYSeries)s.getSeries().get(0)).add(m,df);
+						((XYSeries)s.getSeries().get(0)).add(m,df);}catch(Exception ec){}
 					}
 				}catch(Exception ec){
 					System.out.println("error en función auxAbrirCargas (tiempo): "+ec.getMessage());
@@ -1540,9 +1540,9 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 					//int cantidad=((tam-16)/7)+1;
 					//System.out.println(cantidad);
 					for (int i=14; i<temp.get(1).getChildren().size();i+=6){
-						float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+						try{float m=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
 						float df=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i+3)).getText());
-						((XYSeries)s.getSeries().get(0)).add(m,df);
+						((XYSeries)s.getSeries().get(0)).add(m,df);}catch(Exception ec){}
 					}
 					
 					float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
