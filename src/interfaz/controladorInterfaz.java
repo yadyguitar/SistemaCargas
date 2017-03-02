@@ -11,10 +11,6 @@ import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.LineChart.SortingPolicy;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -30,14 +26,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.embed.swing.SwingNode;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
-import javafx.application.Application; 
-import javafx.embed.swing.SwingNode; 
-import javafx.scene.Scene; 
-import javafx.scene.chart.NumberAxis; 
-import javafx.scene.chart.XYChart; 
-import javafx.scene.control.SplitPane; 
-import javafx.stage.Stage; 
 import org.jfree.chart.ChartFactory; 
 import org.jfree.chart.ChartPanel; 
 import org.jfree.chart.JFreeChart;
@@ -76,6 +68,7 @@ public class controladorInterfaz implements Initializable{
 	
 	@FXML GridPane infoResultados;
 	@FXML GridPane descarga;
+	@FXML Tab tabResultados;
 	//@FXML LineChart<String,Number> curvaCompresibilidad;
 	@FXML StackPane graficaCompresibilidad;
 	
@@ -132,6 +125,19 @@ public class controladorInterfaz implements Initializable{
 	
 	
 /////////////Métodos de FXML/////////////////////////////////////////
+	@FXML public void prueba(){
+		if(tabResultados.isSelected()){
+			auxPrueba(carga1);
+			auxPrueba(carga2);
+			auxPrueba(carga3);
+			auxPrueba(carga4);
+			auxPrueba(carga5);
+			auxPrueba(carga6);
+			auxPrueba(carga7);
+			auxPrueba(carga8);
+			
+		}
+	}
 @FXML public void agregaFila(MouseEvent e){
 		Button b=(Button)e.getSource();
 		GridPane grid=(GridPane)b.parentProperty().getValue();
@@ -1472,6 +1478,57 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 			System.out.println("error en función auxSigmaMenor: "+e.getMessage());
 		}
  	}
+ 	
+ 	void auxPrueba(TitledPane carga){
+ 		List<GridPane> temp = getCadenaCargas(carga);
+ 		float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
+		float minimo =Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
+		for (int i=11;i<temp.get(1).getChildren().size();i+=6){
+			if(!((TextField)temp.get(1).getChildren().get(i)).getText().isEmpty()){
+			float temp1=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+			if(carga.getId().equals("carga2")){
+				if(minimo>temp1){
+					minimo=temp1;
+				}
+			}else{
+				if (maximo<temp1){
+					maximo=temp1;
+				}	
+			}
+			}
+			
+		}			
+
+		//agregar elementos 
+		switch(carga.getId()){
+			case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.format("%.3f",maximo)); 
+							((TextField)descarga.getChildren().get(22)).setText(String.format("%.3f",maximo));
+							break;
+			case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.format("%.3f",minimo));
+							((TextField)descarga.getChildren().get(31)).setText(String.format("%.3f",minimo));
+							break;
+			case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.format("%.3f",maximo));
+							((TextField)descarga.getChildren().get(40)).setText(String.format("%.3f",maximo));
+							break;
+			case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.format("%.3f",maximo));
+							((TextField)descarga.getChildren().get(49)).setText(String.format("%.3f",maximo));
+							break;
+			case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.format("%.3f",maximo));
+							((TextField)descarga.getChildren().get(58)).setText(String.format("%.3f",maximo));
+							break;
+			case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.format("%.3f",maximo));
+							((TextField)descarga.getChildren().get(67)).setText(String.format("%.3f",maximo));
+							break;
+			case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.format("%.3f",maximo));
+							((TextField)descarga.getChildren().get(76)).setText(String.format("%.3f",maximo));
+							break;
+			case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.format("%.3f",maximo));
+							((TextField)descarga.getChildren().get(85)).setText(String.format("%.3f",maximo));
+							break;
+			default:break;
+		}
+ 	}
+ 	
 	void auxAbrirCargas( TitledPane carga, XYSeriesCollection s,Scanner scanner,String []linea){
 		//aqui la parte de la grafica
 		SplitPane lder=(SplitPane)((SplitPane)carga.getContent()).getItems().get(1);
@@ -1545,52 +1602,52 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 						((XYSeries)s.getSeries().get(0)).add(m,df);}catch(Exception ec){}
 					}
 					
-					float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
-					float minimo =Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
-					for (int i=11;i<temp.get(1).getChildren().size();i+=6){
-						if(!((TextField)temp.get(1).getChildren().get(i)).getText().isEmpty()){
-						float temp1=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
-						if(carga.getId().equals("carga2")){
-							if(minimo>temp1){
-								minimo=temp1;
-							}
-						}else{
-							if (maximo<temp1){
-								maximo=temp1;
-							}	
-						}
-						}
-						
-					}			
-
-					//agregar elementos 
-					switch(carga.getId()){
-						case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.format("%.3f",maximo)); 
-										((TextField)descarga.getChildren().get(22)).setText(String.format("%.3f",maximo));
-										break;
-						case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.format("%.3f",minimo));
-										((TextField)descarga.getChildren().get(31)).setText(String.format("%.3f",minimo));
-										break;
-						case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.format("%.3f",maximo));
-										((TextField)descarga.getChildren().get(40)).setText(String.format("%.3f",maximo));
-										break;
-						case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.format("%.3f",maximo));
-										((TextField)descarga.getChildren().get(49)).setText(String.format("%.3f",maximo));
-										break;
-						case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.format("%.3f",maximo));
-										((TextField)descarga.getChildren().get(58)).setText(String.format("%.3f",maximo));
-										break;
-						case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.format("%.3f",maximo));
-										((TextField)descarga.getChildren().get(67)).setText(String.format("%.3f",maximo));
-										break;
-						case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.format("%.3f",maximo));
-										((TextField)descarga.getChildren().get(76)).setText(String.format("%.3f",maximo));
-										break;
-						case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.format("%.3f",maximo));
-										((TextField)descarga.getChildren().get(85)).setText(String.format("%.3f",maximo));
-										break;
-						default:break;
-					}
+//					float maximo = Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
+//					float minimo =Float.parseFloat(((TextField)temp.get(1).getChildren().get(11)).getText());
+//					for (int i=11;i<temp.get(1).getChildren().size();i+=6){
+//						if(!((TextField)temp.get(1).getChildren().get(i)).getText().isEmpty()){
+//						float temp1=Float.parseFloat(((TextField)temp.get(1).getChildren().get(i)).getText());
+//						if(carga.getId().equals("carga2")){
+//							if(minimo>temp1){
+//								minimo=temp1;
+//							}
+//						}else{
+//							if (maximo<temp1){
+//								maximo=temp1;
+//							}	
+//						}
+//						}
+//						
+//					}			
+//
+//					//agregar elementos 
+//					switch(carga.getId()){
+//						case "carga1":	((TextField)descarga.getChildren().get(21)).setText(String.format("%.3f",maximo)); 
+//										((TextField)descarga.getChildren().get(22)).setText(String.format("%.3f",maximo));
+//										break;
+//						case "carga2":	((TextField)descarga.getChildren().get(30)).setText(String.format("%.3f",minimo));
+//										((TextField)descarga.getChildren().get(31)).setText(String.format("%.3f",minimo));
+//										break;
+//						case "carga3":	((TextField)descarga.getChildren().get(39)).setText(String.format("%.3f",maximo));
+//										((TextField)descarga.getChildren().get(40)).setText(String.format("%.3f",maximo));
+//										break;
+//						case "carga4":  ((TextField)descarga.getChildren().get(48)).setText(String.format("%.3f",maximo));
+//										((TextField)descarga.getChildren().get(49)).setText(String.format("%.3f",maximo));
+//										break;
+//						case "carga5":	((TextField)descarga.getChildren().get(57)).setText(String.format("%.3f",maximo));
+//										((TextField)descarga.getChildren().get(58)).setText(String.format("%.3f",maximo));
+//										break;
+//						case "carga6":	((TextField)descarga.getChildren().get(66)).setText(String.format("%.3f",maximo));
+//										((TextField)descarga.getChildren().get(67)).setText(String.format("%.3f",maximo));
+//										break;
+//						case "carga7":	((TextField)descarga.getChildren().get(75)).setText(String.format("%.3f",maximo));
+//										((TextField)descarga.getChildren().get(76)).setText(String.format("%.3f",maximo));
+//										break;
+//						case "carga8":	((TextField)descarga.getChildren().get(84)).setText(String.format("%.3f",maximo));
+//										((TextField)descarga.getChildren().get(85)).setText(String.format("%.3f",maximo));
+//										break;
+//						default:break;
+//					}
 					
 					try{
 						for (int i=23;i<descarga.getChildren().size();i+=9){

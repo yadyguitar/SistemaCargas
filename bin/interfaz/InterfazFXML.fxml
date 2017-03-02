@@ -281,7 +281,7 @@
 	                </ScrollPane>
                  </content>
                 </Tab>
-                <Tab text="Resultados">
+                <Tab fx:id="tabResultados"  text="Resultados" onSelectionChanged="#prueba" >
                   <content>
                   <ScrollPane fitToWidth="true" fitToHeight="true" >
                     <VBox>
