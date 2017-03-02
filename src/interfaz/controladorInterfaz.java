@@ -440,28 +440,28 @@ public class controladorInterfaz implements Initializable{
 		            	insertarCadena(this.despuesDeConsolidar,linea);
 		            	break;
 		            case 8://Para cargas// Carga 1
-		            	auxAbrirCargas(this.carga1,this.s1,scanner,linea);
+		            	auxAbrirCargas(this.carga1,controladorInterfaz.s1,scanner,linea);
 		            	break;
 		            case 9: //para carga 2
-		            	auxAbrirCargas(this.carga2,this.s2,scanner,linea);
+		            	auxAbrirCargas(this.carga2,controladorInterfaz.s2,scanner,linea);
 		            	break;
 		            case 10://PARA carga 3
-		            	auxAbrirCargas(this.carga3,this.s3,scanner,linea);
+		            	auxAbrirCargas(this.carga3,controladorInterfaz.s3,scanner,linea);
 		            	break;
 		            case 11://PARA carga 4
-		            	auxAbrirCargas(this.carga4,this.s4,scanner,linea);
+		            	auxAbrirCargas(this.carga4,controladorInterfaz.s4,scanner,linea);
 		            	break;
 		            case 12://PARA carga 5
-		            	auxAbrirCargas(this.carga5,this.s5,scanner,linea);
+		            	auxAbrirCargas(this.carga5,controladorInterfaz.s5,scanner,linea);
 		            	break;
 		            case 13://PARA carga 6
-		            	auxAbrirCargas(this.carga6,this.s6,scanner,linea);
+		            	auxAbrirCargas(this.carga6,controladorInterfaz.s6,scanner,linea);
 		            	break;
 		            case 14://PARA carga 7
-		            	auxAbrirCargas(this.carga7,this.s7,scanner,linea);
+		            	auxAbrirCargas(this.carga7,controladorInterfaz.s7,scanner,linea);
 		            	break;
 		            case 15://PARA carga 8
-		            	auxAbrirCargas(this.carga8,this.s8,scanner,linea);
+		            	auxAbrirCargas(this.carga8,controladorInterfaz.s8,scanner,linea);
 		            	break;
 		            case 16://PARA carga 8
 		            	insertarCadena(this.infoResultados,linea);
@@ -1266,7 +1266,6 @@ public void initialize() {
 				float c=Float.parseFloat(((TextField)in1.getChildren().get(5)).getText());
 				float sum=c+(Float.parseFloat(i2.getText()));
 				((TextField)in2.getChildren().get(5)).setText(String.format("%.3f",sum));
-				System.out.println("oldValue: "+oldValue+"newValue: "+newValue);
 				reactiva(i3);
 				((TextField)descarga.getChildren().get(27)).setText(i2.getText());
 				
@@ -1480,7 +1479,8 @@ void auxCargaTotal(GridPane in,TextField cargaTotal){
 		ChartPanel chartPane=(ChartPanel)((SwingNode)(contenedorGrafica.getChildren().get(0))).getContent();
 		JFreeChart chart = chartPane.getChart();
 		//aguas!
-		chart.getXYPlot().setDataset(s);//porque es carga 1
+		if(chart.getPlot().getDatasetGroup()==null)
+			chart.getXYPlot().setDataset(s);
 		
 		List<GridPane> temp = getCadenaCargas(carga); //obtengo un List de GridPanes, de los elementos de cada carga
 		insertarCadena(temp.get(0),linea);
