@@ -10,9 +10,11 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
@@ -26,6 +28,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,6 +44,8 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class controladorInterfaz implements Initializable{
 
 	//FXML//
+	
+	@FXML StackPane root;
 	@FXML TextField nombre;
 	@FXML TextField ubicacion;
 	@FXML TextField muestra;
@@ -72,6 +77,7 @@ public class controladorInterfaz implements Initializable{
 	//@FXML LineChart<String,Number> curvaCompresibilidad;
 	@FXML StackPane graficaCompresibilidad;
 	
+	int bandResultados=0;
 	JFreeChart grafica;
 	static XYSeriesCollection s1 = new XYSeriesCollection(new XYSeries(""));
 	static XYSeriesCollection s2 = new XYSeriesCollection(new XYSeries(""));
@@ -127,14 +133,49 @@ public class controladorInterfaz implements Initializable{
 /////////////Métodos de FXML/////////////////////////////////////////
 	@FXML public void prueba(){
 		if(tabResultados.isSelected()){
-			auxPrueba(carga1);
-			auxPrueba(carga2);
-			auxPrueba(carga3);
-			auxPrueba(carga4);
-			auxPrueba(carga5);
-			auxPrueba(carga6);
-			auxPrueba(carga7);
-			auxPrueba(carga8);
+			ProgressIndicator pi = new ProgressIndicator();
+            VBox box = new VBox(pi);
+            
+            box.setAlignment(Pos.CENTER);
+            box.setVisible(true);
+            // Grey Background
+            border.setDisable(true);
+            root.getChildren().add(box);
+            
+			Task<Void> task = new Task<Void>(){
+				@Override public Void call(){
+		             while(true){
+		            	 System.out.println("holis");
+		            	 
+		            	 if(bandResultados==1){
+		            		 System.out.println("Entro en la condicional");
+		            		// border.setDisable(false);            	
+		            		 root.getChildren().get(1).setVisible(false);
+		         			 System.out.println("Termina");
+		         			 bandResultados=0;
+		         			 break;
+		         			 
+		            	 }
+		             }
+		             return null;
+				}
+			};
+		new Thread(task).start();
+		auxPrueba(carga1);
+		auxPrueba(carga2);
+		auxPrueba(carga3);
+		auxPrueba(carga4);
+		auxPrueba(carga5);
+		auxPrueba(carga6);
+		auxPrueba(carga7);
+		auxPrueba(carga8);
+		System.out.println("Llego aqui");
+		bandResultados=1;
+		
+		
+			
+			
+		
 			
 		}
 	}
