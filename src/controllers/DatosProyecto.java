@@ -35,7 +35,6 @@ public class DatosProyecto implements Initializable{
 		profundidad=profundidadFXML.getText();
 		return profundidad;
 	}
-	
 	public List<String> getDatosProyecto(){
 		//Devuelve un list<String> de los atributos de la clase
 		List<String> datosProyecto= new ArrayList<String>();
@@ -51,6 +50,7 @@ public class DatosProyecto implements Initializable{
 		String cadena=getNombre()+";"+getUbicacion()+";"+getMuestra()+";"+getPca()+";"+getProfundidad()+"\n";
 		return cadena;
 	}
+	
 	DatosProyecto(){
 		nombre=getNombre();
 		ubicacion=getUbicacion();
