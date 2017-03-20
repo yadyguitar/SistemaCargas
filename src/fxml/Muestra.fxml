@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+
+<Tab text="Muestra" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.Muestra" >
+  	<content>
+       <VBox>
+		 <TitledPane  text="Antes de la Prueba" >
+ 			<content>
+      			<AnchorPane >
+      				<GridPane fx:id="antesDeLaPrueba"  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
+         				<Label minWidth="150" text=" Wₘ˖ₐₙᵢₗₗₒ" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+         				<TextField  GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+         				<Label text=" Wₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ(Wm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+         				<Label text=" Humedad (W%)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+         				<Label text=" Wₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ ₛ (Ws)" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+         				<Label text=" Volₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ (Vs)" GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+         			
+         				<Label text=" Wₐ. ₘᵤₑₛₜᵣₐ ₙₐₜᵤᵣₐₗ (Ww)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="0" ></TextField>
+         				<Label text=" Volₜₒₜₐₗ ₘ. ₙₐₜᵤᵣₐₗ (Vm)" GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
+         				<Label text=" Volᵥ. ₙₐₜᵤᵣₐₗ (Vv)" GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" ></TextField>
+         				<Label text=" Vacíos (e)" GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3" ></TextField>
+         				<Label text=" Grado de Saturación(G%)" GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
+         				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4"  ></TextField>
+    				</GridPane>
+      			</AnchorPane>
+ 			</content>
+		 </TitledPane>
+		 <TitledPane  text="Despues de Consolidar"  >
+			<content>
+	     		<AnchorPane  prefHeight="800">
+     				<GridPane fx:id="despuesDeConsolidar"   style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
+        				<Label  minWidth="150" text=" Wₘ.ₛₐₜ˖ₐₙᵢₗₗₒ " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+        				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+        				<Label text=" Wₘ.ₛₐₜ (Wm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+        				<Label text=" Wₘ.ₛ˖ₐₙᵢₗₗₒ " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+        				<Label text=" Wₘ.ₛ (Ws) " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+        				<Label text=" Humedad (W%) " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+        				<Label text=" Volₜₒₜₐₗ ₘ. ₛₐₜ (Vm) " GridPane.columnIndex="0" GridPane.rowIndex="5" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" ></TextField>
+        				<Label text=" Volₛₒₗ (Vs)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="0"  ></TextField>
+        				<Label text=" Volᵥₐ. (Vv)" GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
+        				<Label text=" Vacíos (e) " GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" ></TextField>
+        				<Label text=" Grado de Saturación(G%)" GridPane.columnIndex="2" GridPane.rowIndex="3" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3" ></TextField>
+        				<Label text=" Wₐ. ₘᵤₑₛₜᵣₐ ₛₐₜ (Ww) " GridPane.columnIndex="2" GridPane.rowIndex="4" ></Label>
+        				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4" ></TextField>
+   					</GridPane>
+	     		</AnchorPane>
+			</content>
+		 </TitledPane>
+	   </VBox>
+    </content>
+</Tab>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ScrollPane?>
+
+<Tab text="Registro de carga" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.RegistroCarga" >
+    <content>
+        <ScrollPane  fitToWidth="true" fitToHeight="true" >
+       	 	<VBox >
+			 	<TitledPane fx:id="carga1" text="Carga 1" expanded="true" > <!-- onMouseClicked="#actualiza" -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+		 		</TitledPane>
+			 	<TitledPane  fx:id="carga2" text="Carga 2" expanded="false"> <!-- onMouseClicked="#actualiza" -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+				</TitledPane>
+			 	<TitledPane  fx:id="carga3" text="Carga 3" expanded="false"> <!-- onMouseClicked="#actualiza" -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+		 		</TitledPane>
+			 	<TitledPane   fx:id="carga4" text="Carga 4" expanded="false"> <!-- onMouseClicked="#actualiza" -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+		 		</TitledPane>
+		 		<TitledPane   fx:id="carga5"  text="Carga 5" expanded="false"> <!-- onMouseClicked="#actualiza" -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+			 	</TitledPane>
+			 	<TitledPane  fx:id="carga6" text="Carga 6" expanded="false">  <!-- onMouseClicked="#actualiza"  -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+			 	</TitledPane>
+			 	<TitledPane   fx:id="carga7" text="Carga 7" expanded="false"> <!-- onMouseClicked="#actualiza"  -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+			 	</TitledPane>
+			 	<TitledPane   fx:id="carga8" text="Carga 8" expanded="false"> <!-- onMouseClicked="#actualiza"  -->
+  					<content>
+						<fx:include source="CargasBloque.fxml"/>
+  					</content>
+			 	</TitledPane>
+        	</VBox>
+        </ScrollPane>
+    </content>
+</Tab>

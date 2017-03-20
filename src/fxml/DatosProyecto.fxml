@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Region?>
+
+<GridPane vgap="20" hgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.DatosProyecto" >
+  	<Label GridPane.rowIndex="2" GridPane.columnIndex="1" text="Datos del Proyecto" style="-fx-font-size: 15;-fx-font-weight:bold"  ></Label>
+  		<GridPane  GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-font-size: 14"  gridLinesVisible="true" >
+              <Label  wrapText="true" text=" Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+	   				<TextField fx:id="nombre" text=" " GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+	   				<Label wrapText="true" text=" Ubicación" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+	   				<TextField fx:id="ubicacion"  text=" "  GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+	   				<Label wrapText="true" text=" Muestra" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+	   				<TextField fx:id="muestra" text=" "  GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+	   				<Label wrapText="true" text=" PCA" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+	   				<TextField fx:id="pca" text=" "  GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+	   				<Label wrapText="true" text=" Profundidad (m) " GridPane.columnIndex="0" GridPane.rowIndex="4"  ></Label>
+      				<TextField fx:id="profundidad" text=" "  GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+  		</GridPane>
+   		<Region GridPane.columnIndex="3"></Region>
+</GridPane>

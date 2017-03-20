@@ -16,7 +16,7 @@ public class Interfaz extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException  {
 		
-		Parent mainLayout = FXMLLoader.load(getClass().getResource("InterfazFXML.fxml"));
+		Parent mainLayout = FXMLLoader.load(getClass().getResource("/fxml/InterfazMain.fxml"));
         Scene scene = new Scene(mainLayout, 1100, 600);
         primaryStage.setTitle("Consolidómetro");
         primaryStage.setScene(scene);

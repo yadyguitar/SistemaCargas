@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?> 
+<?import javafx.scene.control.SplitPane?>
+
+<Tab fx:id="tabResultados"  text="Resultados" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.Resultados" > <!-- onSelectionChanged="#prueba" -->
+   <content>
+       <ScrollPane fitToWidth="true" fitToHeight="true" >
+           <VBox>
+	           <TitledPane  text="Tabla de Cálculos" >
+	           		<content>
+	                	<SplitPane orientation="VERTICAL" prefHeight="800.0" prefWidth="600.0" >
+							<items>
+								<GridPane  maxHeight="120" hgap="10" vgap="10" >
+					                <GridPane fx:id="infoResultados" GridPane.columnIndex="1" GridPane.rowIndex="1"   style="-fx-font-size: 14"  gridLinesVisible="true" >
+			               				<Label wrapText="true" minWidth="150" text=" Área del anillo" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+			               				<TextField  style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+			               				<Label wrapText="true" text=" Altura Inicial" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+			               				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+			               				<Label wrapText="true" text=" Altura Final" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+			               				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+			               			
+			               				<Label wrapText="true" text=" P. Expansión (kg/cm²)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+			               				<TextField GridPane.columnIndex="3" GridPane.rowIndex="0" ></TextField>
+			               				<Label wrapText="true" text=" Vs" GridPane.columnIndex="2" GridPane.rowIndex="1" ></Label>
+			               				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" ></TextField>
+			               				<Label wrapText="true" text=" Cambio Volumétrico" GridPane.columnIndex="2" GridPane.rowIndex="2" ></Label>
+			               				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" ></TextField>
+					          		</GridPane>
+       							</GridPane>
+							    <GridPane   hgap="10" vgap="10"  >
+			           				<GridPane fx:id="descarga"  GridPane.columnIndex="1" GridPane.rowIndex="1"  style="-fx-font-size: 12"  gridLinesVisible="true" >
+			              				<Label GridPane.halignment="CENTER" minHeight="40" wrapText="true" text="Δq&#10;(kg)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+			              				<Label GridPane.halignment="CENTER" wrapText="true" text="Σq&#10;(kg)" GridPane.columnIndex="1" GridPane.rowIndex="0" ></Label>
+			              				<Label  GridPane.halignment="CENTER" wrapText="true" text="σ&#10;(kg/cm²)" GridPane.columnIndex="2" GridPane.rowIndex="0" ></Label>
+			              				<Label GridPane.halignment="CENTER" wrapText="true" text="Lect. Micr.&#10;(mm)" GridPane.columnIndex="3" GridPane.rowIndex="0" ></Label>
+			              				<Label GridPane.halignment="CENTER" wrapText="true" text="Δh&#10;(mm)" GridPane.columnIndex="4" GridPane.rowIndex="0" ></Label>
+			              				<Label GridPane.halignment="CENTER" wrapText="true" text="Vv&#10;(cm³)" GridPane.columnIndex="5" GridPane.rowIndex="0" ></Label>
+			              				<Label GridPane.halignment="CENTER" wrapText="true" text="e" GridPane.columnIndex="6" GridPane.rowIndex="0" ></Label>
+			              				<Label GridPane.halignment="CENTER" wrapText="true" text="Δe" GridPane.columnIndex="7" GridPane.rowIndex="0" ></Label>
+			              				<Label GridPane.halignment="CENTER" wrapText="true" text="Δe/1+eo" GridPane.columnIndex="8" GridPane.rowIndex="0" ></Label>
+			        				</GridPane>
+								</GridPane>
+					    	</items>
+						</SplitPane>
+  					</content>
+				 </TitledPane>
+   				<TitledPane  text="Curva de Compresibilidad"  >
+   					<StackPane fx:id="graficaCompresibilidad"></StackPane> 
+       			</TitledPane>
+            </VBox>
+       </ScrollPane>
+   </content>
+</Tab>  

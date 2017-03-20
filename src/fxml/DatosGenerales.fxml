@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+
+<Tab text="Datos Generales" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.DatosGenerales">
+	<content>
+		<VBox>
+			<TitledPane  text="Granulometría"  >
+				<content>
+					<AnchorPane>
+						<GridPane  fx:id="granulometria" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+		      				<Label minWidth="150" text=" Grava % " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+		      				<Label text=" Arena % " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+		      				<Label text=" Finos % " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+	 					</GridPane>
+	   				</AnchorPane>
+				</content>
+			</TitledPane>
+			<TitledPane text="Límites"  >
+				<content>
+	   				<AnchorPane >
+	   					<GridPane fx:id="limites" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+		      				<Label minWidth="150" text=" LL %    " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+		      				<Label text=" LP %    " GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+		      				<Label text=" Ip %    " GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+		      				<Label text=" CL %    " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+	 					</GridPane>
+	   				</AnchorPane>
+				</content>
+			</TitledPane>
+	      	<TitledPane  text="Clasificación">
+				<content>
+	   				<AnchorPane prefHeight="800">
+	   					<GridPane  fx:id="clasificacion" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
+		      				<Label minWidth="150" text=" ɣm (g/cm³)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
+		      				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+		      				<Label text=" Ss" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+		      				<Label text=" Carga de Sitio (g/cm²)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+		      				<Label text=" Clasificación SUCS " GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
+		      				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+ 						</GridPane>
+	   				</AnchorPane>
+				</content>
+			</TitledPane>
+    </VBox>
+  </content>
+</Tab>
