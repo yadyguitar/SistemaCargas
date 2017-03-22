@@ -17,7 +17,7 @@
    				<AnchorPane >
        				<GridPane fx:id="constantes" style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
            				<Label minWidth="150" text=" Diámetro (cm)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-           				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+           				<TextField fx:id="diametroFXML" GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
            				<Label text=" Altura (cm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
            				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
            				<Label   text=" Área (cm²)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>

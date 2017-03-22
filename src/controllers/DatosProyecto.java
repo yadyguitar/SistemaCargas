@@ -51,14 +51,6 @@ public class DatosProyecto implements Initializable{
 		return cadena;
 	}
 	
-	DatosProyecto(){
-		nombre=getNombre();
-		ubicacion=getUbicacion();
-		muestra=getMuestra();
-		pca=getPca();
-		profundidad=getProfundidad();
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub

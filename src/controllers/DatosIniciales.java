@@ -7,67 +7,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
-public class DatosIniciales implements Initializable{
+public class DatosIniciales implements Initializable {
 
-	ConstanteEquipo ce;
-	HumedadInicial hi;
+	HumedadInicial humedadInicial;
+	ConstanteEquipo constanteEquipo;
+	@FXML TextField diametroFXML,alturaFXML,areaFXML,volumenFXML,pesoAnilloFXML,cteAparatoFXML;
+	@FXML TextField flaneraFXML,wmFXML,wsFXML,wfFXML,wpFXML;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+		constanteEquipo= new ConstanteEquipo();
+		constanteEquipo.setDiametro(12.5f);
 	}
-
+	
 }
 
-class HumedadInicial{
-	static String flanera;
-	static float wm,ws,wf,wp;
-	@FXML TextField flaneraFXML,wmFXML,wsFXML,wfFXML,wpFXML;
-	
-	public String getFlanera(){
-		flanera= flaneraFXML.getText();
-		return flanera;
-	}
-	public void setFlanera(String flanera){
-		flaneraFXML.setText(flanera);
-	}
-	
-	public float getWm(){
-		wm= Float.parseFloat(wmFXML.getText());
-		return wm;
-	}
-	public void setWm(float wm){
-		wmFXML.setText(String.format("%.3f",wm));
-	}
-
-	public float getWs(){
-		ws= Float.parseFloat(wsFXML.getText());
-		return ws;
-	}
-	public void setWs(float ws){
-		wsFXML.setText(String.format("%.3f",ws));
-	}
-	
-	public float getWf(){
-		wf= Float.parseFloat(wfFXML.getText());
-		return wf;
-	}
-	public void setWf(float wf){
-		wfFXML.setText(String.format("%.3f",wf));
-	}
-
-	public float getWp(){
-		wp= Float.parseFloat(wpFXML.getText());
-		return wp;
-	}
-	public void setWp(float wp){
-		wpFXML.setText(String.format("%.3f",wp));
-	}
-}
-
-class ConstanteEquipo{	
+class ConstanteEquipo extends DatosIniciales {	
 	static float diametro,altura,area,volumen,pesoAnillo, cteAparato;
-	@FXML TextField diametroFXML,alturaFXML,areaFXML,volumenFXML,pesoAnilloFXML,cteAparatoFXML;
 	
 	public float getDiametro(){
 		diametro= Float.parseFloat(diametroFXML.getText());
@@ -116,4 +73,56 @@ class ConstanteEquipo{
 	public void setCteAparato(float cteAparato){
 		cteAparatoFXML.setText(String.format("%.3f",cteAparato));
 	}
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
 }
+
+class HumedadInicial extends DatosIniciales{
+	static String flanera;
+	static float wm,ws,wf,wp;
+	
+	
+	public String getFlanera(){
+		flanera= flaneraFXML.getText();
+		return flanera;
+	}
+	public void setFlanera(String flanera){
+		flaneraFXML.setText(flanera);
+	}
+	
+	public float getWm(){
+		wm= Float.parseFloat(wmFXML.getText());
+		return wm;
+	}
+	public void setWm(float wm){
+		wmFXML.setText(String.format("%.3f",wm));
+	}
+
+	public float getWs(){
+		ws= Float.parseFloat(wsFXML.getText());
+		return ws;
+	}
+	public void setWs(float ws){
+		wsFXML.setText(String.format("%.3f",ws));
+	}
+	
+	public float getWf(){
+		wf= Float.parseFloat(wfFXML.getText());
+		return wf;
+	}
+	public void setWf(float wf){
+		wfFXML.setText(String.format("%.3f",wf));
+	}
+
+	public float getWp(){
+		wp= Float.parseFloat(wpFXML.getText());
+		return wp;
+	}
+	public void setWp(float wp){
+		wpFXML.setText(String.format("%.3f",wp));
+	}
+}
+
