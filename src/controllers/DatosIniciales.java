@@ -9,23 +9,13 @@ import javafx.scene.control.TextField;
 
 public class DatosIniciales implements Initializable {
 
-	HumedadInicial humedadInicial;
-	ConstanteEquipo constanteEquipo;
+	static float diametro,altura,area,volumen,pesoAnillo, cteAparato;
 	@FXML TextField diametroFXML,alturaFXML,areaFXML,volumenFXML,pesoAnilloFXML,cteAparatoFXML;
+	static String flanera;
+	static float wm,ws,wf,wp;
 	@FXML TextField flaneraFXML,wmFXML,wsFXML,wfFXML,wpFXML;
 	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		constanteEquipo= new ConstanteEquipo();
-		constanteEquipo.setDiametro(12.5f);
-	}
-	
-}
-
-class ConstanteEquipo extends DatosIniciales {	
-	static float diametro,altura,area,volumen,pesoAnillo, cteAparato;
-	
+	//Constantes de Equipos
 	public float getDiametro(){
 		diametro= Float.parseFloat(diametroFXML.getText());
 		return diametro;
@@ -73,18 +63,9 @@ class ConstanteEquipo extends DatosIniciales {
 	public void setCteAparato(float cteAparato){
 		cteAparatoFXML.setText(String.format("%.3f",cteAparato));
 	}
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-	}
-}
-
-class HumedadInicial extends DatosIniciales{
-	static String flanera;
-	static float wm,ws,wf,wp;
+	///////////////////////////////////////////////
 	
-	
+	//Humedad Inicial
 	public String getFlanera(){
 		flanera= flaneraFXML.getText();
 		return flanera;
@@ -124,5 +105,15 @@ class HumedadInicial extends DatosIniciales{
 	public void setWp(float wp){
 		wpFXML.setText(String.format("%.3f",wp));
 	}
+	//////////////////////////////////////////////
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
+
 

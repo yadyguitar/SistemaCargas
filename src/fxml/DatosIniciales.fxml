@@ -19,15 +19,15 @@
            				<Label minWidth="150" text=" Diámetro (cm)" GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
            				<TextField fx:id="diametroFXML" GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
            				<Label text=" Altura (cm)" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
-           				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+           				<TextField fx:id="alturaFXML"  GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
            				<Label   text=" Área (cm²)" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
-           				<TextField  style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+           				<TextField  fx:id="areaFXML"  style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
            				<Label text=" Volumen (cm³)" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
-           				<TextField style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+           				<TextField fx:id="volumenFXML"  style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
            				<Label text=" Peso Anillo (grs)" GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
-           				<TextField GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+           				<TextField fx:id="pesoAnilloFXML"  GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
            				<Label text=" Cte. Aparato " GridPane.columnIndex="0" GridPane.rowIndex="5" ></Label>
-           				<TextField GridPane.columnIndex="1" GridPane.rowIndex="5" ></TextField>
+           				<TextField fx:id="cteAparatoFXML"  GridPane.columnIndex="1" GridPane.rowIndex="5" ></TextField>
 	          		</GridPane>
    				</AnchorPane>
 			</content>
@@ -37,15 +37,15 @@
               	<AnchorPane prefHeight="800" >
                 	<GridPane fx:id="humedadInicial"  style="-fx-font-size: 14"  gridLinesVisible="true" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="10">
           				<Label minWidth="150" text=" Flanera " GridPane.columnIndex="0" GridPane.rowIndex="0" ></Label>
-          				<TextField GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
+          				<TextField fx:id="flaneraFXML"  GridPane.columnIndex="1" GridPane.rowIndex="0" ></TextField>
           				<Label text=" Wm˖ₜₐᵣₐ" GridPane.columnIndex="0" GridPane.rowIndex="1" ></Label>
-          				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
+          				<TextField fx:id="wmFXML" GridPane.columnIndex="1" GridPane.rowIndex="1" ></TextField>
           				<Label text=" Ws˖ₜₐᵣₐ" GridPane.columnIndex="0" GridPane.rowIndex="2" ></Label>
-          				<TextField GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
+          				<TextField fx:id="wsFXML" GridPane.columnIndex="1" GridPane.rowIndex="2" ></TextField>
           				<Label text=" Wғₗₐₙₑᵣₐ" GridPane.columnIndex="0" GridPane.rowIndex="3" ></Label>
-          				<TextField GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
+          				<TextField fx:id="wfFXML" GridPane.columnIndex="1" GridPane.rowIndex="3" ></TextField>
           				<Label text=" W % " GridPane.columnIndex="0" GridPane.rowIndex="4" ></Label>
-          				<TextField  style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
+          				<TextField fx:id="wpFXML" style="-fx-background-color: transparent; -fx-cursor: DEFAULT ;"  editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" ></TextField>
 	          		</GridPane>
    				</AnchorPane>
 			</content>
