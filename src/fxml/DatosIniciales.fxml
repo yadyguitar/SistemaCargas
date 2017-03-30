@@ -11,7 +11,7 @@
 <Tab text="Datos Iniciales" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.DatosIniciales" >
    <content>
    	 <VBox>
-   		 <fx:include source="DatosIniciales_ConstanteEquipo.fxml"/>
+   		 <fx:include source="DI_ConstanteEquipo.fxml"/>
 		 <TitledPane  text="Humedad Inicial"  >
            	<content>
               	<AnchorPane prefHeight="800" >
